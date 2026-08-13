@@ -241,17 +241,12 @@
                                 @foreach ($items as $item)
                                     <div class="w-full shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                                         <a href="{{ $item['url'] }}" class="group block h-full">
-                                            <div class="h-full overflow-hidden rounded-[1.8rem] border border-white/18 bg-white/10 p-2.5 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-emerald-400/40 group-hover:bg-white/15 group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
-                                                <div class="relative overflow-hidden rounded-2xl">
-                                                    <div data-hover-shot class="no-scrollbar aspect-[16/6] w-full overflow-y-auto rounded-2xl overscroll-contain bg-slate-900">
-                                                        <img class="block w-full object-cover object-top transition-opacity duration-300" alt="Preview {{ $item['title'] }}" src="{{ $item['src'] }}" />
-                                                    </div>
-                                                    <div class="pointer-events-none absolute bottom-2.5 right-2.5 z-10 flex items-center gap-1.5 rounded-full border border-white/20 bg-slate-950/80 px-2.5 py-0.5 text-[10px] font-medium text-white/90 backdrop-blur-md transition-all duration-300 group-hover:translate-y-1 group-hover:opacity-0">
-                                                        <svg viewBox="0 0 24 24" fill="none" class="h-3 w-3 text-emerald-400">
-                                                            <path d="M12 5v14m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        </svg>
-                                                        <span>Hover untuk scroll</span>
-                                                    </div>
+                                            <div class="h-full overflow-hidden rounded-[1.8rem] border border-white/18 bg-white/10 p-3 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-emerald-400/40 group-hover:bg-white/15 group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
+                                                <div class="aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-900">
+                                                    <img class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" alt="Preview {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                                </div>
+                                                <div class="mt-3 px-2 pb-1">
+                                                    <h3 class="text-base font-semibold text-white transition-colors group-hover:text-emerald-400">{{ $item['title'] }}</h3>
                                                 </div>
                                             </div>
                                         </a>

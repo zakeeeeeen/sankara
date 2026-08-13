@@ -38,7 +38,7 @@
                     </p>
 
                     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
-                        <a href="{{ $hero?->primary_cta_url ?: route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
+                        <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
                             {{ $hero?->primary_cta_label ?? 'Mulai Proyek' }}
                             <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
                                 <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="relative mx-auto mt-14 max-w-[70rem] pb-28 lg:pb-40">
+                <div class="relative mx-auto mt-14 max-w-[70rem] pb-16 lg:pb-24">
                     <div class="agency-code-panel relative mx-auto max-w-4xl">
                         <div class="flex items-center justify-between border-b border-white/10 px-5 py-4">
                             <div class="flex items-center gap-2">
@@ -86,46 +86,76 @@
                         </div>
                     </div>
 
-                    <div class="pointer-events-none absolute -left-6 top-6 hidden h-20 w-20 rounded-3xl border border-white/15 bg-white/10 blur-sm sm:block"></div>
-                    <div class="pointer-events-none absolute -right-8 bottom-14 hidden h-24 w-24 rounded-full border border-white/15 bg-white/10 blur-sm sm:block"></div>
-                    <div class="pointer-events-none absolute left-12 bottom-10 hidden h-3 w-3 rounded-full bg-[rgb(var(--agency-cyan))] sm:block"></div>
-                </div>
+                <div class="pointer-events-none absolute -left-6 top-6 hidden h-20 w-20 rounded-3xl border border-white/15 bg-white/10 blur-sm sm:block"></div>
+                <div class="pointer-events-none absolute -right-8 bottom-14 hidden h-24 w-24 rounded-full border border-white/15 bg-white/10 blur-sm sm:block"></div>
+                <div class="pointer-events-none absolute left-12 bottom-10 hidden h-3 w-3 rounded-full bg-[rgb(var(--agency-cyan))] sm:block"></div>
             </div>
         </section>
 
-        <section id="tentang" class="scroll-mt-28 relative -mt-20 overflow-hidden bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] lg:-mt-32">
-            <div class="agency-wave -mt-px h-[112px] lg:h-[156px]">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-                    <path fill="rgb(7 43 102)" d="M0,120 C160,78 340,42 560,40 C850,38 1120,116 1440,86 L1440,0 L0,0 Z"></path>
-                </svg>
-            </div>
-
-            <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:pt-10 lg:pb-48">
-                <div class="grid gap-10 lg:grid-cols-[190px_1fr] lg:items-start">
-                    <div class="lg:pt-5">
+        <section id="tentang" class="scroll-mt-28 relative bg-white py-16 sm:py-20 lg:py-24">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-10 lg:grid-cols-[220px_1fr] lg:items-start">
+                    <div>
                         <div class="agency-divider"></div>
-                        <p class="mt-4 max-w-[10rem] text-4xl font-semibold leading-none tracking-tight text-white">
+                        <h2 class="mt-4 text-4xl font-bold leading-none tracking-tight text-slate-900 sm:text-5xl">
                             WHO<br>WE<br>ARE?
-                        </p>
+                        </h2>
                     </div>
 
                     <div class="max-w-4xl">
-                        <p class="pt-2 text-base leading-8 text-white/78 sm:text-lg">
+                        <p class="pt-2 text-base leading-8 text-slate-600 sm:text-xl sm:leading-relaxed">
                             {{ $about?->body ?? 'Kami merancang pengalaman digital end-to-end—mulai dari strategi, desain UI/UX, hingga pengembangan website, software, mobile apps, game, dan 3D asset. Fokus kami sederhana: hasil yang elegan, cepat, dan siap scale.' }}
                         </p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="agency-wave -mb-px h-[118px] lg:h-[170px]">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-                    <path fill="#f8fafc" d="M0,92 C220,120 455,118 680,86 C945,48 1172,16 1440,34 L1440,120 L0,120 Z"></path>
+        <section id="why-us" class="scroll-mt-28 relative overflow-hidden bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] pt-16 sm:pt-20 lg:pt-24">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col items-center text-center">
+                    <div class="agency-divider mx-auto"></div>
+                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Why Choose Us?</h2>
+                    <p class="mt-3 max-w-2xl text-base font-medium text-white/80 sm:text-lg">
+                        Keunggulan Utama & Alasan Mengapa Partner Memilih Sankara Tech
+                    </p>
+                </div>
+
+                <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:mt-16 pb-12 sm:pb-16 lg:pb-20">
+                    @foreach (($advantages ?? collect()) as $adv)
+                        <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-8 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-400/40 hover:bg-white/15 hover:shadow-2xl">
+                            <div>
+                                <div class="grid h-14 w-14 place-items-center rounded-2xl border border-emerald-400/30 bg-emerald-400/10 text-emerald-400 transition-colors group-hover:bg-emerald-400 group-hover:text-slate-950">
+                                    <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7">
+                                        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <h3 class="mt-6 text-xl font-bold text-white transition-colors group-hover:text-emerald-400">{{ $adv->title }}</h3>
+                                <p class="mt-3 text-sm leading-relaxed text-white/75">{{ $adv->description }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="agency-wave -mb-px">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="block w-full h-12 sm:h-20 lg:h-28" aria-hidden="true">
+                    <path fill="#f8fafc" d="M0,64 C240,120 480,120 720,86 C960,52 1200,0 1440,16 L1440,120 L0,120 Z"></path>
                 </svg>
             </div>
         </section>
 
-        <section id="layanan" class="scroll-mt-28 relative bg-slate-50">
-            <div class="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8 lg:-mt-52 lg:pb-24">
+        <section id="layanan" class="scroll-mt-28 relative bg-slate-50 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-24 lg:pb-32">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                {{-- Header (Layanan Kami & Subjudul) --}}
+                <div class="flex flex-col items-center text-center">
+                    <div class="agency-divider mx-auto"></div>
+                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
+                    <p class="mt-3 max-w-2xl text-base font-medium text-slate-600 sm:text-lg">
+                        Solusi Digital End-to-End untuk Membantu Bisnis Anda Grow & Scale
+                    </p>
+                </div>
+
                 @php
                     $serviceIcons = [
                         'website-development' => 'M7 7h10M7 12h10M7 17h10',
@@ -137,17 +167,18 @@
                     ];
                 @endphp
 
-                <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-featured-center="true" class="relative mx-auto max-w-[58rem]">
+                <div class="mt-12 sm:mt-16">
+                    <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-featured-center="true" class="relative mx-auto max-w-[58rem]">
                     <div class="relative">
-                        <div class="pointer-events-none absolute inset-y-0 -left-8 z-10 hidden items-center lg:flex">
-                            <button type="button" data-carousel-prev class="pointer-events-auto grid h-12 w-12 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))]">
+                        <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 flex items-center sm:-left-6 lg:-left-8">
+                            <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Sebelumnya">
                                 <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
                                     <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </button>
                         </div>
-                        <div class="pointer-events-none absolute inset-y-0 -right-8 z-10 hidden items-center lg:flex">
-                            <button type="button" data-carousel-next class="pointer-events-auto grid h-12 w-12 place-items-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))]">
+                        <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 flex items-center sm:-right-6 lg:-right-8">
+                            <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Selanjutnya">
                                 <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
                                     <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
@@ -183,7 +214,8 @@
                     <div class="mt-2 flex justify-center gap-2 lg:hidden" data-carousel-dots></div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
         <section id="portofolio" class="scroll-mt-28 bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]">
             <div class="agency-wave -mb-px rotate-180">
@@ -222,15 +254,15 @@
                         </div>
                     @else
                         <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-theme="dark" class="relative px-2 sm:px-4 lg:px-6">
-                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 hidden items-center lg:flex sm:-left-4">
-                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-12 w-12 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25" aria-label="Sebelumnya">
+                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 flex items-center sm:-left-4">
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Sebelumnya">
                                     <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
                                         <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </button>
                             </div>
-                            <div class="pointer-events-none absolute inset-y-0 -right-2 z-10 hidden items-center lg:flex sm:-right-4">
-                                <button type="button" data-carousel-next class="pointer-events-auto grid h-12 w-12 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25" aria-label="Selanjutnya">
+                            <div class="pointer-events-none absolute inset-y-0 -right-2 z-10 flex items-center sm:-right-4">
+                                <button type="button" data-carousel-next class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Selanjutnya">
                                     <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
                                         <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
@@ -241,13 +273,8 @@
                                 @foreach ($items as $item)
                                     <div class="w-full shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                                         <a href="{{ $item['url'] }}" class="group block h-full">
-                                            <div class="h-full overflow-hidden rounded-[1.8rem] border border-white/18 bg-white/10 p-3 shadow-xl backdrop-blur-md transition-all duration-300 group-hover:-translate-y-1.5 group-hover:border-emerald-400/40 group-hover:bg-white/15 group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
-                                                <div class="aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-900">
-                                                    <img class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" alt="Preview {{ $item['title'] }}" src="{{ $item['src'] }}" />
-                                                </div>
-                                                <div class="mt-3 px-2 pb-1">
-                                                    <h3 class="text-base font-semibold text-white transition-colors group-hover:text-emerald-400">{{ $item['title'] }}</h3>
-                                                </div>
+                                            <div data-hover-shot class="no-scrollbar aspect-[4/3] w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20 sm:aspect-[16/11]">
+                                                <img class="block w-full object-cover object-top transition-opacity duration-300" alt="Preview {{ $item['title'] }}" src="{{ $item['src'] }}" />
                                             </div>
                                         </a>
                                     </div>
@@ -321,7 +348,7 @@
                                 @endforeach
                             </div>
 
-                            <a href="#kontak" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]">
+                            <a href="{{ route('contact.show') }}" class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]">
                                 Konsultasi Paket
                             </a>
                         </div>
@@ -330,45 +357,27 @@
             </div>
         </section>
 
-        <section id="kontak" class="scroll-mt-28 agency-hero">
-            <div class="agency-wave -mb-px rotate-180">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-                    <path fill="#ffffff" d="M0,64 C240,120 480,120 720,86 C960,52 1200,0 1440,16 L1440,120 L0,120 Z"></path>
-                </svg>
-            </div>
+        <section id="kontak" class="scroll-mt-28 relative bg-white py-16 sm:py-24 lg:py-32">
+            <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+                <div class="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] p-8 text-center shadow-2xl sm:p-12 lg:p-16">
+                    <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[rgb(var(--agency-cyan)/0.2)] blur-3xl"></div>
+                    <div class="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
 
-            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-                <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
-                    <div>
-                        <div class="agency-divider"></div>
-                        <h2 class="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                    <div class="relative flex flex-col items-center text-center">
+                        <div class="agency-divider mx-auto"></div>
+                        <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                             {{ $cta?->heading ?? 'Siap Membangun Produk Digital Anda?' }}
                         </h2>
-                        <p class="mt-4 max-w-xl text-base leading-relaxed text-white/80">
+                        <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
                             {{ $cta?->body ?? 'Ceritakan kebutuhan Anda. Kami bantu dari ide hingga eksekusi—dengan desain futuristik, performa cepat, dan pengalaman pengguna yang elegan.' }}
                         </p>
-                        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                            <a href="{{ $cta?->primary_url ?: route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center px-8 py-3 text-sm font-semibold">
+                        <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+                            <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-lg transition-transform hover:-translate-y-0.5">
                                 {{ $cta?->primary_label ?? 'Konsultasi Sekarang' }}
                             </a>
-                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3 text-sm font-semibold">
+                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-md transition-transform hover:-translate-y-0.5">
                                 {{ $cta?->secondary_label ?? 'Lihat Hasil Kami' }}
                             </a>
-                        </div>
-                    </div>
-
-                    <div class="grid gap-4 sm:grid-cols-2">
-                        <div class="rounded-3xl border border-white/15 bg-white/10 p-6 text-white backdrop-blur">
-                            <div class="text-sm font-semibold">Email</div>
-                            <div class="mt-2 text-sm text-white/80">{{ $publicEmail }}</div>
-                        </div>
-                        <div class="rounded-3xl border border-white/15 bg-white/10 p-6 text-white backdrop-blur">
-                            <div class="text-sm font-semibold">WhatsApp</div>
-                            <div class="mt-2 text-sm text-white/80">{{ $publicWhatsapp }}</div>
-                        </div>
-                        <div class="rounded-3xl border border-white/15 bg-white/10 p-6 text-white backdrop-blur sm:col-span-2">
-                            <div class="text-sm font-semibold">Jam Operasional</div>
-                            <div class="mt-2 text-sm text-white/80">{{ $publicHours }}</div>
                         </div>
                     </div>
                 </div>

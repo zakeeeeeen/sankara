@@ -5,44 +5,51 @@
 @section('content')
     @include('partials.marketing-header', ['active' => 'about'])
 
-    <main class="pt-24">
+    <main class="pt-28 pb-20 bg-white">
         <section class="relative overflow-hidden">
-            <div class="mx-auto max-w-7xl px-4 pb-14 pt-12 sm:px-6 lg:px-8 lg:pb-20 lg:pt-16">
-                <div class="grid gap-10 lg:grid-cols-2 lg:items-start">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
                     <div>
                         <div class="reveal">
-                            <div class="inline-flex items-center gap-2 rounded-full border border-brand-soft bg-white/70 px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm backdrop-blur">
-                                <span class="brand-dot h-1.5 w-1.5 rounded-full"></span>
-                                {{ $page->title }}
-                            </div>
+                            <div class="agency-divider"></div>
 
-                            <h1 class="mt-6 text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
+                            <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                                 {{ $page->hero_title ?: $page->title }}
                             </h1>
 
                             @if ($page->hero_subtitle)
-                                <p class="mt-5 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                                <p class="mt-4 max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
                                     {{ $page->hero_subtitle }}
                                 </p>
                             @endif
                         </div>
 
                         @if ($page->body)
-                            <div class="mt-10 text-base leading-relaxed text-slate-600 reveal whitespace-pre-line">
+                            <div class="mt-8 text-base leading-relaxed text-slate-600 reveal whitespace-pre-line">
                                 {{ $page->body }}
                             </div>
                         @endif
+
+                        <div class="mt-8">
+                            <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
+                                Konsultasi dengan Kami
+                                <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
+                                    <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                    <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
 
                     <div class="reveal">
-                        <div class="brand-gradient-br-soft rounded-[2rem] p-px shadow-[0_30px_80px_-55px_rgb(var(--brand-from-rgb)/0.55)]">
-                            <div class="overflow-hidden rounded-[2rem] border border-white/60 bg-white/55 backdrop-blur-xl">
-                                @if ($page->image_src)
-                                    <img class="h-full w-full object-cover" src="{{ $page->image_src }}" alt="{{ $page->title }}" />
-                                @else
-                                    <div class="h-[340px] w-full"></div>
-                                @endif
-                            </div>
+                        <div class="agency-card overflow-hidden p-2">
+                            @if ($page->image_src)
+                                <img class="h-full w-full rounded-2xl object-cover" src="{{ $page->image_src }}" alt="{{ $page->title }}" />
+                            @else
+                                <div class="h-[340px] w-full rounded-2xl bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] flex items-center justify-center p-8 text-center text-white">
+                                    <div class="text-xl font-bold">Sankara Tech Digital Agency</div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

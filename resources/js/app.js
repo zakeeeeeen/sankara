@@ -218,9 +218,7 @@ const initCarousel = () => {
             slides = [...track.children];
         }
 
-        let index = isLooping ? N : 0;
-        let timer = null;
-        let resumeTimer = null;
+        let currentIndex = isLooping ? N : 0;
         let isAnimating = false;
         let animationTimeout = null;
 
@@ -278,165 +276,177 @@ const initCarousel = () => {
             });
         };
 
-        const syncArrows = (currIndex) => {
-            if (isLooping) return;
-            prevBtn?.toggleAttribute('disabled', currIndex <= 0);
-            nextBtn?.toggleAttribute('disabled', currIndex >= slides.length - 1);
-            prevBtn?.classList.toggle('opacity-40', currIndex <= 0);
-            nextBtn?.classList.toggle('opacity-40', currIndex >= slides.length - 1);
-            prevBtn?.classList.toggle('cursor-not-allowed', currIndex <= 0);
-            nextBtn?.classList.toggle('cursor-not-allowed', currIndex >= slides.length - 1);
-        };
-
-        const checkBoundaryAndNormalize = () => {
+        const normalizeBoundaryInstant = () => {
             if (!isLooping) return;
             const wSet = getWSet();
             if (wSet <= 0) return;
 
-            const current = track.scrollLeft;
-            if (current >= wSet * 1.5) {
-                track.scrollLeft -= wSet;
-            } else if (current < wSet * 0.5) {
-                track.scrollLeft += wSet;
+            if (currentIndex >= 2 * N) {
+                currentIndex = currentIndex - N;
+                track.style.scrollBehavior = 'auto';
+                track.scrollLeft = slides[currentIndex].offsetLeft;
+                track.style.scrollBehavior = '';
+            } else if (currentIndex < N) {
+                currentIndex = currentIndex + N;
+                track.style.scrollBehavior = 'auto';
+                track.scrollLeft = slides[currentIndex].offsetLeft;
+                track.style.scrollBehavior = '';
             }
         };
 
-        const goTo = (targetIndex, behavior = 'smooth') => {
-            let target = targetIndex;
-            if (!isLooping) {
-                target = Math.max(0, Math.min(targetIndex, slides.length - 1));
-            }
-
-            const slide = slides[target];
+        const scrollToTarget = (targetIdx, behavior = 'smooth') => {
+            const slide = slides[targetIdx];
             if (!slide) return;
 
-            index = target;
+            currentIndex = targetIdx;
             isAnimating = behavior === 'smooth' && !prefersReducedMotion;
 
             track.scrollTo({ left: slide.offsetLeft, behavior: prefersReducedMotion ? 'auto' : behavior });
 
-            const curr = getCenteredIndex();
-            syncDots(curr);
-            syncFeatured(curr);
-            syncArrows(curr);
+            syncDots(currentIndex);
+            syncFeatured(currentIndex);
 
             if (animationTimeout) clearTimeout(animationTimeout);
             animationTimeout = setTimeout(() => {
                 isAnimating = false;
-                checkBoundaryAndNormalize();
-                const updatedIndex = getCenteredIndex();
-                index = updatedIndex;
-                syncDots(updatedIndex);
-                syncFeatured(updatedIndex);
-            }, prefersReducedMotion ? 50 : 400);
+                normalizeBoundaryInstant();
+                syncDots(currentIndex);
+                syncFeatured(currentIndex);
+            }, prefersReducedMotion ? 50 : 380);
         };
 
-        const syncFromScroll = () => {
-            const curr = getCenteredIndex();
-            index = curr;
-            syncDots(curr);
-            syncFeatured(curr);
-            syncArrows(curr);
-
-            if (!isAnimating) {
-                checkBoundaryAndNormalize();
-            }
-        };
-
-        const stop = () => {
-            if (timer) window.clearInterval(timer);
-            timer = null;
-        };
-
-        const start = () => {
-            stop();
-            if (prefersReducedMotion || !autoplay) return;
-            timer = window.setInterval(() => {
-                const curr = getCenteredIndex();
-                goTo(curr + 1);
-            }, 4500);
-        };
-
-        const scheduleResume = () => {
-            if (resumeTimer) window.clearTimeout(resumeTimer);
-            resumeTimer = window.setTimeout(start, 5000);
-        };
-
+        // Initialize Dots
         dots.innerHTML = '';
         for (let i = 0; i < N; i++) {
             const btn = document.createElement('button');
             btn.type = 'button';
             btn.className = 'h-2.5 w-2.5 rounded-full transition';
             btn.addEventListener('click', () => {
-                stop();
-                const curr = getCenteredIndex();
-                const currentSet = isLooping ? Math.floor(curr / N) : 0;
-                const targetIdx = isLooping ? currentSet * N + i : i;
-                goTo(targetIdx);
-                scheduleResume();
+                if (isAnimating) return;
+                const currentDot = ((currentIndex % N) + N) % N;
+                let step = i - currentDot;
+                if (step < 0) step += N;
+                scrollToTarget(currentIndex + step, 'smooth');
             });
             dots.appendChild(btn);
         }
 
         prevBtn?.addEventListener('click', () => {
-            stop();
-            const curr = getCenteredIndex();
-            goTo(curr - 1);
-            scheduleResume();
+            if (isAnimating) return;
+            const step = featuredCenter ? 1 : (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1));
+            scrollToTarget(currentIndex - step, 'smooth');
         });
 
         nextBtn?.addEventListener('click', () => {
-            stop();
-            const curr = getCenteredIndex();
-            goTo(curr + 1);
-            scheduleResume();
+            if (isAnimating) return;
+            const step = featuredCenter ? 1 : (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1));
+            scrollToTarget(currentIndex + step, 'smooth');
         });
 
+        // Mouse Drag to Scroll (Desktop)
+        let isMouseDown = false;
+        let startX = 0;
+        let scrollLeftStart = 0;
+        let hasDragged = false;
+
+        track.style.cursor = 'grab';
+
+        track.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return;
+            isMouseDown = true;
+            hasDragged = false;
+            startX = e.pageX - track.offsetLeft;
+            scrollLeftStart = track.scrollLeft;
+            track.style.scrollBehavior = 'auto';
+            track.style.userSelect = 'none';
+            track.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isMouseDown) return;
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX) * 1.1;
+            if (Math.abs(walk) > 5) {
+                hasDragged = true;
+            }
+            track.scrollLeft = scrollLeftStart - walk;
+        });
+
+        const handleDragEnd = () => {
+            if (!isMouseDown) return;
+            isMouseDown = false;
+            track.style.scrollBehavior = '';
+            track.style.removeProperty('user-select');
+            track.style.cursor = 'grab';
+            if (hasDragged) {
+                const centered = getCenteredIndex();
+                currentIndex = centered;
+                normalizeBoundaryInstant();
+                syncDots(currentIndex);
+                syncFeatured(currentIndex);
+            }
+        };
+
+        window.addEventListener('mouseup', handleDragEnd);
+
+        track.addEventListener('click', (e) => {
+            if (hasDragged) {
+                e.preventDefault();
+                e.stopPropagation();
+                hasDragged = false;
+            }
+        }, true);
+
+        // Scroll listener for manual swipe / scroll
         let raf = null;
         track.addEventListener(
             'scroll',
             () => {
                 if (raf) cancelAnimationFrame(raf);
-                raf = requestAnimationFrame(syncFromScroll);
+                raf = requestAnimationFrame(() => {
+                    if (!isAnimating && !isMouseDown) {
+                        const centered = getCenteredIndex();
+                        const wSet = getWSet();
+                        if (wSet > 0 && isLooping) {
+                            if (track.scrollLeft >= 2 * wSet) {
+                                track.scrollLeft -= wSet;
+                                currentIndex = getCenteredIndex();
+                            } else if (track.scrollLeft <= 0.2 * wSet) {
+                                track.scrollLeft += wSet;
+                                currentIndex = getCenteredIndex();
+                            } else {
+                                currentIndex = centered;
+                            }
+                        } else {
+                            currentIndex = centered;
+                        }
+                        syncDots(currentIndex);
+                        syncFeatured(currentIndex);
+                    }
+                });
             },
             { passive: true }
         );
 
-        ['pointerdown', 'touchstart', 'wheel'].forEach((evt) => {
-            track.addEventListener(
-                evt,
-                () => {
-                    stop();
-                    scheduleResume();
-                },
-                { passive: true }
-            );
-        });
-
-        root.addEventListener('mouseenter', stop);
-        root.addEventListener('mouseleave', start);
-
         window.addEventListener('resize', () => {
-            const curr = getCenteredIndex();
-            goTo(curr, 'auto');
+            scrollToTarget(currentIndex, 'auto');
         });
 
         if (isLooping) {
             requestAnimationFrame(() => {
+                currentIndex = N;
                 const initialTarget = slides[N];
                 if (initialTarget) {
+                    track.style.scrollBehavior = 'auto';
                     track.scrollLeft = initialTarget.offsetLeft;
+                    track.style.scrollBehavior = '';
                 }
-                const curr = getCenteredIndex();
-                index = curr;
-                syncDots(curr);
-                syncFeatured(curr);
+                syncDots(currentIndex);
+                syncFeatured(currentIndex);
             });
         } else {
-            goTo(0, 'auto');
+            scrollToTarget(0, 'auto');
         }
-
-        start();
     });
 };
 

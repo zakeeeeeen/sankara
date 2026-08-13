@@ -10,7 +10,7 @@
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-white text-slate-900 antialiased {{ request()->routeIs('home') ? 'landing-agency' : '' }}">
+    <body class="min-h-screen bg-white text-slate-900 antialiased landing-agency">
         <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
             <div class="brand-blob-1 absolute -top-40 left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full blur-3xl"></div>
             <div class="brand-blob-2 absolute -bottom-56 -left-40 h-[36rem] w-[36rem] rounded-full blur-3xl"></div>

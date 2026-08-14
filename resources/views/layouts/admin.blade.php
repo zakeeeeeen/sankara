@@ -42,10 +42,10 @@
                     <div class="flex items-center justify-between gap-3 px-4 py-4">
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3">
                             <span class="brand-gradient-br grid h-10 w-10 place-items-center rounded-2xl overflow-hidden shadow-[0_18px_40px_-22px_rgba(16,185,129,0.6)]">
-                                <img src="{{ asset('logosankara.png') }}" alt="Sankara Tech Logo" class="h-full w-full object-contain p-0.5">
+                                <img src="{{ \App\Models\SiteSetting::getValue('site_logo', asset('logosankara.png')) }}" alt="Logo" class="h-full w-full object-contain p-0.5">
                             </span>
                             <span class="leading-tight">
-                                <span class="block text-sm font-semibold tracking-tight text-slate-900">Sankara Tech</span>
+                                <span class="block text-sm font-semibold tracking-tight text-slate-900">{{ \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech') }}</span>
                                 <span class="block text-xs font-medium text-slate-500">Admin Panel</span>
                             </span>
                         </a>
@@ -63,6 +63,14 @@
                                 <path d="M10.4 4.8l-6 5v8.8a1.6 1.6 0 001.6 1.6h4.8v-6.4h2.4v6.4h4.8a1.6 1.6 0 001.6-1.6V9.8l-6-5a2.4 2.4 0 00-3.2 0Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
                             </svg>
                             Dashboard
+                        </a>
+
+                        <a href="{{ route('admin.settings.edit') }}" class="{{ $navItemClass(request()->routeIs('admin.settings.*')) }}">
+                            <svg viewBox="0 0 24 24" fill="none" class="{{ $navIconClass(request()->routeIs('admin.settings.*')) }}">
+                                <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Pengaturan Situs
                         </a>
 
                         <a href="{{ route('admin.home.edit') }}" class="{{ $navItemClass(request()->routeIs('admin.home.*')) }}">

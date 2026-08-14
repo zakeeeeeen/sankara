@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', config('app.name', 'Sankara Tech'))</title>
-        <link rel="icon" type="image/png" href="{{ asset('logosankara.png') }}">
-        <link rel="shortcut icon" href="{{ asset('logosankara.png') }}">
+        <title>@yield('title', \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech'))</title>
+        <link rel="icon" type="image/png" href="{{ \App\Models\SiteSetting::getValue('site_favicon', asset('logosankara.png')) }}">
+        <link rel="shortcut icon" href="{{ \App\Models\SiteSetting::getValue('site_favicon', asset('logosankara.png')) }}">
         @fonts
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])

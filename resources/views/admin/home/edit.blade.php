@@ -26,48 +26,7 @@
         @csrf
         @method('PUT')
 
-        <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
-            <div class="text-lg font-semibold text-slate-900">Tema Warna</div>
-            <p class="mt-2 text-sm leading-relaxed text-slate-600">Ubah warna utama (accent) yang dipakai untuk tombol dan highlight.</p>
 
-            <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-                @php
-                    $themes = [
-                        'emerald' => 'Emerald',
-                        'violet' => 'Violet',
-                        'blue' => 'Blue',
-                        'amber' => 'Amber',
-                        'rose' => 'Rose',
-                    ];
-                    $themeStops = [
-                        'emerald' => ['#10b981', '#06b6d4', '#0ea5e9'],
-                        'violet' => ['#8b5cf6', '#ec4899', '#f97316'],
-                        'blue' => ['#3b82f6', '#6366f1', '#06b6d4'],
-                        'amber' => ['#f97316', '#f59e0b', '#eab308'],
-                        'rose' => ['#f43f5e', '#ef4444', '#f97316'],
-                    ];
-                    $selectedTheme = old('theme', $theme ?? 'emerald');
-                @endphp
-
-                @foreach ($themes as $key => $label)
-                    @php
-                        $stops = $themeStops[$key] ?? $themeStops['emerald'];
-                        $preview = "linear-gradient(to right, {$stops[0]}, {$stops[1]}, {$stops[2]})";
-                    @endphp
-                    <label class="group cursor-pointer rounded-2xl border border-slate-200/70 bg-white/70 p-4 shadow-sm backdrop-blur transition hover:bg-white">
-                        <div class="flex items-start justify-between gap-3">
-                            <div class="min-w-0">
-                                <div class="text-sm font-semibold text-slate-900">{{ $label }}</div>
-                                <div class="mt-2 h-2 w-full rounded-full" style="background-image: {{ $preview }};"></div>
-                            </div>
-                            <input type="radio" name="theme" value="{{ $key }}" class="mt-1 h-4 w-4 text-emerald-600" {{ $selectedTheme === $key ? 'checked' : '' }} />
-                        </div>
-                    </label>
-                @endforeach
-            </div>
-
-            @error('theme') <div class="mt-3 text-sm font-semibold text-rose-600">{{ $message }}</div> @enderror
-        </div>
 
         <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
             <div class="text-lg font-semibold text-slate-900">Hero</div>

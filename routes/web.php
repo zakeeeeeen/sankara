@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PortfolioCategoryController;
 use App\Http\Controllers\Admin\PortfolioController as AdminPortfolioController;
 use App\Http\Controllers\Admin\PricingPlanController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
@@ -46,6 +47,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('portfolios', AdminPortfolioController::class)->except(['show']);
         Route::resource('portfolio-categories', PortfolioCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
         Route::resource('pricing', PricingPlanController::class)->except(['show'])->parameters(['pricing' => 'plan']);
+
+        Route::get('/settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
+        Route::put('/settings', [SiteSettingController::class, 'update'])->name('settings.update');
 
         Route::get('contact-messages', [AdminContactMessageController::class, 'index'])->name('contact-messages.index');
         Route::get('contact-messages/{message}', [AdminContactMessageController::class, 'show'])->name('contact-messages.show');

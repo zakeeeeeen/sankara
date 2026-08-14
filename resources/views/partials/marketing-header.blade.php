@@ -6,13 +6,28 @@
     $variant = $variant ?? 'light';
     $isLanding = $variant === 'landing';
 
-    $navItems = [
-        ['key' => 'home', 'label' => 'Home', 'url' => $homeHref],
-        ['key' => 'about', 'label' => 'Tentang Kami', 'url' => route('about')],
-        ['key' => 'services', 'label' => 'Layanan', 'url' => route('services.index')],
-        ['key' => 'portfolios', 'label' => 'Portofolio', 'url' => route('portfolios.index')],
-        ['key' => 'contact', 'label' => 'Kontak', 'url' => route('contact.show')],
-    ];
+    $siteName = \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech');
+    $siteTagline = \App\Models\SiteSetting::getValue('site_tagline', 'Digital Agency');
+    $siteLogo = \App\Models\SiteSetting::getValue('site_logo', asset('logosankara.png'));
+
+    $customHeaderNav = \App\Models\SiteSetting::getValue('header_nav');
+    if (!empty($customHeaderNav) && is_array($customHeaderNav)) {
+        $navItems = array_map(function ($item) {
+            return [
+                'key' => $item['key'] ?? \Illuminate\Support\Str::slug($item['label'] ?? ''),
+                'label' => $item['label'] ?? '',
+                'url' => $item['url'] ?? '#',
+            ];
+        }, $customHeaderNav);
+    } else {
+        $navItems = [
+            ['key' => 'home', 'label' => 'Home', 'url' => $homeHref],
+            ['key' => 'about', 'label' => 'Tentang Kami', 'url' => route('about')],
+            ['key' => 'services', 'label' => 'Layanan', 'url' => route('services.index')],
+            ['key' => 'portfolios', 'label' => 'Portofolio', 'url' => route('portfolios.index')],
+            ['key' => 'contact', 'label' => 'Kontak', 'url' => route('contact.show')],
+        ];
+    }
 @endphp
 
 <header @if($headerId) id="{{ $headerId }}" @endif class="relative">
@@ -28,10 +43,10 @@
             <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
                     <a href="{{ $homeHref }}" class="flex items-center gap-3 lg:justify-self-start">
-                        <img src="{{ asset('logosankara.png') }}" alt="Sankara Tech Logo" class="h-9 w-9 object-contain">
+                        <img src="{{ $siteLogo }}" alt="{{ $siteName }} Logo" class="h-9 w-9 object-contain">
                         <span class="leading-tight">
-                            <span data-brand-name class="block text-sm font-semibold tracking-tight {{ $isLanding ? 'text-white' : 'text-slate-900' }}">Sankara Tech</span>
-                            <span data-brand-tagline class="block text-xs font-medium {{ $isLanding ? 'text-white/65' : 'text-slate-500' }}">Digital Agency</span>
+                            <span data-brand-name class="block text-sm font-semibold tracking-tight {{ $isLanding ? 'text-white' : 'text-slate-900' }}">{{ $siteName }}</span>
+                            <span data-brand-tagline class="block text-xs font-medium {{ $isLanding ? 'text-white/65' : 'text-slate-500' }}">{{ $siteTagline }}</span>
                         </span>
                     </a>
 

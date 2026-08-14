@@ -21,31 +21,12 @@ class HomeController extends Controller
         $about = HomeAbout::query()->first();
         $cta = HomeCta::query()->first();
         $stats = HomeStat::query()->orderBy('sort_order')->get();
-        $advantages = Advantage::query()->orderBy('sort_order')->get();
-        $theme = SiteSetting::getValue('theme', 'emerald');
-
-        $contact = SiteSetting::getValue('contact', [
-            'email' => '',
-            'whatsapp' => '',
-            'address' => '',
-            'hours' => '',
-            'inbox_email' => '',
-            'map_embed_url' => '',
-        ]);
-
-        $socials = SiteSetting::getValue('socials', [
-            'instagram' => '',
-            'linkedin' => '',
-            'dribbble' => '',
-        ]);
-
-        return view('admin.home.edit', compact('hero', 'about', 'cta', 'stats', 'advantages', 'contact', 'socials', 'theme'));
+        return view('admin.home.edit', compact('hero', 'about', 'cta', 'stats', 'advantages', 'contact', 'socials'));
     }
 
     public function update(Request $request)
     {
         $data = $request->validate([
-            'theme' => ['nullable', 'string', Rule::in(['emerald', 'violet', 'blue', 'amber', 'rose'])],
             'hero.heading' => ['required', 'string', 'max:255'],
             'hero.subheading' => ['nullable', 'string'],
             'hero.primary_cta_label' => ['nullable', 'string', 'max:255'],
@@ -141,7 +122,6 @@ class HomeController extends Controller
 
             SiteSetting::setValue('contact', $data['contact'] ?? []);
             SiteSetting::setValue('socials', $data['socials'] ?? []);
-            SiteSetting::setValue('theme', $data['theme'] ?? 'emerald');
         });
 
         return redirect()->route('admin.home.edit')->with('status', 'Perubahan tersimpan.');

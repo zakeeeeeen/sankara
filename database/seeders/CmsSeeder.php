@@ -295,6 +295,53 @@ class CmsSeeder extends Seeder
         ];
         SiteSetting::setValue('socials', array_merge($socialDefaults, is_array($existingSocials) ? $existingSocials : []));
 
+        if (!filled(SiteSetting::getValue('site_name'))) {
+            SiteSetting::setValue('site_name', 'Sankara Tech');
+        }
+
+        if (!filled(SiteSetting::getValue('site_tagline'))) {
+            SiteSetting::setValue('site_tagline', 'Digital Agency');
+        }
+
+        if (!filled(SiteSetting::getValue('site_logo'))) {
+            SiteSetting::setValue('site_logo', '/logosankara.png');
+        }
+
+        if (!filled(SiteSetting::getValue('site_favicon'))) {
+            SiteSetting::setValue('site_favicon', '/logosankara.png');
+        }
+
+        if (!filled(SiteSetting::getValue('footer_description'))) {
+            SiteSetting::setValue('footer_description', 'Kami membangun produk digital modern: website, software, aplikasi mobile, UI/UX, game development, dan 3D modeling—dengan kualitas premium yang meyakinkan.');
+        }
+
+        if (!filled(SiteSetting::getValue('footer_copyright'))) {
+            SiteSetting::setValue('footer_copyright', '© ' . date('Y') . ' Sankara Tech. All rights reserved.');
+        }
+
+        if (!filled(SiteSetting::getValue('footer_subtext'))) {
+            SiteSetting::setValue('footer_subtext', 'Built with Laravel • Blade • Livewire • Tailwind');
+        }
+
+        if (empty(SiteSetting::getValue('header_nav'))) {
+            SiteSetting::setValue('header_nav', [
+                ['key' => 'home', 'label' => 'Home', 'url' => '/'],
+                ['key' => 'about', 'label' => 'Tentang Kami', 'url' => '/tentang-kami'],
+                ['key' => 'services', 'label' => 'Layanan', 'url' => '/layanan'],
+                ['key' => 'portfolios', 'label' => 'Portofolio', 'url' => '/portfolio'],
+                ['key' => 'contact', 'label' => 'Kontak', 'url' => '/kontak'],
+            ]);
+        }
+
+        if (empty(SiteSetting::getValue('bottom_nav'))) {
+            SiteSetting::setValue('bottom_nav', [
+                ['key' => 'home', 'label' => 'Home', 'url' => '/', 'icon' => 'home', 'custom_icon' => '', 'is_active' => true],
+                ['key' => 'services', 'label' => 'Layanan', 'url' => '/layanan', 'icon' => 'services', 'custom_icon' => '', 'is_active' => true],
+                ['key' => 'portfolios', 'label' => 'Portofolio', 'url' => '/portfolio', 'icon' => 'portfolios', 'custom_icon' => '', 'is_active' => true],
+                ['key' => 'contact', 'label' => 'Kontak', 'url' => '/kontak', 'icon' => 'contact', 'is_active' => true],
+            ]);
+        }
+
         if (!filled(SiteSetting::getValue('theme'))) {
             SiteSetting::setValue('theme', 'emerald');
         }

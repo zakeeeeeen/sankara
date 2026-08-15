@@ -240,66 +240,29 @@
                         ->values();
                 @endphp
 
-                <div
-                    x-data="{
-                        active: 0,
-                        total: {{ $items->count() }},
-                        timer: null,
-                        startAutoPlay() {
-                            if (this.total <= 1) return;
-                            this.timer = setInterval(() => {
-                                if (window.innerWidth < 640) {
-                                    this.active = (this.active + 1) % this.total;
-                                }
-                            }, 4500);
-                        }
-                    }"
-                    x-init="startAutoPlay()"
-                    class="mt-12 sm:mt-16"
-                >
+                <div class="mt-12 sm:mt-16">
                     @if ($items->count() === 0)
                         <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-slate-200 font-medium">
                             Belum ada data portofolio.
                         </div>
                     @else
-                        <!-- Tampilan Mobile Auto-Changing Fade Carousel (< sm) -->
-                        <div class="block sm:hidden relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-slate-900 shadow-xl">
-                            @foreach ($items as $idx => $item)
-                                <div
-                                    x-show="active === {{ $idx }}"
-                                    x-transition:enter="transition opacity duration-700 ease-in-out"
-                                    x-transition:enter-start="opacity-0"
-                                    x-transition:enter-end="opacity-100"
-                                    x-transition:leave="transition opacity duration-500 ease-in-out"
-                                    x-transition:leave-start="opacity-100"
-                                    x-transition:leave-end="opacity-0"
-                                    class="absolute inset-0 h-full w-full"
-                                >
-                                    <a href="{{ $item['url'] }}" wire:navigate class="group block h-full w-full" aria-label="Lihat Project {{ $item['title'] }}">
-                                        <div data-hover-shot class="no-scrollbar h-full w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900">
-                                            <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-
-                        <!-- Tampilan Desktop Carousel Track (>= sm) -->
-                        <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-theme="dark" class="hidden sm:block relative px-2 sm:px-4 lg:px-6">
-                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 hidden sm:flex items-center sm:-left-4">
-                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Portofolio Sebelumnya">
+                        <div data-carousel class="relative px-2 sm:px-4 lg:px-6">
+                            <!-- Prev / Next Controls -->
+                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 flex items-center sm:-left-4">
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border border-white/20 bg-slate-950/80 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95" aria-label="Portofolio Sebelumnya">
                                     <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
-                            <div class="pointer-events-none absolute inset-y-0 -right-2 z-10 hidden sm:flex items-center sm:-right-4">
-                                <button type="button" data-carousel-next class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Portofolio Selanjutnya">
+                            <div class="pointer-events-none absolute inset-y-0 -right-2 z-10 flex items-center sm:-right-4">
+                                <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border border-white/20 bg-slate-950/80 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95" aria-label="Portofolio Selanjutnya">
                                     <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
 
-                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth py-4">
+                            <!-- Carousel Track -->
+                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 overflow-x-auto scroll-smooth py-4 select-none">
                                 @foreach ($items as $item)
-                                    <div class="w-full shrink-0 snap-center sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
+                                    <div class="w-[85%] shrink-0 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                                         <a href="{{ $item['url'] }}" wire:navigate class="group block h-full" aria-label="Lihat Project {{ $item['title'] }}">
                                             <div data-hover-shot class="no-scrollbar aspect-[4/3] w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20 sm:aspect-[16/11]">
                                                 <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />

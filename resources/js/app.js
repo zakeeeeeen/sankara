@@ -176,151 +176,50 @@ const initCarousel = () => {
 
     roots.forEach((root) => {
         const track = root.querySelector('[data-carousel-track]');
-        const dots = root.querySelector('[data-carousel-dots]');
         if (!track) return;
-
-        const originalSlides = [...track.children];
-        const N = originalSlides.length;
-        if (N <= 1) return;
-
-        const theme = root.getAttribute('data-carousel-theme') || 'light';
-        const autoplay = root.getAttribute('data-carousel-autoplay') !== 'false';
-        const loop = root.getAttribute('data-carousel-loop') !== 'false';
-        const featuredCenter = root.getAttribute('data-carousel-featured-center') === 'true';
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        let slides = originalSlides;
-        const isLooping = loop && N > 1;
-
-        if (isLooping) {
-            track.innerHTML = '';
-            const set0 = originalSlides.map((el) => el.cloneNode(true));
-            const set1 = originalSlides.map((el) => el.cloneNode(true));
-            const set2 = originalSlides.map((el) => el.cloneNode(true));
-
-            set0.forEach((el) => track.appendChild(el));
-            set1.forEach((el) => track.appendChild(el));
-            set2.forEach((el) => track.appendChild(el));
-
-            slides = [...track.children];
-        }
-
-        let currentIndex = isLooping ? N : 0;
-        let isAnimating = false;
-        let animationTimeout = null;
 
         const prevBtn = root.querySelector('[data-carousel-prev]');
         const nextBtn = root.querySelector('[data-carousel-next]');
+        const dots = root.querySelector('[data-carousel-dots]');
 
-        const getWSet = () => {
-            if (!isLooping) return 0;
-            return slides[N] && slides[0] ? slides[N].offsetLeft - slides[0].offsetLeft : 0;
+        const getScrollDistance = () => {
+            const firstChild = track.firstElementChild;
+            if (firstChild) {
+                const style = window.getComputedStyle(track);
+                const gap = parseInt(style.gap || '24') || 24;
+                return firstChild.getBoundingClientRect().width + gap;
+            }
+            return track.clientWidth * 0.85;
         };
 
-        const syncFeatured = (currIndex) => {
-            if (!featuredCenter) return;
-
-            const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-            slides.forEach((slide) => {
-                slide.querySelector('[data-carousel-feature-card]')?.classList.remove('agency-service-card--featured');
-            });
-
-            if (!isDesktop || N < 3) return;
-
-            const idx = typeof currIndex === 'number' ? currIndex : currentIndex;
-            const centerIndex = isLooping
-                ? Math.max(0, Math.min(idx + 1, slides.length - 1))
-                : Math.max(0, Math.min(idx + 1, slides.length - 1));
-
-            slides[centerIndex]?.querySelector('[data-carousel-feature-card]')?.classList.add('agency-service-card--featured');
-        };
-
-        const syncDots = (currIndex) => {
-            if (!dots) return;
-            const activeDot = isLooping ? ((currIndex % N) + N) % N : currIndex;
-            dots.querySelectorAll('button').forEach((btn, i) => {
-                const active = i === activeDot;
-                if (theme === 'dark') {
-                    btn.classList.toggle('bg-white', active);
-                    btn.classList.toggle('bg-white/25', !active);
+        if (prevBtn) {
+            prevBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const dist = getScrollDistance();
+                if (track.scrollLeft <= 10) {
+                    track.scrollTo({ left: track.scrollWidth, behavior: 'smooth' });
                 } else {
-                    btn.classList.toggle('bg-slate-900', active);
-                    btn.classList.toggle('bg-slate-300/70', !active);
+                    track.scrollBy({ left: -dist, behavior: 'smooth' });
                 }
-                btn.setAttribute('aria-current', active ? 'true' : 'false');
-            });
-        };
-
-        const normalizeBoundaryInstant = () => {
-            if (!isLooping) return;
-            const wSet = getWSet();
-            if (wSet <= 0) return;
-
-            if (currentIndex >= 2 * N) {
-                currentIndex = currentIndex - N;
-                track.style.scrollBehavior = 'auto';
-                track.scrollLeft = slides[currentIndex].offsetLeft;
-                track.style.scrollBehavior = '';
-            } else if (currentIndex < N) {
-                currentIndex = currentIndex + N;
-                track.style.scrollBehavior = 'auto';
-                track.scrollLeft = slides[currentIndex].offsetLeft;
-                track.style.scrollBehavior = '';
-            }
-        };
-
-        const scrollToTarget = (targetIdx, behavior = 'smooth') => {
-            const slide = slides[targetIdx];
-            if (!slide) return;
-
-            currentIndex = targetIdx;
-            isAnimating = behavior === 'smooth' && !prefersReducedMotion;
-
-            track.scrollTo({ left: slide.offsetLeft, behavior: prefersReducedMotion ? 'auto' : behavior });
-
-            syncDots(currentIndex);
-            syncFeatured(currentIndex);
-
-            if (animationTimeout) clearTimeout(animationTimeout);
-            animationTimeout = setTimeout(() => {
-                isAnimating = false;
-                normalizeBoundaryInstant();
-                syncDots(currentIndex);
-                syncFeatured(currentIndex);
-            }, prefersReducedMotion ? 50 : 380);
-        };
-
-        // Initialize Dots
-        if (dots) {
-            dots.innerHTML = '';
-            for (let i = 0; i < N; i++) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'h-2.5 w-2.5 rounded-full transition';
-                btn.addEventListener('click', () => {
-                    if (isAnimating) return;
-                    const currentDot = ((currentIndex % N) + N) % N;
-                    let step = i - currentDot;
-                    if (step < 0) step += N;
-                    scrollToTarget(currentIndex + step, 'smooth');
-                });
-                dots.appendChild(btn);
-            }
+            };
         }
 
-        prevBtn?.addEventListener('click', () => {
-            if (isAnimating) return;
-            const step = 1;
-            scrollToTarget(currentIndex - step, 'smooth');
-        });
+        if (nextBtn) {
+            nextBtn.onclick = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const dist = getScrollDistance();
+                const maxScroll = track.scrollWidth - track.clientWidth;
+                if (track.scrollLeft >= maxScroll - 10) {
+                    track.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    track.scrollBy({ left: dist, behavior: 'smooth' });
+                }
+            };
+        }
 
-        nextBtn?.addEventListener('click', () => {
-            if (isAnimating) return;
-            const step = 1;
-            scrollToTarget(currentIndex + step, 'smooth');
-        });
-
-        // Mouse Drag to Scroll (Desktop)
+        // Mouse Drag to Scroll
         let isMouseDown = false;
         let startX = 0;
         let scrollLeftStart = 0;
@@ -328,7 +227,7 @@ const initCarousel = () => {
 
         track.style.cursor = 'grab';
 
-        track.addEventListener('mousedown', (e) => {
+        track.onmousedown = (e) => {
             if (e.button !== 0) return;
             isMouseDown = true;
             hasDragged = false;
@@ -337,93 +236,35 @@ const initCarousel = () => {
             track.style.scrollBehavior = 'auto';
             track.style.userSelect = 'none';
             track.style.cursor = 'grabbing';
-        });
+        };
 
-        window.addEventListener('mousemove', (e) => {
+        window.onmousemove = (e) => {
             if (!isMouseDown) return;
             const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 1.1;
-            if (Math.abs(walk) > 5) {
+            const walk = (x - startX) * 1.25;
+            if (Math.abs(walk) > 4) {
                 hasDragged = true;
             }
             track.scrollLeft = scrollLeftStart - walk;
-        });
+        };
 
         const handleDragEnd = () => {
             if (!isMouseDown) return;
             isMouseDown = false;
-            track.style.scrollBehavior = '';
+            track.style.scrollBehavior = 'smooth';
             track.style.removeProperty('user-select');
             track.style.cursor = 'grab';
-            if (hasDragged) {
-                const centered = getCenteredIndex();
-                currentIndex = centered;
-                normalizeBoundaryInstant();
-                syncDots(currentIndex);
-                syncFeatured(currentIndex);
-            }
         };
 
-        window.addEventListener('mouseup', handleDragEnd);
+        window.onmouseup = handleDragEnd;
 
-        track.addEventListener('click', (e) => {
+        track.onclick = (e) => {
             if (hasDragged) {
                 e.preventDefault();
                 e.stopPropagation();
                 hasDragged = false;
             }
-        }, true);
-
-        // Scroll listener for manual swipe / scroll
-        let raf = null;
-        track.addEventListener(
-            'scroll',
-            () => {
-                if (raf) cancelAnimationFrame(raf);
-                raf = requestAnimationFrame(() => {
-                    if (!isAnimating && !isMouseDown) {
-                        const centered = getCenteredIndex();
-                        const wSet = getWSet();
-                        if (wSet > 0 && isLooping) {
-                            if (track.scrollLeft >= 2 * wSet) {
-                                track.scrollLeft -= wSet;
-                                currentIndex = getCenteredIndex();
-                            } else if (track.scrollLeft <= 0.2 * wSet) {
-                                track.scrollLeft += wSet;
-                                currentIndex = getCenteredIndex();
-                            } else {
-                                currentIndex = centered;
-                            }
-                        } else {
-                            currentIndex = centered;
-                        }
-                        syncDots(currentIndex);
-                        syncFeatured(currentIndex);
-                    }
-                });
-            },
-            { passive: true }
-        );
-
-        window.addEventListener('resize', () => {
-            scrollToTarget(currentIndex, 'auto');
-        });
-
-        if (isLooping) {
-            requestAnimationFrame(() => {
-                currentIndex = N;
-                const initialTarget = slides[N];
-                if (initialTarget) {
-                    track.style.scrollBehavior = 'auto';
-                    track.scrollLeft = initialTarget.offsetLeft;
-                    track.style.scrollBehavior = '';
-                }
-                syncDots(currentIndex);
-                syncFeatured(currentIndex);
-            });
-        } else {
-            scrollToTarget(0, 'auto');
-        }
+        };
     });
 };
 

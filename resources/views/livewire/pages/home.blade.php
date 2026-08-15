@@ -20,28 +20,28 @@
             <div class="agency-hero-grid pointer-events-none absolute inset-0 opacity-45" aria-hidden="true"></div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-3xl text-center">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white/85 backdrop-blur">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[rgb(var(--agency-cyan))]"></span>
+                    <div class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-4 py-2 text-xs font-bold text-white backdrop-blur">
+                        <span class="h-2 w-2 rounded-full bg-[rgb(var(--agency-cyan))]"></span>
                         Web & Product Agency
                     </div>
 
-                    <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                    <h1 class="mt-6 text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
                         {{ $hero?->heading ?? 'Inovasi Digital untuk Pertumbuhan Bisnis Anda' }}
                     </h1>
 
-                    <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+                    <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-slate-100 sm:text-lg font-medium">
                         {{ $hero?->subheading ?? 'Kami membantu bisnis berkembang melalui solusi digital modern seperti website, aplikasi mobile, software custom, desain kreatif, game development, dan 3D modeling.' }}
                     </p>
 
                     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
-                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
+                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-bold shadow-lg" aria-label="Mulai Proyek dengan Sankara Tech">
                             <span>{{ $hero?->primary_cta_label ?? 'Mulai Proyek' }}</span>
                             <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
 
-                        <a href="{{ $hero?->secondary_cta_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
+                        <a href="{{ $hero?->secondary_cta_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-bold shadow-md" aria-label="Lihat Showcase Portofolio">
                             <span>{{ $hero?->secondary_cta_label ?? 'Lihat Portofolio' }}</span>
-                            <i class="fa-solid fa-bars-staggered text-xs text-white/70" aria-hidden="true"></i>
+                            <i class="fa-solid fa-bars-staggered text-xs text-white" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -53,26 +53,26 @@
                                 <span class="h-2.5 w-2.5 rounded-full bg-rose-400"></span>
                                 <span class="h-2.5 w-2.5 rounded-full bg-amber-400"></span>
                                 <span class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
-                                <div class="ml-3 hidden rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-medium text-white/55 sm:block">app/Http/Controllers/HomeController.php</div>
+                                <div class="ml-3 hidden rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold text-slate-200 sm:block">app/Http/Controllers/HomeController.php</div>
                             </div>
-                            <div class="agency-pill hidden px-3 py-1 text-[11px] font-medium sm:block">Laravel • Blade • Livewire</div>
+                            <div class="agency-pill hidden px-3 py-1 text-[11px] font-semibold text-white sm:block">Laravel • Blade • Livewire</div>
                         </div>
 
                         <div class="grid gap-0 lg:grid-cols-[88px_1fr]">
-                            <div class="hidden border-r border-white/8 bg-black/10 px-4 py-5 text-right text-xs leading-10 text-white/28 lg:block" aria-hidden="true">
+                            <div class="hidden border-r border-white/10 bg-black/20 px-4 py-5 text-right text-xs leading-10 text-slate-400 lg:block" aria-hidden="true">
                                 @for ($i = 1; $i <= 9; $i++)
                                     <div>{{ $i }}</div>
                                 @endfor
                             </div>
                             <div class="agency-code-lines overflow-hidden px-5 py-5 font-mono text-[13px] leading-10 sm:px-7 sm:text-[14px]">
-                                <div><span class="text-cyan-300">const</span> <span class="text-sky-200">agency</span> <span class="text-white/70">=</span> <span class="text-white">{</span></div>
-                                <div class="pl-4"><span class="text-sky-200">name</span><span class="text-white/70">:</span> <span class="text-emerald-300">'Sankara Tech'</span><span class="text-white/60">,</span></div>
-                                <div class="pl-4"><span class="text-sky-200">focus</span><span class="text-white/70">:</span> <span class="text-emerald-300">['website', 'software', 'mobile']</span><span class="text-white/60">,</span></div>
-                                <div class="pl-4"><span class="text-sky-200">approach</span><span class="text-white/70">:</span> <span class="text-emerald-300">'clean UI, fast build, scalable system'</span><span class="text-white/60">,</span></div>
-                                <div class="pl-4"><span class="text-sky-200">delivery</span><span class="text-white/70">:</span> <span class="text-emerald-300">'design to launch'</span></div>
+                                <div><span class="text-cyan-300">const</span> <span class="text-sky-200">agency</span> <span class="text-white">=</span> <span class="text-white">{</span></div>
+                                <div class="pl-4"><span class="text-sky-200">name</span><span class="text-white">:</span> <span class="text-emerald-300">'Sankara Tech'</span><span class="text-white">,</span></div>
+                                <div class="pl-4"><span class="text-sky-200">focus</span><span class="text-white">:</span> <span class="text-emerald-300">['website', 'software', 'mobile']</span><span class="text-white">,</span></div>
+                                <div class="pl-4"><span class="text-sky-200">approach</span><span class="text-white">:</span> <span class="text-emerald-300">'clean UI, fast build, scalable system'</span><span class="text-white">,</span></div>
+                                <div class="pl-4"><span class="text-sky-200">delivery</span><span class="text-white">:</span> <span class="text-emerald-300">'design to launch'</span></div>
                                 <div><span class="text-white">}</span></div>
-                                <div class="mt-2"><span class="text-cyan-300">export default</span> <span class="text-sky-200">agency</span><span class="text-white/60">;</span></div>
-                                <div class="mt-2"><span class="text-cyan-300">echo</span> <span class="text-emerald-300">"Hello, World!"</span><span class="text-white/60">;</span></div>
+                                <div class="mt-2"><span class="text-cyan-300">export default</span> <span class="text-sky-200">agency</span><span class="text-white">;</span></div>
+                                <div class="mt-2"><span class="text-cyan-300">echo</span> <span class="text-emerald-300">"Hello, World!"</span><span class="text-white">;</span></div>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="max-w-4xl">
-                        <p class="pt-2 text-base leading-8 text-slate-600 sm:text-xl sm:leading-relaxed">
+                        <p class="pt-2 text-base leading-8 text-slate-700 sm:text-xl sm:leading-relaxed font-normal">
                             {{ $about?->body ?? 'Kami merancang pengalaman digital end-to-end—mulai dari strategi, desain UI/UX, hingga pengembangan website, software, mobile apps, game, dan 3D asset. Fokus kami sederhana: hasil yang elegan, cepat, dan siap scale.' }}
                         </p>
                     </div>
@@ -108,7 +108,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Why Choose Us?</h2>
-                    <p class="mt-3 max-w-2xl text-base font-medium text-white/80 sm:text-lg">
+                    <p class="mt-3 max-w-2xl text-base font-semibold text-slate-200 sm:text-lg">
                         Keunggulan Utama & Alasan Mengapa Partner Memilih Sankara Tech
                     </p>
                 </div>
@@ -122,8 +122,8 @@
                                         <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
-                                <h3 class="mt-6 text-xl font-bold text-white transition-colors group-hover:text-emerald-400">{{ $adv->title }}</h3>
-                                <p class="mt-3 text-sm leading-relaxed text-white/75">{{ $adv->description }}</p>
+                                <h3 class="mt-6 text-xl font-bold text-white transition-colors group-hover:text-emerald-300">{{ $adv->title }}</h3>
+                                <p class="mt-3 text-sm leading-relaxed text-slate-200">{{ $adv->description }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -142,7 +142,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
-                    <p class="mt-3 max-w-2xl text-base font-medium text-slate-600 sm:text-lg">
+                    <p class="mt-3 max-w-2xl text-base font-semibold text-slate-700 sm:text-lg">
                         Solusi Digital End-to-End untuk Membantu Bisnis Anda Grow & Scale
                     </p>
                 </div>
@@ -151,12 +151,12 @@
                     <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-featured-center="true" class="relative mx-auto max-w-[58rem]">
                         <div class="relative">
                             <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 flex items-center sm:-left-6 lg:-left-8">
-                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Sebelumnya">
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-300 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Sebelumnya">
                                     <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 flex items-center sm:-right-6 lg:-right-8">
-                                <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Selanjutnya">
+                                <button type="button" data-carousel-next class="pointer-events-auto grid h-11 w-11 place-items-center rounded-full border border-slate-300 bg-white text-slate-800 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-300 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Selanjutnya">
                                     <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -177,11 +177,11 @@
                                     @endphp
                                     <div class="w-[88%] shrink-0 snap-center sm:w-[44%] lg:w-[32.2%]">
                                         <a href="{{ route('services.show', $service->slug) }}" wire:navigate data-carousel-feature-card class="agency-service-card flex h-full flex-col p-8" aria-label="Detail Layanan {{ $service->title }}">
-                                            <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-[rgb(var(--agency-cyan)/0.08)] text-[rgb(var(--agency-cyan))]">
+                                            <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-200 bg-sky-50 text-sky-700">
                                                 <i class="{{ $iconClass }} text-2xl" aria-hidden="true"></i>
                                             </div>
-                                            <h3 class="mt-8 text-[1.8rem] font-semibold leading-tight tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
-                                            <p class="mt-4 max-w-xs text-sm leading-7 text-slate-500">{{ $service->excerpt }}</p>
+                                            <h3 class="mt-8 text-[1.8rem] font-bold leading-tight tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
+                                            <p class="mt-4 max-w-xs text-sm leading-7 text-slate-700 font-normal">{{ $service->excerpt }}</p>
                                             <div class="mt-auto flex items-center justify-end pt-10 text-[rgb(var(--agency-navy-2))]">
                                                 <i class="fa-solid fa-arrow-right text-base" aria-hidden="true"></i>
                                             </div>
@@ -208,7 +208,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Portofolio</h2>
-                    <p class="mt-3 max-w-2xl text-base font-medium text-white/80 sm:text-lg">
+                    <p class="mt-3 max-w-2xl text-base font-semibold text-slate-200 sm:text-lg">
                         Menampilkan Project Terbaik dari Setiap Kolaborasi
                     </p>
                 </div>
@@ -227,7 +227,7 @@
 
                 <div class="mt-12 sm:mt-16">
                     @if ($items->count() === 0)
-                        <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-white/75">
+                        <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-slate-200 font-medium">
                             Belum ada data portofolio.
                         </div>
                     @else
@@ -261,7 +261,7 @@
                 </div>
 
                 <div class="mt-12 flex justify-center">
-                    <a href="{{ route('portfolios.index') }}" wire:navigate class="group brand-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-cyan-500/30">
+                    <a href="{{ route('portfolios.index') }}" wire:navigate class="group brand-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-bold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-cyan-500/30" aria-label="Buka Semua Halaman Portofolio">
                         <span>Lihat Selengkapnya</span>
                         <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
                     </a>
@@ -281,9 +281,9 @@
                     <div class="mx-auto flex justify-center">
                         <div class="agency-divider"></div>
                     </div>
-                    <p class="mt-4 text-sm font-semibold text-slate-600">Pricing</p>
-                    <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Paket fleksibel untuk setiap kebutuhan</h2>
-                    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+                    <p class="mt-4 text-sm font-bold text-slate-800">Pricing</p>
+                    <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Paket fleksibel untuk setiap kebutuhan</h2>
+                    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700 font-normal">
                         Pilih paket sesuai scope. Semua paket sudah termasuk konsultasi, timeline yang jelas, dan dokumentasi.
                     </p>
                 </div>
@@ -291,43 +291,43 @@
                 <div class="mt-12 grid gap-6 lg:grid-cols-3">
                     @foreach (($pricingPlans ?? collect()) as $plan)
                         @php $popular = (bool) $plan->is_popular; @endphp
-                        <div class="agency-card relative p-8 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
+                        <div class="agency-card relative p-8 {{ $popular ? 'ring-2 ring-sky-500 shadow-xl' : '' }}">
                             @if ($popular)
-                                <div class="absolute right-6 top-6 rounded-full bg-[rgb(var(--agency-cyan))] px-3 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">Paling populer</div>
+                                <div class="absolute right-6 top-6 rounded-full bg-sky-500 px-3 py-1 text-xs font-bold text-white shadow-sm">Paling populer</div>
                             @endif
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <h3 class="text-lg font-semibold text-slate-900">{{ $plan->name }}</h3>
-                                    <div class="mt-2 text-xs font-semibold text-slate-500">{{ $plan->tag }}</div>
+                                    <h3 class="text-lg font-bold text-slate-900">{{ $plan->name }}</h3>
+                                    <div class="mt-2 text-xs font-semibold text-slate-700">{{ $plan->tag }}</div>
                                 </div>
-                                <div class="h-10 w-10 rounded-2xl bg-[rgb(var(--agency-cyan)/0.12)] flex items-center justify-center">
+                                <div class="h-10 w-10 rounded-2xl bg-sky-100 flex items-center justify-center">
                                     @if(str_contains(strtolower($plan->name), 'starter') || str_contains(strtolower($plan->name), 'basic'))
-                                        <i class="fa-solid fa-paper-plane text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                        <i class="fa-solid fa-paper-plane text-sm text-sky-700" aria-hidden="true"></i>
                                     @elseif(str_contains(strtolower($plan->name), 'professional') || str_contains(strtolower($plan->name), 'pro'))
-                                        <i class="fa-solid fa-rocket text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                        <i class="fa-solid fa-rocket text-sm text-sky-700" aria-hidden="true"></i>
                                     @elseif(str_contains(strtolower($plan->name), 'enterprise') || str_contains(strtolower($plan->name), 'business') || str_contains(strtolower($plan->name), 'custom'))
-                                        <i class="fa-solid fa-crown text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                        <i class="fa-solid fa-crown text-sm text-sky-700" aria-hidden="true"></i>
                                     @else
-                                        <i class="fa-solid fa-cube text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                        <i class="fa-solid fa-cube text-sm text-sky-700" aria-hidden="true"></i>
                                     @endif
                                 </div>
                             </div>
 
                             @if ($plan->price_text)
-                                <div class="mt-5 text-3xl font-semibold tracking-tight text-[rgb(var(--agency-navy-1))]">{{ $plan->price_text }}</div>
+                                <div class="mt-5 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))]">{{ $plan->price_text }}</div>
                             @endif
-                            <p class="mt-3 text-sm leading-relaxed text-slate-600">{{ $plan->description }}</p>
+                            <p class="mt-3 text-sm leading-relaxed text-slate-700">{{ $plan->description }}</p>
 
-                            <div class="mt-6 space-y-2 text-sm text-slate-700">
+                            <div class="mt-6 space-y-2 text-sm text-slate-800">
                                 @foreach ($plan->features as $feat)
                                     <div class="flex items-center gap-2">
-                                        <i class="fa-solid fa-check text-xs text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
+                                        <i class="fa-solid fa-check text-xs text-sky-700 font-bold" aria-hidden="true"></i>
                                         <span>{{ $feat->text }}</span>
                                     </div>
                                 @endforeach
                             </div>
 
-                            <a href="{{ route('contact.show') }}" wire:navigate class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]">
+                            <a href="{{ route('contact.show') }}" wire:navigate class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]" aria-label="Konsultasi Paket {{ $plan->name }}">
                                 Konsultasi Paket
                             </a>
                         </div>
@@ -347,14 +347,14 @@
                         <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                             {{ $cta?->heading ?? 'Siap Membangun Produk Digital Anda?' }}
                         </h2>
-                        <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+                        <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-100 sm:text-lg font-medium">
                             {{ $cta?->body ?? 'Ceritakan kebutuhan Anda. Kami bantu dari ide hingga eksekusi—dengan desain futuristik, performa cepat, dan pengalaman pengguna yang elegan.' }}
                         </p>
                         <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                            <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-lg transition-transform hover:-translate-y-0.5">
+                            <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold shadow-lg transition-transform hover:-translate-y-0.5" aria-label="Konsultasi Sekarang">
                                 {{ $cta?->primary_label ?? 'Konsultasi Sekarang' }}
                             </a>
-                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-md transition-transform hover:-translate-y-0.5">
+                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold shadow-md transition-transform hover:-translate-y-0.5" aria-label="Lihat Hasil Karya Kami">
                                 {{ $cta?->secondary_label ?? 'Lihat Hasil Kami' }}
                             </a>
                         </div>

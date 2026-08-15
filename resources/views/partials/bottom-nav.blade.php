@@ -68,19 +68,20 @@
 @endphp
 
 @if (count($items) > 0)
-    <nav class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/60 bg-white/85 backdrop-blur-xl lg:hidden">
+    <nav class="fixed inset-x-0 bottom-0 z-50 border-t border-slate-200/80 bg-white/95 backdrop-blur-xl lg:hidden" aria-label="Navigasi Menu Bawah">
         <div class="mx-auto max-w-7xl px-4 pb-[env(safe-area-inset-bottom)] sm:px-6">
             <div class="grid grid-cols-{{ $colCount }} gap-1 py-2" style="grid-template-columns: repeat({{ count($items) }}, minmax(0, 1fr));">
                 @foreach ($items as $item)
                     <a
                         href="{{ $item['href'] }}"
                         wire:navigate
-                        class="group flex flex-col items-center justify-center gap-1 rounded-2xl px-2 py-2 transition active:scale-[0.98]"
+                        class="group flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl px-2 py-1.5 transition active:scale-[0.98]"
+                        aria-label="Menu {{ $item['label'] }}"
                     >
-                        <span class="{{ $item['active'] ? 'brand-gradient text-white shadow-brand-cta' : 'border border-slate-200/70 bg-white/70 text-slate-700 shadow-sm' }} grid h-9 w-9 place-items-center rounded-2xl backdrop-blur transition group-hover:-translate-y-0.5">
-                            <i class="{{ $item['icon'] }} text-sm"></i>
+                        <span class="{{ $item['active'] ? 'brand-gradient text-white shadow-brand-cta' : 'border border-slate-200 bg-white text-slate-800 shadow-sm' }} grid h-9 w-9 place-items-center rounded-2xl backdrop-blur transition group-hover:-translate-y-0.5">
+                            <i class="{{ $item['icon'] }} text-sm" aria-hidden="true"></i>
                         </span>
-                        <span class="{{ $item['active'] ? 'text-brand font-bold' : 'text-slate-600 font-semibold' }} text-[11px] truncate max-w-full">
+                        <span class="{{ $item['active'] ? 'text-brand font-bold' : 'text-slate-700 font-bold' }} text-[11px] truncate max-w-full">
                             {{ $item['label'] }}
                         </span>
                     </a>

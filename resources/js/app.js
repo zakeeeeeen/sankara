@@ -177,7 +177,7 @@ const initCarousel = () => {
     roots.forEach((root) => {
         const track = root.querySelector('[data-carousel-track]');
         const dots = root.querySelector('[data-carousel-dots]');
-        if (!track || !dots) return;
+        if (!track) return;
 
         const originalSlides = [...track.children];
         const N = originalSlides.length;
@@ -217,20 +217,6 @@ const initCarousel = () => {
             return slides[N] && slides[0] ? slides[N].offsetLeft - slides[0].offsetLeft : 0;
         };
 
-        const getCenteredIndex = () => {
-            const current = track.scrollLeft;
-            let best = 0;
-            let bestDist = Infinity;
-            slides.forEach((el, i) => {
-                const dist = Math.abs(el.offsetLeft - current);
-                if (dist < bestDist) {
-                    bestDist = dist;
-                    best = i;
-                }
-            });
-            return best;
-        };
-
         const syncFeatured = (currIndex) => {
             if (!featuredCenter) return;
 
@@ -241,14 +227,16 @@ const initCarousel = () => {
 
             if (!isDesktop || N < 3) return;
 
+            const idx = typeof currIndex === 'number' ? currIndex : currentIndex;
             const centerIndex = isLooping
-                ? Math.max(1, Math.min(currIndex + 1, slides.length - 2))
-                : Math.max(1, Math.min(currIndex + 1, slides.length - 2));
+                ? Math.max(0, Math.min(idx + 1, slides.length - 1))
+                : Math.max(0, Math.min(idx + 1, slides.length - 1));
 
             slides[centerIndex]?.querySelector('[data-carousel-feature-card]')?.classList.add('agency-service-card--featured');
         };
 
         const syncDots = (currIndex) => {
+            if (!dots) return;
             const activeDot = isLooping ? ((currIndex % N) + N) % N : currIndex;
             dots.querySelectorAll('button').forEach((btn, i) => {
                 const active = i === activeDot;
@@ -303,19 +291,21 @@ const initCarousel = () => {
         };
 
         // Initialize Dots
-        dots.innerHTML = '';
-        for (let i = 0; i < N; i++) {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'h-2.5 w-2.5 rounded-full transition';
-            btn.addEventListener('click', () => {
-                if (isAnimating) return;
-                const currentDot = ((currentIndex % N) + N) % N;
-                let step = i - currentDot;
-                if (step < 0) step += N;
-                scrollToTarget(currentIndex + step, 'smooth');
-            });
-            dots.appendChild(btn);
+        if (dots) {
+            dots.innerHTML = '';
+            for (let i = 0; i < N; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'h-2.5 w-2.5 rounded-full transition';
+                btn.addEventListener('click', () => {
+                    if (isAnimating) return;
+                    const currentDot = ((currentIndex % N) + N) % N;
+                    let step = i - currentDot;
+                    if (step < 0) step += N;
+                    scrollToTarget(currentIndex + step, 'smooth');
+                });
+                dots.appendChild(btn);
+            }
         }
 
         prevBtn?.addEventListener('click', () => {

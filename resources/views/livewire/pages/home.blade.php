@@ -178,7 +178,7 @@
                                 </button>
                             </div>
 
-                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth pb-8 pt-6">
+                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth pb-8 pt-10">
                                 @foreach (($services ?? collect()) as $service)
                                     @php
                                         $faIcons = [

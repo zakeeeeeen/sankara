@@ -34,7 +34,7 @@
                             <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
 
-                        <a href="#portofolio" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]" aria-label="Lihat Karya Kami">
+                        <a href="#portofolio" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]" aria-label="Lihat Portofolio">
                             <span>{{ $hero?->cta_secondary_label ?? 'Lihat Portofolio' }}</span>
                         </a>
                     </div>
@@ -164,22 +164,57 @@
                     </p>
                 </div>
 
-                <div class="mt-12 sm:mt-16">
+                @php
+                    $serviceList = ($services ?? collect())->values();
+                @endphp
+
+                <!-- Layanan Mobile: 1 Card Per View (Native Touch Swipe, Zero Peek, Desain Persis Desktop) -->
+                <div class="block sm:hidden mt-4 w-full max-w-full overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-0 scroll-smooth touch-pan-x py-6 px-1">
+                    @foreach ($serviceList as $service)
+                        @php
+                            $faIcons = [
+                                'website-development' => 'fa-solid fa-globe',
+                                'software-development' => 'fa-solid fa-code',
+                                'mobile-app-development' => 'fa-solid fa-mobile-screen-button',
+                                'ui-ux-design' => 'fa-solid fa-pen-ruler',
+                                'uiux-design' => 'fa-solid fa-pen-ruler',
+                                'game-development' => 'fa-solid fa-gamepad',
+                                '3d-modeling' => 'fa-solid fa-cube',
+                            ];
+                            $iconClass = $faIcons[$service->slug] ?? 'fa-solid fa-cubes';
+                        @endphp
+                        <div class="w-full min-w-full shrink-0 snap-center snap-always px-2 py-2">
+                            <a href="{{ route('services.show', $service->slug) }}" wire:navigate class="agency-service-card flex h-full flex-col p-7" aria-label="Detail Layanan {{ $service->title }}">
+                                <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm">
+                                    <i class="{{ $iconClass }} text-xl" aria-hidden="true"></i>
+                                </div>
+                                <h3 class="mt-6 text-xl font-bold leading-snug tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
+                                <p class="mt-3 text-xs leading-relaxed text-slate-500">{{ $service->excerpt }}</p>
+                                <div class="mt-auto flex items-center justify-end pt-8 text-sky-600">
+                                    <i class="fa-solid fa-arrow-right text-base transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Layanan Tampilan Desktop Carousel Track (>= sm) -->
+                <div class="hidden sm:block mt-12 sm:mt-16">
                     <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-featured-center="true" class="relative mx-auto max-w-[74rem]">
                         <div class="relative">
-                            <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 hidden sm:flex items-center sm:-left-6 lg:-left-8">
+                            <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 flex items-center sm:-left-6 lg:-left-8">
                                 <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Sebelumnya">
                                     <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
-                            <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 hidden sm:flex items-center sm:-right-6 lg:-right-8">
+                            <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 flex items-center sm:-right-6 lg:-right-8">
                                 <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Selanjutnya">
                                     <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
 
-                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth pb-8 pt-10">
-                                @foreach (($services ?? collect()) as $service)
+                            <div data-carousel-track class="no-scrollbar flex w-full gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth pb-10 pt-10 px-1">
+                                @foreach ($serviceList as $service)
                                     @php
                                         $faIcons = [
                                             'website-development' => 'fa-solid fa-globe',
@@ -192,7 +227,7 @@
                                         ];
                                         $iconClass = $faIcons[$service->slug] ?? 'fa-solid fa-cubes';
                                     @endphp
-                                    <div class="w-full shrink-0 snap-center sm:w-[46%] lg:w-[31.5%]">
+                                    <div class="w-full shrink-0 snap-center sm:w-[46%] lg:w-[31.5%] py-2">
                                         <a href="{{ route('services.show', $service->slug) }}" wire:navigate data-carousel-feature-card class="agency-service-card flex h-full flex-col p-6 sm:p-9 lg:p-10" aria-label="Detail Layanan {{ $service->title }}">
                                             <div class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm">
                                                 <i class="{{ $iconClass }} text-xl sm:text-2xl" aria-hidden="true"></i>
@@ -240,16 +275,58 @@
                         ->values();
                 @endphp
 
-                <div class="mt-12 sm:mt-16">
+                <div
+                    x-data="{
+                        active: 0,
+                        total: {{ $items->count() }},
+                        timer: null,
+                        startAutoPlay() {
+                            if (this.total <= 1) return;
+                            this.timer = setInterval(() => {
+                                if (window.innerWidth < 640) {
+                                    this.active = (this.active + 1) % this.total;
+                                }
+                            }, 4500);
+                        }
+                    }"
+                    x-init="startAutoPlay()"
+                    class="mt-8 sm:mt-16"
+                >
                     @if ($items->count() === 0)
                         <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-slate-200 font-medium">
                             Belum ada data portofolio.
                         </div>
                     @else
-                        <div data-carousel class="relative px-2 sm:px-4 lg:px-6">
-                            <!-- Prev / Next Controls -->
-                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 flex items-center sm:-left-4">
-                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-2xl border border-white/20 bg-slate-950/80 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95" aria-label="Portofolio Sebelumnya">
+                        <!-- Portofolio Mobile: Auto-Changing Fade Carousel (< sm) -->
+                        <div class="block sm:hidden relative w-full aspect-[4/3] overflow-hidden rounded-3xl bg-slate-900 shadow-2xl border border-white/10 select-none">
+                            @foreach ($items as $idx => $item)
+                                <div
+                                    x-show="active === {{ $idx }}"
+                                    x-transition:enter="transition opacity duration-700 ease-in-out"
+                                    x-transition:enter-start="opacity-0"
+                                    x-transition:enter-end="opacity-100"
+                                    x-transition:leave="transition opacity duration-500 ease-in-out"
+                                    x-transition:leave-start="opacity-100"
+                                    x-transition:leave-end="opacity-0"
+                                    class="absolute inset-0 h-full w-full"
+                                >
+                                    <a href="{{ $item['url'] }}" wire:navigate class="group block h-full w-full" aria-label="Lihat Project {{ $item['title'] }}">
+                                        <div data-hover-shot class="no-scrollbar h-full w-full overflow-y-auto overscroll-contain rounded-3xl bg-slate-900">
+                                            <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                        </div>
+                                        <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-5 text-white">
+                                            <div class="text-[11px] font-medium text-sky-400">Featured Project</div>
+                                            <div class="mt-0.5 text-base font-bold tracking-tight text-white">{{ $item['title'] }}</div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <!-- Tampilan Desktop Carousel Track (>= sm) -->
+                        <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-theme="dark" class="hidden sm:block relative px-2 sm:px-4 lg:px-6">
+                            <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 hidden sm:flex items-center sm:-left-4">
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Portofolio Sebelumnya">
                                     <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
@@ -303,10 +380,56 @@
                     </p>
                 </div>
 
-                <div class="no-scrollbar mt-12 flex w-full gap-6 overflow-x-auto snap-x snap-mandatory pb-6 lg:pb-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible">
-                    @foreach (($pricingPlans ?? collect()) as $plan)
+                @php
+                    $pricingList = ($pricingPlans ?? collect())->values();
+                @endphp
+
+                <!-- Pricing Mobile: 1 Card Per View (Native Touch Swipe, Zero Peek) -->
+                <div class="block lg:hidden mt-4 w-full max-w-full overflow-x-auto snap-x snap-mandatory no-scrollbar flex gap-0 scroll-smooth touch-pan-x py-6 px-1">
+                    @foreach ($pricingList as $plan)
                         @php $popular = (bool) $plan->is_popular; @endphp
-                        <div class="w-full shrink-0 snap-center sm:w-[60%] lg:w-auto lg:shrink agency-card relative flex flex-col justify-between p-7 sm:p-8 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
+                        <div class="w-full min-w-full shrink-0 snap-center snap-always px-2 py-2">
+                            <div class="agency-card relative flex flex-col justify-between p-7 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
+                                <div>
+                                    @if ($popular)
+                                        <div class="inline-block mb-3 rounded-full bg-[rgb(var(--agency-cyan))] px-3 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">Paling populer</div>
+                                    @endif
+                                    <div class="flex items-start justify-between gap-4">
+                                        <div>
+                                            <h3 class="text-lg font-bold text-slate-900">{{ $plan->name }}</h3>
+                                            <div class="mt-1 text-xs font-semibold text-slate-500">{{ $plan->tag }}</div>
+                                        </div>
+                                    </div>
+
+                                    @if ($plan->price_text)
+                                        <div class="mt-4 text-2xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))]">{{ $plan->price_text }}</div>
+                                    @endif
+                                    <p class="mt-2 text-xs leading-relaxed text-slate-600">{{ $plan->description }}</p>
+
+                                    <div class="mt-6 space-y-2.5 text-xs text-slate-700">
+                                        @foreach ($plan->features as $feat)
+                                            <div class="flex items-center gap-2.5">
+                                                <i class="fa-solid fa-check text-xs text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
+                                                <span>{{ $feat->text }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <a href="{{ route('contact.show') }}" wire:navigate class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:bg-[rgb(var(--agency-navy-2))]" aria-label="Konsultasi Paket {{ $plan->name }}">
+                                    Konsultasi Paket
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Pricing Tampilan Desktop Grid (>= lg) -->
+                <div class="hidden lg:grid lg:grid-cols-3 lg:gap-8 mt-10 py-6 px-1 items-stretch">
+                    @foreach ($pricingList as $plan)
+                        @php $popular = (bool) $plan->is_popular; @endphp
+                        <div class="py-2 flex flex-col">
+                            <div class="agency-card relative flex h-full flex-col justify-between p-8 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
                             <div>
                                 @if ($popular)
                                     <div class="inline-block mb-3 lg:absolute lg:right-6 lg:top-6 rounded-full bg-[rgb(var(--agency-cyan))] px-3 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">Paling populer</div>
@@ -337,6 +460,7 @@
                                 Konsultasi Paket
                             </a>
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>

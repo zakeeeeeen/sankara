@@ -66,64 +66,50 @@
                     </nav>
 
                     <div class="flex items-center justify-end gap-3 lg:justify-self-end">
-                        <a
-                            wire:navigate
-                            href="{{ route('contact.show') }}"
-                            class="hidden lg:inline-flex items-center gap-2 rounded-2xl brand-gradient px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
-                            aria-label="Hubungi Sankara Tech"
+                        <button
+                            type="button"
+                            @click="open = !open"
+                            data-mobile-toggle="true"
+                            class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white hover:bg-white/20' : 'border-slate-300/80 bg-slate-100 text-slate-800 hover:bg-slate-200' }} transition lg:justify-self-end lg:hidden shadow-sm"
+                            aria-label="Buka menu navigasi"
                         >
-                            <span>Hubungi Kami</span>
-                            <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
-                        </a>
-
-                        @if ($isLanding)
-                            <button
-                                type="button"
-                                @click="open = !open"
-                                data-mobile-toggle="true"
-                                class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-none backdrop-blur hover:bg-white/20 transition lg:justify-self-end lg:hidden"
-                                aria-label="Buka menu navigasi"
-                            >
-                                <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
-                            </button>
-                        @endif
+                            <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            @if ($isLanding)
-                <div
-                    data-mobile-menu
-                    x-show="open"
-                    x-cloak
-                    @click.away="open = false"
-                    x-transition:enter="transition ease-out duration-250 transform"
-                    x-transition:enter-start="opacity-0 -translate-y-3 scale-95"
-                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                    x-transition:leave="transition ease-in duration-150 transform"
-                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                    x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
-                    class="absolute inset-x-0 top-full mt-2 mx-4 rounded-2xl border border-white/15 bg-[rgb(var(--agency-navy-1))] text-white shadow-2xl backdrop-blur-2xl lg:hidden overflow-hidden"
-                >
-                    <div class="px-4 py-4 sm:px-6">
-                        <nav class="grid gap-1 text-sm font-medium" aria-label="Navigasi Mobile">
-                            @foreach ($navItems as $item)
-                                @php
-                                    $isActive = $active === $item['key'];
-                                @endphp
-                                <a
-                                    @click="open = false"
-                                    wire:navigate
-                                    class="block rounded-xl px-4 py-3 font-medium transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-semibold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
-                                    href="{{ $item['url'] }}"
-                                >
-                                    {{ $item['label'] }}
-                                </a>
-                            @endforeach
-                        </nav>
-                    </div>
+            <div
+                data-mobile-menu
+                x-show="open"
+                x-cloak
+                @click.away="open = false"
+                x-transition:enter="transition ease-out duration-250 transform"
+                x-transition:enter-start="opacity-0 -translate-y-3 scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition ease-in duration-150 transform"
+                x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+                class="absolute inset-x-0 top-full mt-2 mx-4 rounded-2xl border border-white/15 bg-[rgb(var(--agency-navy-1))] text-white shadow-2xl backdrop-blur-2xl lg:hidden overflow-hidden"
+            >
+                <div class="px-4 py-4 sm:px-6">
+                    <nav class="grid gap-1 text-sm font-medium" aria-label="Navigasi Mobile">
+                        @foreach ($navItems as $item)
+                            @php
+                                $isActive = $active === $item['key'];
+                            @endphp
+                            <a
+                                @click="open = false"
+                                wire:navigate
+                                class="block rounded-xl px-4 py-3 font-medium transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-semibold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
+                                href="{{ $item['url'] }}"
+                            >
+                                {{ $item['label'] }}
+                            </a>
+                        @endforeach
+                    </nav>
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 </header>

@@ -69,14 +69,25 @@
                         @endforeach
                     </nav>
 
-                    <button
-                        type="button"
-                        data-mobile-toggle="true"
-                        class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white shadow-none backdrop-blur' : 'border-slate-200/70 bg-white text-slate-700 shadow-sm backdrop-blur' }} transition hover:bg-white lg:justify-self-end lg:hidden"
-                        aria-label="Buka menu navigasi"
-                    >
-                        <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
-                    </button>
+                    <div class="flex items-center justify-end gap-3 lg:justify-self-end">
+                        <a
+                            wire:navigate
+                            href="{{ route('contact.show') }}"
+                            class="hidden lg:inline-flex items-center gap-2 rounded-2xl brand-gradient px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                        >
+                            <span>Hubungi Kami</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+                        </a>
+
+                        <button
+                            type="button"
+                            data-mobile-toggle="true"
+                            class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white shadow-none backdrop-blur' : 'border-slate-200/70 bg-white text-slate-700 shadow-sm backdrop-blur' }} transition hover:bg-white lg:hidden"
+                            aria-label="Buka menu navigasi"
+                        >
+                            <i class="fa-solid fa-bars text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 

@@ -215,11 +215,11 @@
     }
 
     .agency-hero-grid {
-        background-image: linear-gradient(to right, rgb(255 255 255 / 0.15) 1px, transparent 1px),
-            linear-gradient(to bottom, rgb(255 255 255 / 0.15) 1px, transparent 1px);
-        background-size: 64px 64px;
-        -webkit-mask-image: radial-gradient(circle at 50% 35%, black 0%, black 50%, transparent 85%);
-        mask-image: radial-gradient(circle at 50% 35%, black 0%, black 50%, transparent 85%);
+        background-image: linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+        background-size: 52px 52px;
+        -webkit-mask-image: radial-gradient(circle at 50% 20%, black 0%, black 45%, transparent 78%);
+        mask-image: radial-gradient(circle at 50% 20%, black 0%, black 45%, transparent 78%);
     }
 
     .agency-wave {

@@ -3,7 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ $title ?? 'Admin Dashboard - ' . \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech') }}</title>
+        <!-- Critical Inline Anti-FOUC Styles -->
+        <style>
+            html {
+                background-color: #f1f5f9;
+                color: #1e293b;
+            }
+            [x-cloak], .cloak { display: none !important; }
+        </style>
         <link rel="icon" type="image/png" href="{{ asset('favicon.svg') }}">
         <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
         @fonts

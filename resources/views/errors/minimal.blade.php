@@ -1,9 +1,25 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ \App\Models\SiteSetting::getValue('theme', 'emerald') }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="{{ \App\Models\SiteSetting::getValue('theme', 'emerald') }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('code') - @yield('title') | {{ \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech') }}</title>
+
+        <!-- Critical Inline Anti-FOUC Styles -->
+        <style>
+            html {
+                background-color: #090d16;
+                color: #f8fafc;
+                color-scheme: dark;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            }
+            body {
+                margin: 0;
+                min-height: 100vh;
+                background-color: #090d16;
+            }
+            [x-cloak], .cloak { display: none !important; }
+        </style>
 
         <!-- Favicons -->
         @php
@@ -22,7 +38,7 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="min-h-screen bg-slate-950 text-slate-100 antialiased selection:bg-sky-500 selection:text-white flex flex-col justify-between landing-agency relative overflow-x-hidden">
+    <body class="min-h-screen bg-[#090d16] text-slate-100 antialiased selection:bg-sky-500 selection:text-white flex flex-col justify-between landing-agency relative overflow-x-hidden">
         <!-- Background Ambient Glow & Mesh -->
         <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
             <div class="brand-blob-1 absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full opacity-40 blur-3xl"></div>
@@ -32,7 +48,7 @@
         </div>
 
         <!-- Header / Logo -->
-        <header class="relative z-10 w-full py-6 px-4 sm:px-6 lg:px-8 border-b border-white/10 bg-slate-950/40 backdrop-blur-md">
+        <header class="relative z-10 w-full py-6 px-4 sm:px-6 lg:px-8 border-b border-white/10 bg-slate-950/60 backdrop-blur-md">
             <div class="mx-auto max-w-7xl flex items-center justify-between">
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group transition" aria-label="{{ $siteName }} Home">
                     <img src="{{ $siteLogo }}" alt="{{ $siteName }} Logo" width="36" height="36" class="h-9 w-9 object-contain transition duration-300 group-hover:scale-105">
@@ -115,4 +131,3 @@
         </footer>
     </body>
 </html>
-

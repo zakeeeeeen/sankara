@@ -3,7 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech'))</title>
+        <!-- Critical Inline Anti-FOUC Styles -->
+        <style>
+            html {
+                background-color: #ffffff;
+                color: #0f172a;
+            }
+            [x-cloak], .cloak { display: none !important; }
+        </style>
         
         <!-- Dynamic SEO Meta Tags, OpenGraph, Twitter Cards & GA4 -->
         @php

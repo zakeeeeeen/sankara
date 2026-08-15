@@ -30,7 +30,7 @@ class DashboardService
         return [
             'siteName' => SiteSetting::getValue('site_name', 'Sankara Tech'),
             'siteTagline' => SiteSetting::getValue('site_tagline', 'Digital Agency'),
-            'siteLogo' => SiteSetting::getValue('site_logo', asset('logosankara.png')),
+            'siteLogo' => SiteSetting::getValue('site_logo', asset('logo.webp')),
             'servicesCount' => Service::query()->count(),
             'portfoliosCount' => Portfolio::query()->count(),
             'categoriesCount' => PortfolioCategory::query()->count(),

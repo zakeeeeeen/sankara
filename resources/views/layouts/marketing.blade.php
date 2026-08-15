@@ -23,7 +23,7 @@
 
         <!-- Favicons -->
         @php
-            $fav = \App\Models\SiteSetting::getValue('site_favicon', asset('logosankara.png'));
+            $fav = \App\Models\SiteSetting::getValue('site_favicon', asset('favicon.svg'));
         @endphp
         <link rel="icon" type="image/png" href="{{ $fav }}">
         <link rel="apple-touch-icon" href="{{ $fav }}">

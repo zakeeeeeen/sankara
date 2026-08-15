@@ -16,8 +16,8 @@ class SiteSettingService
         return [
             'siteName' => SiteSetting::getValue('site_name', 'Sankara Tech'),
             'siteTagline' => SiteSetting::getValue('site_tagline', 'Digital Agency'),
-            'siteLogo' => SiteSetting::getValue('site_logo', '/logosankara.png'),
-            'siteFavicon' => SiteSetting::getValue('site_favicon', '/logosankara.png'),
+            'siteLogo' => SiteSetting::getValue('site_logo', '/logo.webp'),
+            'siteFavicon' => SiteSetting::getValue('site_favicon', '/favicon.svg'),
             'footerDescription' => SiteSetting::getValue('footer_description', 'Kami membangun produk digital modern: website, software, aplikasi mobile, UI/UX, game development, dan 3D modeling—dengan kualitas premium yang meyakinkan.'),
             'footerCopyright' => SiteSetting::getValue('footer_copyright', '© '.date('Y').' Sankara Tech. All rights reserved.'),
             'footerSubtext' => SiteSetting::getValue('footer_subtext', 'Built with Laravel • Blade • Livewire • Tailwind'),

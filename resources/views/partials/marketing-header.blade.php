@@ -8,7 +8,7 @@
 
     $siteName = \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech');
     $siteTagline = \App\Models\SiteSetting::getValue('site_tagline', 'Digital Agency');
-    $siteLogo = \App\Models\SiteSetting::getValue('site_logo', asset('logosankara.png'));
+    $siteLogo = \App\Models\SiteSetting::getValue('site_logo', asset('logo.webp'));
 
     $customHeaderNav = \App\Models\SiteSetting::getValue('header_nav');
     if (!empty($customHeaderNav) && is_array($customHeaderNav)) {

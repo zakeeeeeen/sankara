@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>@yield('title', 'Admin - ' . \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech'))</title>
-        <link rel="icon" type="image/png" href="{{ asset('logosankara.png') }}">
-        <link rel="shortcut icon" href="{{ asset('logosankara.png') }}">
+        <link rel="icon" type="image/png" href="{{ asset('favicon.svg') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon.svg') }}">
         @fonts
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -43,7 +43,7 @@
                     <div class="flex h-20 shrink-0 items-center justify-between gap-3 px-6 border-b border-slate-100">
                         <a href="{{ route('admin.dashboard') }}" wire:navigate class="flex items-center gap-3.5 group">
                             <span class="brand-gradient-br grid h-11 w-11 place-items-center rounded-2xl overflow-hidden shadow-[0_12px_30px_-10px_rgba(14,165,233,0.5)] transition-transform group-hover:scale-105">
-                                <img src="{{ \App\Models\SiteSetting::getValue('site_logo', asset('logosankara.png')) }}" alt="Logo" class="h-full w-full object-contain p-1">
+                                <img src="{{ \App\Models\SiteSetting::getValue('site_logo', asset('logo.webp')) }}" alt="Logo" class="h-full w-full object-contain p-1">
                             </span>
                             <div class="leading-tight">
                                 <span class="block text-sm font-bold tracking-tight text-slate-900 group-hover:text-sky-600 transition-colors">{{ \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech') }}</span>

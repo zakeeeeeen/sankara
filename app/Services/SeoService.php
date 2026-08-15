@@ -23,7 +23,7 @@ class SeoService
             SiteSetting::getValue('footer_description', 'Sankara Tech adalah digital agency modern penyedia solusi website, software custom, mobile app, UI/UX, game, dan 3D modeling.')
         );
         $defaultKeywords = (string) SiteSetting::getValue('meta_keywords', 'digital agency, web development, software development, mobile app, UI UX design, game development, 3d modeling, laravel, tailwind, sankara tech');
-        $defaultOgImage = (string) SiteSetting::getValue('og_image', SiteSetting::getValue('site_logo', asset('logosankara.png')));
+        $defaultOgImage = (string) SiteSetting::getValue('og_image', SiteSetting::getValue('site_logo', asset('logo.webp')));
 
         if (! str_starts_with($defaultOgImage, 'http') && filled($defaultOgImage)) {
             $defaultOgImage = url($defaultOgImage);
@@ -94,7 +94,7 @@ class SeoService
     public function renderStructuredData(array $context = []): HtmlString
     {
         $siteName = (string) SiteSetting::getValue('site_name', config('app.name', 'Sankara Tech'));
-        $siteLogo = (string) SiteSetting::getValue('site_logo', asset('logosankara.png'));
+        $siteLogo = (string) SiteSetting::getValue('site_logo', asset('logo.webp'));
         if (! str_starts_with($siteLogo, 'http') && filled($siteLogo)) {
             $siteLogo = url($siteLogo);
         }

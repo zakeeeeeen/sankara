@@ -4,7 +4,7 @@
 
     $siteName = \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech');
     $siteTagline = \App\Models\SiteSetting::getValue('site_tagline', 'Digital Agency');
-    $siteLogo = \App\Models\SiteSetting::getValue('site_logo', asset('logosankara.png'));
+    $siteLogo = \App\Models\SiteSetting::getValue('site_logo', asset('logo.webp'));
 
     $footerDescription = \App\Models\SiteSetting::getValue('footer_description', 'Kami membangun produk digital modern: website, software, aplikasi mobile, UI/UX, game development, dan 3D modeling—dengan kualitas premium yang meyakinkan.');
     $footerCopyright = \App\Models\SiteSetting::getValue('footer_copyright', '© ' . date('Y') . ' ' . $siteName . '. All rights reserved.');

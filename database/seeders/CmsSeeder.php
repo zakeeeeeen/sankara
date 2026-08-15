@@ -233,7 +233,7 @@ class CmsSeeder extends Seeder
 
         $aboutPage = Page::query()->where('slug', 'tentang-kami')->first();
         if ($aboutPage && (! filled($aboutPage->image_url) || str_contains($aboutPage->image_url, 'kersa') || str_contains($aboutPage->image_url, 'sankara.png')) && ! filled($aboutPage->image_path)) {
-            $aboutPage->image_url = '/logosankara.png';
+            $aboutPage->image_url = '/logo.webp';
             $aboutPage->save();
         }
 
@@ -301,12 +301,12 @@ class CmsSeeder extends Seeder
             SiteSetting::setValue('site_tagline', 'Digital Agency');
         }
 
-        if (! filled(SiteSetting::getValue('site_logo'))) {
-            SiteSetting::setValue('site_logo', '/logosankara.png');
+        if (! filled(SiteSetting::getValue('site_logo')) || SiteSetting::getValue('site_logo') === '/logosankara.png') {
+            SiteSetting::setValue('site_logo', '/logo.webp');
         }
 
-        if (! filled(SiteSetting::getValue('site_favicon'))) {
-            SiteSetting::setValue('site_favicon', '/logosankara.png');
+        if (! filled(SiteSetting::getValue('site_favicon')) || SiteSetting::getValue('site_favicon') === '/logosankara.png') {
+            SiteSetting::setValue('site_favicon', '/favicon.svg');
         }
 
         if (! filled(SiteSetting::getValue('footer_description'))) {

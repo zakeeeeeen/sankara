@@ -35,9 +35,9 @@
         <link rel="icon" type="image/png" href="{{ $fav }}">
         <link rel="apple-touch-icon" href="{{ $fav }}">
 
-        <!-- Preconnect & Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-        <link rel="dns-prefetch" href="https://fonts.bunny.net">
+        <!-- Asset Preloading & Resource Hints for LCP -->
+        <link rel="preload" as="image" type="image/webp" href="{{ asset('logo.webp') }}" fetchpriority="high">
+
         @fonts
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])

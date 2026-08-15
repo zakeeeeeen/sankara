@@ -58,9 +58,6 @@
                 <span wire:loading>Memproses...</span>
             </button>
 
-            <div class="mt-6 rounded-2xl border border-emerald-200/70 bg-gradient-to-r from-emerald-50 to-cyan-50 p-4 text-center text-xs font-semibold text-emerald-800">
-                Default: <span class="font-mono">admin@sankaratech.test</span> / <span class="font-mono">password</span>
-            </div>
         </form>
     </div>
 </div>

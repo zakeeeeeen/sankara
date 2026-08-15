@@ -300,7 +300,17 @@
                                     <h3 class="text-lg font-semibold text-slate-900">{{ $plan->name }}</h3>
                                     <div class="mt-2 text-xs font-semibold text-slate-500">{{ $plan->tag }}</div>
                                 </div>
-                                <div class="h-10 w-10 rounded-2xl bg-[rgb(var(--agency-cyan)/0.12)]"></div>
+                                <div class="h-10 w-10 rounded-2xl bg-[rgb(var(--agency-cyan)/0.12)] flex items-center justify-center">
+                                    @if(str_contains(strtolower($plan->name), 'starter') || str_contains(strtolower($plan->name), 'basic'))
+                                        <i class="fa-solid fa-paper-plane text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                    @elseif(str_contains(strtolower($plan->name), 'professional') || str_contains(strtolower($plan->name), 'pro'))
+                                        <i class="fa-solid fa-rocket text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                    @elseif(str_contains(strtolower($plan->name), 'enterprise') || str_contains(strtolower($plan->name), 'business') || str_contains(strtolower($plan->name), 'custom'))
+                                        <i class="fa-solid fa-crown text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                    @else
+                                        <i class="fa-solid fa-cube text-sm text-[rgb(var(--agency-cyan))]"></i>
+                                    @endif
+                                </div>
                             </div>
 
                             @if ($plan->price_text)

@@ -153,7 +153,7 @@
         <div class="rounded-[2.5rem] border border-slate-200/80 bg-white/90 p-6 sm:p-8 shadow-xs backdrop-blur">
             <h2 class="text-xl font-bold text-slate-900 flex items-center gap-3">
                 <span class="grid h-8 w-8 place-items-center rounded-xl bg-sky-100 text-sky-600 text-xs">3</span>
-                <span>Section "Who We Are"</span>
+                <span>Section "Siapa Kami"</span>
             </h2>
 
             <div class="mt-6">

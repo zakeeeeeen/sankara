@@ -17,20 +17,7 @@ const toggleNavbar = () => {
 };
 
 const initMobileMenu = () => {
-    const toggle = document.querySelector('[data-mobile-toggle="true"]');
-    const menu = document.querySelector('[data-mobile-menu]');
-
-    if (!toggle || !menu) return;
-
-    toggle.addEventListener('click', () => {
-        menu.classList.toggle('hidden');
-    });
-
-    menu.querySelectorAll('a').forEach((a) => {
-        a.addEventListener('click', () => {
-            menu.classList.add('hidden');
-        });
-    });
+    // State menu mobile dikelola secara reaktif dan mulus oleh Alpine.js di marketing-header.blade.php
 };
 
 const initAdminSidebar = () => {
@@ -333,13 +320,13 @@ const initCarousel = () => {
 
         prevBtn?.addEventListener('click', () => {
             if (isAnimating) return;
-            const step = featuredCenter ? 1 : (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1));
+            const step = 1;
             scrollToTarget(currentIndex - step, 'smooth');
         });
 
         nextBtn?.addEventListener('click', () => {
             if (isAnimating) return;
-            const step = featuredCenter ? 1 : (window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 640 ? 2 : 1));
+            const step = 1;
             scrollToTarget(currentIndex + step, 'smooth');
         });
 

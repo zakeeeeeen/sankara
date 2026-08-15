@@ -121,11 +121,11 @@
                     <div class="flex items-center justify-between gap-3 rounded-2xl border border-slate-200/60 bg-white p-3 shadow-xs">
                         <div class="flex items-center gap-3 min-w-0">
                             <div class="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-sky-100 text-sky-700 font-bold text-xs uppercase">
-                                {{ substr(auth()->user()->name ?? 'A', 0, 1) }}
+                                {{ substr(auth()->user()?->name ?? 'A', 0, 1) }}
                             </div>
                             <div class="min-w-0">
-                                <div class="truncate text-xs font-bold text-slate-900">{{ auth()->user()->name }}</div>
-                                <div class="truncate text-[11px] font-medium text-slate-400">{{ auth()->user()->email }}</div>
+                                <div class="truncate text-xs font-bold text-slate-900">{{ auth()->user()?->name ?? 'Administrator' }}</div>
+                                <div class="truncate text-[11px] font-medium text-slate-400">{{ auth()->user()?->email ?? '' }}</div>
                             </div>
                         </div>
 

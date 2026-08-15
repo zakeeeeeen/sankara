@@ -9,7 +9,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
-#[Layout('layouts.dashboard')]
+#[Layout('layouts.admin')]
 class Login extends Component
 {
     #[Rule('required|email')]

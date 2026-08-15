@@ -6,8 +6,9 @@
     ])
 
     <main>
-        <section id="hero" class="relative overflow-hidden bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] pt-28 pb-20 sm:pt-36 sm:pb-28">
+        <section id="hero" class="agency-hero relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
             <div class="pointer-events-none absolute inset-0">
+                <div class="agency-hero-grid absolute inset-0 opacity-75"></div>
                 <div class="brand-blob-1 absolute -top-40 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full blur-3xl opacity-30"></div>
                 <div class="brand-blob-2 absolute -bottom-56 -left-40 h-[42rem] w-[42rem] rounded-full blur-3xl opacity-20"></div>
             </div>

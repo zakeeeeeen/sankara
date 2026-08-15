@@ -76,58 +76,54 @@
                             <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
                         </a>
 
-                        <button
-                            type="button"
-                            @click="open = !open"
-                            data-mobile-toggle="true"
-                            class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white shadow-none backdrop-blur hover:bg-white/20' : 'border-slate-200/70 bg-white text-slate-700 shadow-sm backdrop-blur hover:bg-slate-50 hover:text-sky-600' }} transition lg:justify-self-end lg:hidden"
-                            aria-label="Buka menu navigasi"
-                        >
-                            <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
-                        </button>
+                        @if ($isLanding)
+                            <button
+                                type="button"
+                                @click="open = !open"
+                                data-mobile-toggle="true"
+                                class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border border-white/20 bg-white/10 text-white shadow-none backdrop-blur hover:bg-white/20 transition lg:justify-self-end lg:hidden"
+                                aria-label="Buka menu navigasi"
+                            >
+                                <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
 
-            <div
-                data-mobile-menu
-                x-show="open"
-                x-cloak
-                @click.away="open = false"
-                x-transition:enter="transition ease-out duration-250 transform"
-                x-transition:enter-start="opacity-0 -translate-y-3 scale-95"
-                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
-                x-transition:leave="transition ease-in duration-150 transform"
-                x-transition:leave-start="opacity-100 translate-y-0 scale-100"
-                x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
-                class="absolute inset-x-0 top-full mt-2 mx-4 rounded-2xl border {{ $isLanding ? 'border-white/15 bg-[rgb(var(--agency-navy-1))] text-white shadow-2xl' : 'border-slate-200/80 bg-white/95 text-slate-900 shadow-2xl' }} backdrop-blur-2xl lg:hidden overflow-hidden"
-            >
-                <div class="px-4 py-4 sm:px-6">
-                    <nav class="grid gap-1 text-sm font-medium" aria-label="Navigasi Mobile">
-                        @foreach ($navItems as $item)
-                            @php
-                                $isActive = $active === $item['key'];
-                            @endphp
-                            <a
-                                @click="open = false"
-                                wire:navigate
-                                class="block rounded-xl px-4 py-3 font-medium transition-all duration-200 {{
-                                    $isActive
-                                        ? ($isLanding
-                                            ? 'bg-sky-500/20 text-sky-400 font-semibold border-l-4 border-sky-400 pl-3.5'
-                                            : 'bg-sky-50 text-sky-600 font-semibold border-l-4 border-sky-600 pl-3.5')
-                                        : ($isLanding
-                                            ? 'text-white/85 hover:bg-white/10 hover:text-white'
-                                            : 'text-slate-700 hover:bg-slate-50 hover:text-sky-600')
-                                }}"
-                                href="{{ $item['url'] }}"
-                            >
-                                {{ $item['label'] }}
-                            </a>
-                        @endforeach
-                    </nav>
+            @if ($isLanding)
+                <div
+                    data-mobile-menu
+                    x-show="open"
+                    x-cloak
+                    @click.away="open = false"
+                    x-transition:enter="transition ease-out duration-250 transform"
+                    x-transition:enter-start="opacity-0 -translate-y-3 scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave="transition ease-in duration-150 transform"
+                    x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                    x-transition:leave-end="opacity-0 -translate-y-2 scale-95"
+                    class="absolute inset-x-0 top-full mt-2 mx-4 rounded-2xl border border-white/15 bg-[rgb(var(--agency-navy-1))] text-white shadow-2xl backdrop-blur-2xl lg:hidden overflow-hidden"
+                >
+                    <div class="px-4 py-4 sm:px-6">
+                        <nav class="grid gap-1 text-sm font-medium" aria-label="Navigasi Mobile">
+                            @foreach ($navItems as $item)
+                                @php
+                                    $isActive = $active === $item['key'];
+                                @endphp
+                                <a
+                                    @click="open = false"
+                                    wire:navigate
+                                    class="block rounded-xl px-4 py-3 font-medium transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-semibold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
+                                    href="{{ $item['url'] }}"
+                                >
+                                    {{ $item['label'] }}
+                                </a>
+                            @endforeach
+                        </nav>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
 </header>

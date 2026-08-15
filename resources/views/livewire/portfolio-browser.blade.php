@@ -5,19 +5,17 @@
                 <input
                     wire:model.live="search"
                     type="text"
+                    aria-label="Cari project portofolio"
                     placeholder="Cari project..."
                     class="w-full rounded-2xl border border-slate-200/80 bg-white px-4 py-3 pr-12 text-sm font-medium text-slate-800 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
                 />
-                <div class="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-slate-400">
-                    <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                        <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
-                        <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                    </svg>
+                <div class="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-slate-400" aria-hidden="true">
+                    <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </div>
             </div>
         </div>
 
-        <div class="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
+        <div class="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0" role="tablist" aria-label="Kategori Portofolio">
             <button
                 type="button"
                 wire:click="$set('category','all')"
@@ -42,16 +40,17 @@
             <a
                 href="{{ route('portfolios.show', $portfolio->slug) }}"
                 class="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                aria-label="Lihat detail project {{ $portfolio->title }}"
             >
                 <div class="relative overflow-hidden bg-slate-900">
                     @if ($portfolio->preview_image_src)
                         <div data-hover-shot class="no-scrollbar aspect-[4/3] overflow-y-auto overscroll-contain">
-                            <img class="w-full object-cover object-top" src="{{ $portfolio->preview_image_src }}" alt="Preview {{ $portfolio->title }}" />
+                            <img class="w-full object-cover object-top" loading="lazy" width="400" height="300" src="{{ $portfolio->preview_image_src }}" alt="Preview {{ $portfolio->title }}" />
                         </div>
                     @else
                         <div class="aspect-[4/3] w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
                     @endif
-                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+                    <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent opacity-0 transition duration-300 group-hover:opacity-100" aria-hidden="true"></div>
                 </div>
 
                 <div class="p-6">
@@ -84,4 +83,3 @@
         {{ $portfolios->links() }}
     </div>
 </div>
-

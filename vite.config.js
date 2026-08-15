@@ -11,9 +11,11 @@ export default defineConfig({
             fonts: [
                 bunny('Inter', {
                     weights: [400, 500, 600, 700],
+                    optimizedFallbacks: false,
                 }),
                 bunny('Poppins', {
                     weights: [400, 500, 600, 700],
+                    optimizedFallbacks: false,
                 }),
             ],
         }),

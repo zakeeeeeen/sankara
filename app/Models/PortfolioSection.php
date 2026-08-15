@@ -24,4 +24,3 @@ class PortfolioSection extends Model
         return $this->image_url;
     }
 }
-

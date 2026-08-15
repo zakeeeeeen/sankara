@@ -1,6 +1,16 @@
 @extends('layouts.marketing')
 
-@section('title', 'Layanan - Sankara Tech')
+@section('title', 'Layanan Bisnis Digital - Sankara Tech')
+@section('meta_description', 'Layanan digital agency profesional: Website Development, Software Custom, Mobile App iOS & Android, UI/UX Design, Game Development, dan 3D Modeling.')
+
+@section('structured_data')
+    {{ app(\App\Services\SeoService::class)->renderStructuredData([
+        'breadcrumb' => [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Layanan', 'url' => route('services.index')],
+        ],
+    ]) }}
+@endsection
 
 @section('content')
     @include('partials.marketing-header', ['active' => 'services'])
@@ -27,7 +37,7 @@
                                 <div class="grid gap-6 sm:grid-cols-[180px_1fr] sm:items-center">
                                     <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-50 to-cyan-50 border border-sky-100 p-2">
                                         @if ($service->image_src)
-                                            <img class="h-36 w-full rounded-xl object-cover" src="{{ $service->image_src }}" alt="{{ $service->title }}" />
+                                            <img class="h-36 w-full rounded-xl object-cover" width="180" height="144" loading="lazy" src="{{ $service->image_src }}" alt="Layanan {{ $service->title }}" />
                                         @else
                                             <div class="flex h-36 w-full items-center justify-center rounded-xl bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] p-4 text-center text-xs font-bold text-white">
                                                 {{ $service->title }}
@@ -36,7 +46,7 @@
                                     </div>
 
                                     <div>
-                                        <h3 class="text-xl font-bold text-[rgb(var(--agency-navy-1))]">{{ $service->title }}</h3>
+                                        <h2 class="text-xl font-bold text-[rgb(var(--agency-navy-1))]">{{ $service->title }}</h2>
                                         <p class="mt-2 text-sm leading-relaxed text-slate-500 line-clamp-3">
                                             {{ $service->description ?: $service->excerpt }}
                                         </p>
@@ -44,12 +54,10 @@
                                             <a
                                                 href="{{ route('services.show', $service->slug) }}"
                                                 class="agency-btn-primary inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold"
+                                                aria-label="Lihat detail layanan {{ $service->title }}"
                                             >
-                                                {{ $service->cta_label ?: 'Lihat Selengkapnya' }}
-                                                <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
-                                                    <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                                    <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
+                                                <span>{{ $service->cta_label ?: 'Lihat Selengkapnya' }}</span>
+                                                <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
                                             </a>
                                         </div>
                                     </div>
@@ -62,4 +70,3 @@
         </section>
     </main>
 @endsection
-

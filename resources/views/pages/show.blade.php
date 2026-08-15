@@ -1,6 +1,19 @@
 @extends('layouts.marketing')
 
 @section('title', $page->title . ' - Sankara Tech')
+@section('meta_description', $page->hero_subtitle ?: \Illuminate\Support\Str::limit(strip_tags($page->body), 155))
+@if ($page->image_src)
+    @section('meta_image', $page->image_src)
+@endif
+
+@section('structured_data')
+    {{ app(\App\Services\SeoService::class)->renderStructuredData([
+        'breadcrumb' => [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => $page->title, 'url' => route('about')],
+        ],
+    ]) }}
+@endsection
 
 @section('content')
     @include('partials.marketing-header', ['active' => 'about'])
@@ -32,11 +45,8 @@
 
                         <div class="mt-8">
                             <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
-                                Konsultasi dengan Kami
-                                <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                    <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                    <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                                <span>Konsultasi dengan Kami</span>
+                                <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -44,7 +54,7 @@
                     <div class="reveal">
                         <div class="agency-card overflow-hidden p-2">
                             @if ($page->image_src)
-                                <img class="h-full w-full rounded-2xl object-cover" src="{{ $page->image_src }}" alt="{{ $page->title }}" />
+                                <img class="h-full w-full rounded-2xl object-cover" width="600" height="400" fetchpriority="high" src="{{ $page->image_src }}" alt="{{ $page->title }}" />
                             @else
                                 <div class="h-[340px] w-full rounded-2xl bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] flex items-center justify-center p-8 text-center text-white">
                                     <div class="text-xl font-bold">Sankara Tech Digital Agency</div>
@@ -57,4 +67,3 @@
         </section>
     </main>
 @endsection
-

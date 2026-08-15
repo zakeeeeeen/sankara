@@ -1,6 +1,25 @@
 @extends('layouts.marketing')
 
-@section('title', $service->title . ' - Sankara Tech')
+@section('title', $service->title . ' - Layanan Sankara Tech')
+@section('meta_description', $service->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($service->description), 155))
+@if ($service->image_src)
+    @section('meta_image', $service->image_src)
+@endif
+
+@section('structured_data')
+    {{ app(\App\Services\SeoService::class)->renderStructuredData([
+        'service' => [
+            'title' => $service->title,
+            'description' => $service->description ?: $service->excerpt,
+            'url' => route('services.show', $service->slug),
+        ],
+        'breadcrumb' => [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Layanan', 'url' => route('services.index')],
+            ['name' => $service->title, 'url' => route('services.show', $service->slug)],
+        ],
+    ]) }}
+@endsection
 
 @section('content')
     @include('partials.marketing-header', ['active' => 'services'])
@@ -24,9 +43,7 @@
                                 @foreach ($service->features as $feature)
                                     <div class="flex items-start gap-3 rounded-2xl border border-slate-100 bg-slate-50/80 p-4 shadow-sm">
                                         <div class="mt-0.5 grid h-7 w-7 flex-none place-items-center rounded-xl border border-sky-100 bg-[rgb(var(--agency-cyan)/0.12)] text-[rgb(var(--agency-cyan))]">
-                                            <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
-                                                <path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
+                                            <i class="fa-solid fa-check text-xs" aria-hidden="true"></i>
                                         </div>
                                         <div class="text-sm font-semibold text-slate-800">{{ $feature->text }}</div>
                                     </div>
@@ -36,11 +53,8 @@
 
                         <div class="mt-8">
                             <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
-                                Konsultasi Layanan Ini
-                                <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                    <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                    <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                                <span>Konsultasi Layanan Ini</span>
+                                <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
@@ -48,7 +62,7 @@
                     <div class="reveal">
                         <div class="agency-card overflow-hidden p-2">
                             @if ($service->image_src)
-                                <img class="h-full w-full rounded-2xl object-cover" src="{{ $service->image_src }}" alt="{{ $service->title }}" />
+                                <img class="h-full w-full rounded-2xl object-cover" width="600" height="400" fetchpriority="high" src="{{ $service->image_src }}" alt="Layanan {{ $service->title }}" />
                             @else
                                 <div class="h-[340px] w-full rounded-2xl bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] flex items-center justify-center p-8 text-center text-white">
                                     <div class="text-xl font-bold">{{ $service->title }}</div>
@@ -76,11 +90,12 @@
                             <a
                                 href="{{ route('portfolios.show', $portfolio->slug) }}"
                                 class="agency-card group overflow-hidden p-0"
+                                aria-label="Lihat Project {{ $portfolio->title }}"
                             >
                                 <div class="relative overflow-hidden bg-slate-900">
                                     @if ($portfolio->preview_image_src)
                                         <div data-hover-shot class="no-scrollbar aspect-[4/3] overflow-y-auto overscroll-contain">
-                                            <img class="w-full object-cover object-top" src="{{ $portfolio->preview_image_src }}" alt="Preview {{ $portfolio->title }}" />
+                                            <img class="w-full object-cover object-top" loading="lazy" width="400" height="300" src="{{ $portfolio->preview_image_src }}" alt="Preview {{ $portfolio->title }}" />
                                         </div>
                                     @else
                                         <div class="aspect-[4/3] w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
@@ -115,4 +130,3 @@
         @endif
     </main>
 @endsection
-

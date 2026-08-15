@@ -462,3 +462,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', toggleNavbar, { passive: true });
 });
+
+document.addEventListener('livewire:navigated', () => {
+    document.documentElement.classList.add('js');
+    toggleNavbar();
+    initMobileMenu();
+    initAdminSidebar();
+    initReveal();
+    initCounters();
+    initCarousel();
+    initHoverShots();
+});

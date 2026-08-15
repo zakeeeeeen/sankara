@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 
-@section('title', 'Pengaturan Situs - Admin Sankara Tech')
+@section('title', 'Pengaturan Situs & SEO - Admin Sankara Tech')
 
 @section('content')
     <div class="reveal flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-            <h1 class="text-3xl font-semibold tracking-tight text-slate-900">Pengaturan Situs & Navigasi</h1>
+            <h1 class="text-3xl font-semibold tracking-tight text-slate-900">Pengaturan Situs, SEO & Sitemap</h1>
             <p class="mt-2 max-w-2xl text-base leading-relaxed text-slate-600">
-                Kelola identitas website, logo, favicon, bottom navigation (mobile), menu header, footer, kontak, serta media sosial.
+                Kelola identitas website, logo, favicon, SEO Meta Tags, Google Analytics (GA4), generator sitemap XML, navigasi, serta kontak.
             </p>
         </div>
 
@@ -17,8 +17,14 @@
     </div>
 
     @if (session('status'))
-        <div class="brand-gradient-soft mt-8 rounded-2xl border border-slate-200/70 px-5 py-4 text-sm font-semibold text-slate-800">
+        <div class="mt-8 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4 text-sm font-semibold text-emerald-800">
             {{ session('status') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mt-8 rounded-2xl border border-rose-200 bg-rose-50 px-5 py-4 text-sm font-semibold text-rose-800">
+            {{ session('error') }}
         </div>
     @endif
 
@@ -31,6 +37,46 @@
             </ul>
         </div>
     @endif
+
+    <!-- SECTION: SITEMAP GENERATOR (MANUAL BUTTON) -->
+    <div class="mt-8 rounded-[2rem] border border-sky-200/80 bg-gradient-to-br from-sky-50/60 via-white to-cyan-50/40 p-6 shadow-sm backdrop-blur sm:p-8">
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <div class="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-sky-100/60 px-3 py-1 text-xs font-semibold text-sky-800">
+                    <i class="fa-solid fa-sitemap text-xs"></i>
+                    Spatie Laravel Sitemap Engine
+                </div>
+                <h2 class="mt-3 text-xl font-bold text-slate-900">XML Sitemap Generator</h2>
+                <p class="mt-1 text-sm text-slate-600">
+                    Sitemap otomatis diperbarui setiap hari melalui cronjob (shared hosting). Anda juga dapat memperbaruinya secara manual kapan saja.
+                </p>
+                <div class="mt-3 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500">
+                    <div>
+                        <span class="font-semibold text-slate-700">Status File:</span>
+                        <a href="{{ url('/sitemap.xml') }}" target="_blank" class="text-sky-600 hover:underline inline-flex items-center gap-1 font-semibold">
+                            <span>/sitemap.xml</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-slate-700">Terakhir Di-generate:</span>
+                        <span class="font-bold text-slate-800">{{ $sitemapLastGeneratedAt ? \Carbon\Carbon::parse($sitemapLastGeneratedAt)->translatedFormat('d F Y, H:i') . ' WIB' : 'Belum pernah' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <form method="POST" action="{{ route('admin.sitemap.generate') }}">
+                @csrf
+                <button
+                    type="submit"
+                    class="brand-gradient inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5"
+                >
+                    <i class="fa-solid fa-rotate text-xs"></i>
+                    <span>Generate Sitemap Sekarang</span>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <form class="mt-10 space-y-10" method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
         @csrf
@@ -115,11 +161,107 @@
             </div>
         </div>
 
-        <!-- SECTION 2: BOTTOM NAVIGATION (MOBILE) -->
+        <!-- SECTION 2: OPTIMASI SEO & ANALYTICS -->
+        <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
+            <div class="text-lg font-semibold text-slate-900">2. Optimasi SEO Global & Google Analytics (GA4)</div>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                Pengaturan standar meta tags untuk Google Search, OpenGraph media sosial, dan tracking analytics.
+            </p>
+
+            <div class="mt-8 space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-900" for="meta_title">Default Meta Title</label>
+                    <input
+                        id="meta_title"
+                        type="text"
+                        name="meta_title"
+                        value="{{ old('meta_title', $metaTitle) }}"
+                        class="mt-2 w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white"
+                        placeholder="Sankara Tech - Digital Agency"
+                    />
+                    <p class="mt-1 text-xs text-slate-500">Judul utama halaman saat dibagikan ke Google & sosial media (disarankan 50–60 karakter).</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-900" for="meta_description">Default Meta Description</label>
+                    <textarea
+                        id="meta_description"
+                        name="meta_description"
+                        rows="3"
+                        class="mt-2 w-full rounded-2xl border border-slate-200/80 bg-white/80 p-4 text-sm font-medium text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white"
+                        placeholder="Deskripsi singkat mengenai bisnis..."
+                    >{{ old('meta_description', $metaDescription) }}</textarea>
+                    <p class="mt-1 text-xs text-slate-500">Deskripsi ringkas yang tampil di hasil pencarian Google (disarankan 120–160 karakter).</p>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-900" for="meta_keywords">Meta Keywords</label>
+                    <input
+                        id="meta_keywords"
+                        type="text"
+                        name="meta_keywords"
+                        value="{{ old('meta_keywords', $metaKeywords) }}"
+                        class="mt-2 w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white"
+                        placeholder="digital agency, web development, software, mobile app"
+                    />
+                </div>
+
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-900" for="ga_measurement_id">Google Analytics 4 (Measurement ID)</label>
+                        <input
+                            id="ga_measurement_id"
+                            type="text"
+                            name="ga_measurement_id"
+                            value="{{ old('ga_measurement_id', $gaMeasurementId) }}"
+                            class="mt-2 w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white font-mono"
+                            placeholder="G-XXXXXXXXXX"
+                        />
+                        <p class="mt-1 text-xs text-slate-500">Masukkan ID pengukuran GA4 (Contoh: <code class="bg-slate-100 px-1 py-0.5 rounded">G-1234567890</code>). Otomatis di-inject secara async.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-900" for="google_search_console_code">Google Search Console Verification Code</label>
+                        <input
+                            id="google_search_console_code"
+                            type="text"
+                            name="google_search_console_code"
+                            value="{{ old('google_search_console_code', $googleSearchConsoleCode) }}"
+                            class="mt-2 w-full rounded-2xl border border-slate-200/80 bg-white/80 px-4 py-3 text-sm font-medium text-slate-900 shadow-sm outline-none transition focus:border-sky-500 focus:bg-white font-mono"
+                            placeholder="Kode meta tag verifikasi google"
+                        />
+                    </div>
+                </div>
+
+                <!-- Custom OG Share Image -->
+                <div class="rounded-2xl border border-slate-200/70 bg-white/50 p-5">
+                    <label class="block text-sm font-semibold text-slate-900">Default Social Share Image (OpenGraph Image)</label>
+                    <p class="mt-1 text-xs text-slate-500">Gambar yang muncul saat link website dibagikan ke WhatsApp, LinkedIn, Twitter, Facebook (Rekomendasi 1200x630px).</p>
+                    
+                    <div class="mt-4 flex items-center gap-4">
+                        <div class="grid h-16 w-28 place-items-center rounded-2xl border border-slate-200/80 bg-slate-900/5 p-2">
+                            <img id="og-preview" src="{{ $ogImage }}" alt="Preview OG Image" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <div class="flex-1">
+                            <input
+                                type="file"
+                                name="og_image_file"
+                                accept="image/*"
+                                class="w-full text-xs text-slate-600 file:mr-3 file:rounded-xl file:border-0 file:bg-slate-900 file:px-3 file:py-2 file:text-xs file:font-semibold file:text-white hover:file:bg-slate-800"
+                                onchange="previewImage(this, 'og-preview')"
+                            />
+                            <span class="mt-1 block text-[11px] text-slate-400 truncate">Current: {{ $ogImage }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: BOTTOM NAVIGATION (MOBILE) -->
         <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <div class="text-lg font-semibold text-slate-900">2. Bottom Navigation (Tampilan Mobile)</div>
+                    <div class="text-lg font-semibold text-slate-900">3. Bottom Navigation (Tampilan Mobile)</div>
                     <p class="mt-2 text-sm leading-relaxed text-slate-600">
                         Atur item menu yang tampil pada bar navigasi bawah di HP/layar kecil.
                     </p>
@@ -208,11 +350,11 @@
             </div>
         </div>
 
-        <!-- SECTION 3: HEADER NAVIGATION -->
+        <!-- SECTION 4: HEADER NAVIGATION -->
         <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
             <div class="flex items-center justify-between gap-4">
                 <div>
-                    <div class="text-lg font-semibold text-slate-900">3. Header Navigation (Menu Utama Navigasi)</div>
+                    <div class="text-lg font-semibold text-slate-900">4. Header Navigation (Menu Utama Navigasi)</div>
                     <p class="mt-2 text-sm leading-relaxed text-slate-600">
                         Atur item menu navigasi yang tampil pada bagian atas website.
                     </p>
@@ -274,9 +416,9 @@
             </div>
         </div>
 
-        <!-- SECTION 4: FOOTER & COPYRIGHT -->
+        <!-- SECTION 5: FOOTER & COPYRIGHT -->
         <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
-            <div class="text-lg font-semibold text-slate-900">4. Informasi Footer Website</div>
+            <div class="text-lg font-semibold text-slate-900">5. Informasi Footer Website</div>
             <p class="mt-2 text-sm leading-relaxed text-slate-600">Atur deskripsi singkat, teks hak cipta, dan subtitle di bagian paling bawah website.</p>
 
             <div class="mt-8 space-y-6">
@@ -316,9 +458,9 @@
             </div>
         </div>
 
-        <!-- SECTION 5: KONTAK & SOSIAL MEDIA -->
+        <!-- SECTION 6: KONTAK & SOSIAL MEDIA -->
         <div class="rounded-[2rem] border border-slate-200/70 bg-white/70 p-6 shadow-sm backdrop-blur sm:p-8">
-            <div class="text-lg font-semibold text-slate-900">5. Informasi Kontak & Media Sosial</div>
+            <div class="text-lg font-semibold text-slate-900">6. Informasi Kontak & Media Sosial</div>
             <p class="mt-2 text-sm leading-relaxed text-slate-600">Kontak utama yang akan muncul pada footer dan halaman kontak.</p>
 
             <div class="mt-8 grid gap-6 sm:grid-cols-2">
@@ -435,7 +577,7 @@
                 type="submit"
                 class="brand-gradient rounded-2xl px-8 py-3 text-sm font-semibold text-white shadow-[0_18px_50px_-26px_rgba(14,165,233,0.6)] transition hover:-translate-y-0.5"
             >
-                Simpan Perubahan
+                Simpan Semua Pengaturan
             </button>
         </div>
     </form>

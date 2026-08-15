@@ -61,12 +61,6 @@
                 </tbody>
             </table>
         </div>
-
-        @if (method_exists($messages, 'links'))
-            <div class="border-t border-slate-200/60 px-6 py-4">
-                {{ $messages->links() }}
-            </div>
-        @endif
     </div>
 @endsection
 

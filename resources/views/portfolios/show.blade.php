@@ -1,6 +1,29 @@
 @extends('layouts.marketing')
 
-@section('title', $portfolio->title . ' - Sankara Tech')
+@section('title', $portfolio->title . ' - Portofolio Sankara Tech')
+@section('meta_description', $portfolio->excerpt ?: 'Hasil karya dan portofolio ' . $portfolio->title . ' oleh Sankara Tech Digital Agency.')
+@php
+    $mainShot = $portfolio->cover_image_src ?: $portfolio->preview_image_src;
+@endphp
+@if ($mainShot)
+    @section('meta_image', $mainShot)
+@endif
+
+@section('structured_data')
+    {{ app(\App\Services\SeoService::class)->renderStructuredData([
+        'portfolio' => [
+            'title' => $portfolio->title,
+            'excerpt' => $portfolio->excerpt,
+            'image' => $mainShot,
+            'url' => route('portfolios.show', $portfolio->slug),
+        ],
+        'breadcrumb' => [
+            ['name' => 'Home', 'url' => route('home')],
+            ['name' => 'Portofolio', 'url' => route('portfolios.index')],
+            ['name' => $portfolio->title, 'url' => route('portfolios.show', $portfolio->slug)],
+        ],
+    ]) }}
+@endsection
 
 @section('content')
     @include('partials.marketing-header', ['active' => 'portfolios'])
@@ -42,9 +65,7 @@
 
                                             <li class="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/80 p-4 shadow-sm">
                                                 <div class="mt-1 grid h-7 w-7 flex-none place-items-center rounded-xl border border-sky-100 bg-[rgb(var(--agency-cyan)/0.12)] text-[rgb(var(--agency-cyan))]">
-                                                    <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4">
-                                                        <path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg>
+                                                    <i class="fa-solid fa-check text-xs" aria-hidden="true"></i>
                                                 </div>
                                                 <div>
                                                     @if (filled($section->heading))
@@ -71,11 +92,8 @@
 
                             <div>
                                 <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
-                                    Konsultasi Proyek Serupa
-                                    <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                        <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                        <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                    <span>Konsultasi Proyek Serupa</span>
+                                    <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
@@ -83,13 +101,9 @@
 
                     <div class="reveal">
                         <div class="agency-card overflow-hidden p-2">
-                            @php
-                                $mainShot = $portfolio->cover_image_src ?: $portfolio->preview_image_src;
-                            @endphp
-
                             @if ($mainShot)
                                 <div data-hover-shot class="no-scrollbar h-[380px] overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 sm:h-[440px] lg:h-[480px]">
-                                    <img class="w-full object-cover object-top" src="{{ $mainShot }}" alt="{{ $portfolio->title }}" />
+                                    <img class="w-full object-cover object-top" width="600" height="480" fetchpriority="high" src="{{ $mainShot }}" alt="Project {{ $portfolio->title }}" />
                                 </div>
                             @else
                                 <div class="h-[340px] w-full rounded-2xl bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] flex items-center justify-center p-8 text-center text-white">
@@ -117,4 +131,3 @@
         </section>
     </main>
 @endsection
-

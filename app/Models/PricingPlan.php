@@ -21,4 +21,3 @@ class PricingPlan extends Model
         return $this->hasMany(PricingFeature::class)->orderBy('sort_order');
     }
 }
-

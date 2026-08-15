@@ -6,7 +6,6 @@ use App\Models\Advantage;
 use App\Models\HomeAbout;
 use App\Models\HomeCta;
 use App\Models\HomeHero;
-use App\Models\HomeStat;
 use App\Models\Page;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
@@ -41,7 +40,6 @@ class CmsSeeder extends Seeder
             'secondary_cta_label' => 'Lihat Portofolio',
             'secondary_cta_url' => '#portofolio',
         ]);
-
 
         HomeAbout::query()->firstOrCreate([], [
             'eyebrow' => 'Tentang Kami',
@@ -142,7 +140,7 @@ class CmsSeeder extends Seeder
 
         foreach ($serviceDescriptions as $slug => $description) {
             $service = Service::query()->where('slug', $slug)->first();
-            if (!$service) {
+            if (! $service) {
                 continue;
             }
 
@@ -172,7 +170,7 @@ class CmsSeeder extends Seeder
             $service = Service::query()->where('title', $serviceTitle)->first()
                 ?: Service::query()->where('title', Str::headline($serviceTitle))->first();
 
-            if (!$service) {
+            if (! $service) {
                 continue;
             }
 
@@ -234,7 +232,7 @@ class CmsSeeder extends Seeder
         );
 
         $aboutPage = Page::query()->where('slug', 'tentang-kami')->first();
-        if ($aboutPage && (!filled($aboutPage->image_url) || str_contains($aboutPage->image_url, 'kersa') || str_contains($aboutPage->image_url, 'sankara.png')) && !filled($aboutPage->image_path)) {
+        if ($aboutPage && (! filled($aboutPage->image_url) || str_contains($aboutPage->image_url, 'kersa') || str_contains($aboutPage->image_url, 'sankara.png')) && ! filled($aboutPage->image_path)) {
             $aboutPage->image_url = '/logosankara.png';
             $aboutPage->save();
         }
@@ -254,13 +252,13 @@ class CmsSeeder extends Seeder
         foreach ($paths as $i => $p) {
             $name = pathinfo($p, PATHINFO_FILENAME);
             $slug = Str::slug($name);
-            $publicUrl = '/portofolio/' . basename($p);
+            $publicUrl = '/portofolio/'.basename($p);
 
             $portfolio = Portfolio::query()->updateOrCreate(
                 ['slug' => $slug],
                 [
                     'title' => Str::headline($name),
-                    'excerpt' => 'Preview project ' . Str::headline($name) . '.',
+                    'excerpt' => 'Preview project '.Str::headline($name).'.',
                     'preview_image_url' => $publicUrl,
                     'cover_image_url' => $publicUrl,
                     'is_active' => true,
@@ -295,31 +293,31 @@ class CmsSeeder extends Seeder
         ];
         SiteSetting::setValue('socials', array_merge($socialDefaults, is_array($existingSocials) ? $existingSocials : []));
 
-        if (!filled(SiteSetting::getValue('site_name'))) {
+        if (! filled(SiteSetting::getValue('site_name'))) {
             SiteSetting::setValue('site_name', 'Sankara Tech');
         }
 
-        if (!filled(SiteSetting::getValue('site_tagline'))) {
+        if (! filled(SiteSetting::getValue('site_tagline'))) {
             SiteSetting::setValue('site_tagline', 'Digital Agency');
         }
 
-        if (!filled(SiteSetting::getValue('site_logo'))) {
+        if (! filled(SiteSetting::getValue('site_logo'))) {
             SiteSetting::setValue('site_logo', '/logosankara.png');
         }
 
-        if (!filled(SiteSetting::getValue('site_favicon'))) {
+        if (! filled(SiteSetting::getValue('site_favicon'))) {
             SiteSetting::setValue('site_favicon', '/logosankara.png');
         }
 
-        if (!filled(SiteSetting::getValue('footer_description'))) {
+        if (! filled(SiteSetting::getValue('footer_description'))) {
             SiteSetting::setValue('footer_description', 'Kami membangun produk digital modern: website, software, aplikasi mobile, UI/UX, game development, dan 3D modeling—dengan kualitas premium yang meyakinkan.');
         }
 
-        if (!filled(SiteSetting::getValue('footer_copyright'))) {
-            SiteSetting::setValue('footer_copyright', '© ' . date('Y') . ' Sankara Tech. All rights reserved.');
+        if (! filled(SiteSetting::getValue('footer_copyright'))) {
+            SiteSetting::setValue('footer_copyright', '© '.date('Y').' Sankara Tech. All rights reserved.');
         }
 
-        if (!filled(SiteSetting::getValue('footer_subtext'))) {
+        if (! filled(SiteSetting::getValue('footer_subtext'))) {
             SiteSetting::setValue('footer_subtext', 'Built with Laravel • Blade • Livewire • Tailwind');
         }
 
@@ -342,9 +340,8 @@ class CmsSeeder extends Seeder
             ]);
         }
 
-        if (!filled(SiteSetting::getValue('theme'))) {
+        if (! filled(SiteSetting::getValue('theme'))) {
             SiteSetting::setValue('theme', 'emerald');
         }
     }
 }
-

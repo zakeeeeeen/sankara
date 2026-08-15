@@ -27,7 +27,7 @@ class Portfolio extends Model
 {
     private function normalizePublicAssetUrl(?string $url): ?string
     {
-        if (!$url) {
+        if (! $url) {
             return null;
         }
 
@@ -36,7 +36,7 @@ class Portfolio extends Model
         }
 
         $path = parse_url($url, PHP_URL_PATH);
-        if (!$path || !str_starts_with($path, '/')) {
+        if (! $path || ! str_starts_with($path, '/')) {
             return $url;
         }
 
@@ -90,4 +90,3 @@ class Portfolio extends Model
         return $query->where('is_active', true);
     }
 }
-

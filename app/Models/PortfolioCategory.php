@@ -19,4 +19,3 @@ class PortfolioCategory extends Model
         return $this->belongsToMany(Service::class, 'service_portfolio_category')->withTimestamps();
     }
 }
-

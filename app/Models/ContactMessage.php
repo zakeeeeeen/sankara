@@ -15,4 +15,3 @@ class ContactMessage extends Model
         'user_agent',
     ];
 }
-

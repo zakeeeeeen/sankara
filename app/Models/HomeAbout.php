@@ -18,4 +18,3 @@ class HomeAbout extends Model
         return $this->image_url;
     }
 }
-

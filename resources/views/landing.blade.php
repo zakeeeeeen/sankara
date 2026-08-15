@@ -1,7 +1,5 @@
 @extends('layouts.marketing')
 
-@section('title', 'Sankara Tech - Digital Agency')
-
 @section('content')
     @php
         $contact = is_array($contact ?? null) ? $contact : [];
@@ -21,7 +19,7 @@
 
     <main class="pt-0">
         <section id="home" class="agency-hero relative overflow-hidden pt-28">
-            <div class="agency-hero-grid pointer-events-none absolute inset-0 opacity-45"></div>
+            <div class="agency-hero-grid pointer-events-none absolute inset-0 opacity-45" aria-hidden="true"></div>
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="mx-auto max-w-3xl text-center">
                     <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white/85 backdrop-blur">
@@ -39,18 +37,13 @@
 
                     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
                         <a href="{{ route('contact.show') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
-                            {{ $hero?->primary_cta_label ?? 'Mulai Proyek' }}
-                            <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <span>{{ $hero?->primary_cta_label ?? 'Mulai Proyek' }}</span>
+                            <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
                         </a>
 
                         <a href="{{ $hero?->secondary_cta_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
-                            {{ $hero?->secondary_cta_label ?? 'Lihat Portofolio' }}
-                            <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 text-white/70">
-                                <path d="M8 5h8M8 12h8M8 19h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                            </svg>
+                            <span>{{ $hero?->secondary_cta_label ?? 'Lihat Portofolio' }}</span>
+                            <i class="fa-solid fa-bars-staggered text-xs text-white/70" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -68,7 +61,7 @@
                         </div>
 
                         <div class="grid gap-0 lg:grid-cols-[88px_1fr]">
-                            <div class="hidden border-r border-white/8 bg-black/10 px-4 py-5 text-right text-xs leading-10 text-white/28 lg:block">
+                            <div class="hidden border-r border-white/8 bg-black/10 px-4 py-5 text-right text-xs leading-10 text-white/28 lg:block" aria-hidden="true">
                                 @for ($i = 1; $i <= 9; $i++)
                                     <div>{{ $i }}</div>
                                 @endfor
@@ -86,9 +79,10 @@
                         </div>
                     </div>
 
-                <div class="pointer-events-none absolute -left-6 top-6 hidden h-20 w-20 rounded-3xl border border-white/15 bg-white/10 blur-sm sm:block"></div>
-                <div class="pointer-events-none absolute -right-8 bottom-14 hidden h-24 w-24 rounded-full border border-white/15 bg-white/10 blur-sm sm:block"></div>
-                <div class="pointer-events-none absolute left-12 bottom-10 hidden h-3 w-3 rounded-full bg-[rgb(var(--agency-cyan))] sm:block"></div>
+                    <div class="pointer-events-none absolute -left-6 top-6 hidden h-20 w-20 rounded-3xl border border-white/15 bg-white/10 blur-sm sm:block" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute -right-8 bottom-14 hidden h-24 w-24 rounded-full border border-white/15 bg-white/10 blur-sm sm:block" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute left-12 bottom-10 hidden h-3 w-3 rounded-full bg-[rgb(var(--agency-cyan))] sm:block" aria-hidden="true"></div>
+                </div>
             </div>
         </section>
 
@@ -126,7 +120,7 @@
                         <div class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-8 shadow-xl backdrop-blur-md transition-all duration-300 hover:-translate-y-1.5 hover:border-emerald-400/40 hover:bg-white/15 hover:shadow-2xl">
                             <div>
                                 <div class="grid h-14 w-14 place-items-center rounded-2xl border border-emerald-400/30 bg-emerald-400/10 text-emerald-400 transition-colors group-hover:bg-emerald-400 group-hover:text-slate-950">
-                                    <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7">
+                                    <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7" aria-hidden="true">
                                         <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
                                 </div>
@@ -138,7 +132,7 @@
                 </div>
             </div>
 
-            <div class="agency-wave -mb-px">
+            <div class="agency-wave -mb-px" aria-hidden="true">
                 <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="block w-full h-12 sm:h-20 lg:h-28" aria-hidden="true">
                     <path fill="#f8fafc" d="M0,64 C240,120 480,120 720,86 C960,52 1200,0 1440,16 L1440,120 L0,120 Z"></path>
                 </svg>
@@ -147,7 +141,6 @@
 
         <section id="layanan" class="scroll-mt-28 relative bg-slate-50 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-24 lg:pb-32">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                {{-- Header (Layanan Kami & Subjudul) --}}
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
@@ -156,76 +149,64 @@
                     </p>
                 </div>
 
-                @php
-                    $serviceIcons = [
-                        'website-development' => 'M7 7h10M7 12h10M7 17h10',
-                        'software-development' => 'M12 6v12M6 12h12',
-                        'mobile-app-development' => 'M7 4h10v16H7z',
-                        'ui-ux-design' => 'M12 4l8 4-8 4-8-4 8-4Z',
-                        'game-development' => 'M8 5v14l11-7L8 5Z',
-                        '3d-modeling' => 'M12 3l9 5-9 5-9-5 9-5 9 5-9 5V8l9-5Z',
-                    ];
-                @endphp
-
                 <div class="mt-12 sm:mt-16">
                     <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-featured-center="true" class="relative mx-auto max-w-[58rem]">
-                    <div class="relative">
-                        <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 flex items-center sm:-left-6 lg:-left-8">
-                            <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Sebelumnya">
-                                <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                    <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 flex items-center sm:-right-6 lg:-right-8">
-                            <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Selanjutnya">
-                                <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                    <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </button>
+                        <div class="relative">
+                            <div class="pointer-events-none absolute inset-y-0 -left-3 z-10 flex items-center sm:-left-6 lg:-left-8">
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Sebelumnya">
+                                    <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <div class="pointer-events-none absolute inset-y-0 -right-3 z-10 flex items-center sm:-right-6 lg:-right-8">
+                                <button type="button" data-carousel-next class="pointer-events-auto grid h-10 w-10 place-items-center rounded-full border border-slate-200 bg-white/90 text-slate-700 shadow-md backdrop-blur-md transition hover:-translate-y-0.5 hover:border-sky-200 hover:text-[rgb(var(--agency-navy-1))] active:scale-95 sm:h-12 sm:w-12" aria-label="Layanan Selanjutnya">
+                                    <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                            <div data-carousel-track class="no-scrollbar flex gap-4 snap-x snap-mandatory overflow-x-auto scroll-smooth px-1 pb-10 pt-8">
+                                @foreach (($services ?? collect()) as $service)
+                                    @php
+                                        $faIcons = [
+                                            'website-development' => 'fa-solid fa-globe',
+                                            'software-development' => 'fa-solid fa-code',
+                                            'mobile-app-development' => 'fa-solid fa-mobile-screen-button',
+                                            'ui-ux-design' => 'fa-solid fa-pen-ruler',
+                                            'uiux-design' => 'fa-solid fa-pen-ruler',
+                                            'game-development' => 'fa-solid fa-gamepad',
+                                            '3d-modeling' => 'fa-solid fa-cube',
+                                        ];
+                                        $iconClass = $faIcons[$service->slug] ?? 'fa-solid fa-cubes';
+                                    @endphp
+                                    <div class="w-[88%] shrink-0 snap-center sm:w-[44%] lg:w-[32.2%]">
+                                        <a href="{{ route('services.show', $service->slug) }}" data-carousel-feature-card class="agency-service-card flex h-full flex-col p-8" aria-label="Detail Layanan {{ $service->title }}">
+                                            <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-[rgb(var(--agency-cyan)/0.08)] text-[rgb(var(--agency-cyan))]">
+                                                <i class="{{ $iconClass }} text-2xl" aria-hidden="true"></i>
+                                            </div>
+                                            <h3 class="mt-8 text-[1.8rem] font-semibold leading-tight tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
+                                            <p class="mt-4 max-w-xs text-sm leading-7 text-slate-500">{{ $service->excerpt }}</p>
+                                            <div class="mt-auto flex items-center justify-end pt-10 text-[rgb(var(--agency-navy-2))]">
+                                                <i class="fa-solid fa-arrow-right text-base" aria-hidden="true"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
 
-                        <div data-carousel-track class="no-scrollbar flex gap-4 snap-x snap-mandatory overflow-x-auto scroll-smooth px-1 pb-10 pt-8">
-                            @foreach (($services ?? collect()) as $service)
-                                @php
-                                    $icon = $serviceIcons[$service->slug] ?? 'M7 7h10M7 12h10M7 17h10';
-                                @endphp
-                                <div class="w-[88%] shrink-0 snap-center sm:w-[44%] lg:w-[32.2%]">
-                                    <a href="{{ route('services.show', $service->slug) }}" data-carousel-feature-card class="agency-service-card flex h-full flex-col p-8">
-                                        <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-[rgb(var(--agency-cyan)/0.08)] text-[rgb(var(--agency-cyan))]">
-                                            <svg viewBox="0 0 24 24" fill="none" class="h-7 w-7">
-                                                <path d="{{ $icon }}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                        <h3 class="mt-8 text-[1.8rem] font-semibold leading-tight tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
-                                        <p class="mt-4 max-w-xs text-sm leading-7 text-slate-500">{{ $service->excerpt }}</p>
-                                        <div class="mt-auto flex items-center justify-end pt-10 text-[rgb(var(--agency-navy-2))]">
-                                            <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                                <path d="M5 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-                                                <path d="M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
+                        <div class="mt-2 flex justify-center gap-2 lg:hidden" data-carousel-dots aria-label="Indikator Layanan"></div>
                     </div>
-
-                    <div class="mt-2 flex justify-center gap-2 lg:hidden" data-carousel-dots></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <section id="portofolio" class="scroll-mt-28 bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]">
-            <div class="agency-wave -mb-px rotate-180">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+            <div class="agency-wave -mb-px rotate-180" aria-hidden="true">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="block w-full h-12 sm:h-20 lg:h-28" aria-hidden="true">
                     <path fill="#f8fafc" d="M0,64 C240,120 480,120 720,86 C960,52 1200,0 1440,16 L1440,120 L0,120 Z"></path>
                 </svg>
             </div>
 
             <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-                {{-- Header (Portofolio & Subjudul) --}}
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Portofolio</h2>
@@ -246,7 +227,6 @@
                         ->values();
                 @endphp
 
-                {{-- Projek Cards (Auto-slide 3 di desktop, pause saat hover) --}}
                 <div class="mt-12 sm:mt-16">
                     @if ($items->count() === 0)
                         <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-white/75">
@@ -255,50 +235,43 @@
                     @else
                         <div data-carousel data-carousel-autoplay="false" data-carousel-loop="true" data-carousel-theme="dark" class="relative px-2 sm:px-4 lg:px-6">
                             <div class="pointer-events-none absolute inset-y-0 -left-2 z-10 flex items-center sm:-left-4">
-                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Sebelumnya">
-                                    <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                        <path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                <button type="button" data-carousel-prev class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Portofolio Sebelumnya">
+                                    <i class="fa-solid fa-chevron-left text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <div class="pointer-events-none absolute inset-y-0 -right-2 z-10 flex items-center sm:-right-4">
-                                <button type="button" data-carousel-next class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Selanjutnya">
-                                    <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5">
-                                        <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+                                <button type="button" data-carousel-next class="pointer-events-auto grid h-11 w-11 place-items-center rounded-2xl border border-white/20 bg-slate-950/70 text-white shadow-lg backdrop-blur-md transition-all hover:scale-105 hover:bg-white/25 active:scale-95 sm:h-12 sm:w-12" aria-label="Portofolio Selanjutnya">
+                                    <i class="fa-solid fa-chevron-right text-sm" aria-hidden="true"></i>
                                 </button>
                             </div>
 
                             <div data-carousel-track class="no-scrollbar flex gap-6 snap-x snap-mandatory overflow-x-auto scroll-smooth py-4">
                                 @foreach ($items as $item)
                                     <div class="w-full shrink-0 snap-start sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                                        <a href="{{ $item['url'] }}" class="group block h-full">
+                                        <a href="{{ $item['url'] }}" class="group block h-full" aria-label="Lihat Project {{ $item['title'] }}">
                                             <div data-hover-shot class="no-scrollbar aspect-[4/3] w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20 sm:aspect-[16/11]">
-                                                <img class="block w-full object-cover object-top transition-opacity duration-300" alt="Preview {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                                <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
                                             </div>
                                         </a>
                                     </div>
                                 @endforeach
                             </div>
 
-                            <div data-carousel-dots class="mt-8 flex justify-center gap-2"></div>
+                            <div data-carousel-dots class="mt-8 flex justify-center gap-2" aria-label="Indikator Portofolio"></div>
                         </div>
                     @endif
                 </div>
 
-                {{-- Tombol Lihat Selengkapnya (Bawah) --}}
                 <div class="mt-12 flex justify-center">
-                    <a href="{{ route('portfolios.index') }}" class="brand-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-cyan-500/30">
+                    <a href="{{ route('portfolios.index') }}" class="group brand-gradient inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-cyan-500/30">
                         <span>Lihat Selengkapnya</span>
-                        <svg viewBox="0 0 24 24" fill="none" class="h-4 w-4 transition-transform group-hover:translate-x-1">
-                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
 
-            <div class="agency-wave -mt-px">
-                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+            <div class="agency-wave -mt-px" aria-hidden="true">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="block w-full h-12 sm:h-20 lg:h-28" aria-hidden="true">
                     <path fill="#ffffff" d="M0,64 C240,120 480,120 720,86 C960,52 1200,0 1440,16 L1440,120 L0,120 Z"></path>
                 </svg>
             </div>
@@ -326,7 +299,7 @@
                             @endif
                             <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <div class="text-lg font-semibold text-slate-900">{{ $plan->name }}</div>
+                                    <h3 class="text-lg font-semibold text-slate-900">{{ $plan->name }}</h3>
                                     <div class="mt-2 text-xs font-semibold text-slate-500">{{ $plan->tag }}</div>
                                 </div>
                                 <div class="h-10 w-10 rounded-2xl bg-[rgb(var(--agency-cyan)/0.12)]"></div>
@@ -340,9 +313,7 @@
                             <div class="mt-6 space-y-2 text-sm text-slate-700">
                                 @foreach ($plan->features as $feat)
                                     <div class="flex items-center gap-2">
-                                        <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5 text-[rgb(var(--agency-cyan))]">
-                                            <path d="M7 12l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                        <i class="fa-solid fa-check text-xs text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
                                         <span>{{ $feat->text }}</span>
                                     </div>
                                 @endforeach
@@ -360,8 +331,8 @@
         <section id="kontak" class="scroll-mt-28 relative bg-white py-16 sm:py-24 lg:py-32">
             <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                 <div class="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] p-8 text-center shadow-2xl sm:p-12 lg:p-16">
-                    <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[rgb(var(--agency-cyan)/0.2)] blur-3xl"></div>
-                    <div class="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
+                    <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[rgb(var(--agency-cyan)/0.2)] blur-3xl" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
 
                     <div class="relative flex flex-col items-center text-center">
                         <div class="agency-divider mx-auto"></div>

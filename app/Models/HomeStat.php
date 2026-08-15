@@ -6,7 +6,4 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(['value', 'label', 'sort_order'])]
-class HomeStat extends Model
-{
-}
-
+class HomeStat extends Model {}

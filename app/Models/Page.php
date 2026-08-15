@@ -11,7 +11,7 @@ class Page extends Model
 {
     private function normalizePublicAssetUrl(?string $url): ?string
     {
-        if (!$url) {
+        if (! $url) {
             return null;
         }
 
@@ -20,7 +20,7 @@ class Page extends Model
         }
 
         $path = parse_url($url, PHP_URL_PATH);
-        if (!$path || !str_starts_with($path, '/')) {
+        if (! $path || ! str_starts_with($path, '/')) {
             return $url;
         }
 
@@ -41,4 +41,3 @@ class Page extends Model
         return $this->normalizePublicAssetUrl($this->image_url);
     }
 }
-

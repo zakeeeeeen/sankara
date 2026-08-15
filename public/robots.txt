@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /storage/framework/
+
+Sitemap: https://sankaratech.com/sitemap.xml

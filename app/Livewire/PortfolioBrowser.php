@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
 use App\Models\Service;
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -48,13 +49,13 @@ class PortfolioBrowser extends Component
         $this->resetPage();
     }
 
-    public function render()
+    public function render(): View
     {
         $categories = PortfolioCategory::query()->orderBy('sort_order')->get();
 
         $query = Portfolio::query()
             ->active()
-            ->with('categories')
+            ->with('categories:id,name,slug')
             ->orderByDesc('published_at')
             ->orderBy('sort_order');
 
@@ -66,8 +67,12 @@ class PortfolioBrowser extends Component
             $query->whereHas('categories', fn ($q) => $q->where('slug', $this->category));
         }
 
-        if (trim($this->search) !== '') {
-            $query->where('title', 'like', '%' . trim($this->search) . '%');
+        $trimmedSearch = trim($this->search);
+        if ($trimmedSearch !== '') {
+            $query->where(function ($q) use ($trimmedSearch): void {
+                $q->where('title', 'like', '%'.$trimmedSearch.'%')
+                    ->orWhere('excerpt', 'like', '%'.$trimmedSearch.'%');
+            });
         }
 
         return view('livewire.portfolio-browser', [
@@ -76,4 +81,3 @@ class PortfolioBrowser extends Component
         ]);
     }
 }
-

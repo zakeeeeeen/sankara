@@ -1,0 +1,83 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sankara-app:latest
+    container_name: sankara_app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      APP_NAME: "${APP_NAME:-Sankara Tech}"
+      APP_ENV: "${APP_ENV:-production}"
+      APP_KEY: "${APP_KEY}"
+      APP_DEBUG: "${APP_DEBUG:-false}"
+      APP_URL: "${APP_URL:-http://localhost:8080}"
+      DB_CONNECTION: "${DB_CONNECTION:-pgsql}"
+      DB_HOST: "${DB_HOST:-postgres}"
+      DB_PORT: "${DB_PORT:-5432}"
+      DB_DATABASE: "${DB_DATABASE:-sankara_db}"
+      DB_USERNAME: "${DB_USERNAME:-sankara_user}"
+      DB_PASSWORD: "${DB_PASSWORD:-sankara_secret}"
+      CACHE_STORE: "${CACHE_STORE:-redis}"
+      SESSION_DRIVER: "${SESSION_DRIVER:-redis}"
+      QUEUE_CONNECTION: "${QUEUE_CONNECTION:-redis}"
+      REDIS_HOST: "${REDIS_HOST:-redis}"
+      REDIS_PORT: 6379
+      AUTO_MIGRATE: "true"
+      AUTO_GENERATE_SITEMAP: "true"
+    volumes:
+      - storage_data:/var/www/html/storage/app/public
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - sankara_network
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: sankara_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: "${DB_DATABASE:-sankara_db}"
+      POSTGRES_USER: "${DB_USERNAME:-sankara_user}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-sankara_secret}"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-sankara_user} -d ${DB_DATABASE:-sankara_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sankara_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: sankara_redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - sankara_network
+
+volumes:
+  storage_data:
+    driver: local
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  sankara_network:
+    driver: bridge

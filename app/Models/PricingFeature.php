@@ -14,4 +14,3 @@ class PricingFeature extends Model
         return $this->belongsTo(PricingPlan::class);
     }
 }
-

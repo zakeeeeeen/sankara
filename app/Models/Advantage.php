@@ -6,7 +6,4 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
 #[Fillable(['title', 'description', 'icon', 'sort_order'])]
-class Advantage extends Model
-{
-}
-
+class Advantage extends Model {}

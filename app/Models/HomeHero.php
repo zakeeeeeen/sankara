@@ -27,4 +27,3 @@ class HomeHero extends Model
         return $this->image_url;
     }
 }
-

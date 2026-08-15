@@ -7,9 +7,9 @@
                     type="text"
                     aria-label="Cari project portofolio"
                     placeholder="Cari project..."
-                    class="w-full rounded-2xl border border-slate-200/80 bg-white px-4 py-3 pr-12 text-sm font-medium text-slate-800 shadow-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+                    class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 pr-12 text-sm font-semibold text-slate-900 shadow-sm outline-none transition focus:border-sky-600 focus:ring-2 focus:ring-sky-500/20"
                 />
-                <div class="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-slate-400" aria-hidden="true">
+                <div class="pointer-events-none absolute inset-y-0 right-4 grid place-items-center text-slate-500" aria-hidden="true">
                     <i class="fa-solid fa-magnifying-glass text-sm"></i>
                 </div>
             </div>
@@ -18,16 +18,20 @@
         <div class="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0" role="tablist" aria-label="Kategori Portofolio">
             <button
                 type="button"
+                role="tab"
+                aria-selected="{{ $category === 'all' ? 'true' : 'false' }}"
                 wire:click="$set('category','all')"
-                class="shrink-0 rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition {{ $category === 'all' ? 'bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] text-white shadow-md' : 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900' }}"
+                class="shrink-0 rounded-full px-4 py-2 text-sm font-bold shadow-sm transition {{ $category === 'all' ? 'bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] text-white shadow-md' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-950' }}"
             >
                 Semua
             </button>
             @foreach ($categories as $cat)
                 <button
                     type="button"
+                    role="tab"
+                    aria-selected="{{ $category === $cat->slug ? 'true' : 'false' }}"
                     wire:click="$set('category','{{ $cat->slug }}')"
-                    class="shrink-0 rounded-full px-4 py-2 text-sm font-semibold shadow-sm transition {{ $category === $cat->slug ? 'bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] text-white shadow-md' : 'border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900' }}"
+                    class="shrink-0 rounded-full px-4 py-2 text-sm font-bold shadow-sm transition {{ $category === $cat->slug ? 'bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] text-white shadow-md' : 'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 hover:text-slate-950' }}"
                 >
                     {{ $cat->name }}
                 </button>
@@ -54,14 +58,14 @@
                 </div>
 
                 <div class="p-6">
-                    <div class="text-base font-semibold text-slate-900 group-hover:text-sky-600 transition-colors">{{ $portfolio->title }}</div>
+                    <div class="text-base font-bold text-slate-900 group-hover:text-sky-700 transition-colors">{{ $portfolio->title }}</div>
                     @if ($portfolio->excerpt)
-                        <div class="mt-2 text-sm leading-relaxed text-slate-600 line-clamp-2">{{ $portfolio->excerpt }}</div>
+                        <div class="mt-2 text-sm leading-relaxed text-slate-700 font-normal line-clamp-2">{{ $portfolio->excerpt }}</div>
                     @endif
 
                     <div class="mt-4 flex flex-wrap gap-2">
                         @foreach ($portfolio->categories->take(3) as $cat)
-                            <span class="rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-xs font-semibold text-sky-700">
+                            <span class="rounded-full border border-sky-200 bg-sky-50 px-3 py-1 text-xs font-bold text-sky-800">
                                 {{ $cat->name }}
                             </span>
                         @endforeach
@@ -70,9 +74,9 @@
             </a>
         @empty
             <div class="rounded-3xl border border-slate-200/80 bg-white p-10 text-center shadow-sm sm:col-span-2 lg:col-span-3">
-                <div class="text-base font-semibold text-slate-900">Belum ada project untuk filter ini.</div>
-                <div class="mt-2 text-sm leading-relaxed text-slate-600">Coba ganti kategori atau gunakan pencarian untuk menemukan project yang relevan.</div>
-                <button type="button" wire:click="$set('category','all')" class="mt-6 inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50">
+                <div class="text-base font-bold text-slate-900">Belum ada project untuk filter ini.</div>
+                <div class="mt-2 text-sm leading-relaxed text-slate-700">Coba ganti kategori atau gunakan pencarian untuk menemukan project yang relevan.</div>
+                <button type="button" wire:click="$set('category','all')" class="mt-6 inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-900 shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-50">
                     Reset Filter
                 </button>
             </div>

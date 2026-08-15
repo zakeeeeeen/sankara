@@ -38,19 +38,19 @@
                 <div class="flex items-center gap-3">
                     <img src="{{ $siteLogo }}" alt="{{ $siteName }} Logo" width="36" height="36" loading="lazy" class="h-9 w-9 object-contain">
                     <div>
-                        <div class="text-sm font-semibold text-white">{{ $siteName }}</div>
-                        <div class="text-xs font-medium text-white/65">{{ $siteTagline }}</div>
+                        <div class="text-sm font-bold text-white">{{ $siteName }}</div>
+                        <div class="text-xs font-semibold text-slate-200">{{ $siteTagline }}</div>
                     </div>
                 </div>
 
-                <p class="mt-4 max-w-xl text-sm leading-relaxed text-white/75">
+                <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-200">
                     {{ $footerDescription }}
                 </p>
             </div>
 
             <div>
-                <div class="text-sm font-semibold text-white">Navigasi</div>
-                <nav class="mt-4 grid gap-2 text-sm font-medium text-white/75" aria-label="Navigasi Footer">
+                <div class="text-sm font-bold text-white">Navigasi</div>
+                <nav class="mt-4 grid gap-2 text-sm font-medium text-slate-200" aria-label="Navigasi Menu Footer">
                     <a class="hover:text-white transition-colors" href="{{ $href('tentang') }}">Tentang Kami</a>
                     <a class="hover:text-white transition-colors" href="{{ $href('layanan') }}">Layanan</a>
                     <a class="hover:text-white transition-colors" href="{{ $href('portofolio') }}">Portofolio</a>
@@ -60,11 +60,11 @@
             </div>
 
             <div>
-                <div class="text-sm font-semibold text-white">Kontak</div>
-                <div class="mt-4 grid gap-3 text-sm font-medium text-white/75">
+                <div class="text-sm font-bold text-white">Kontak</div>
+                <div class="mt-4 grid gap-3 text-sm font-medium text-slate-200">
                     <div class="flex items-start gap-3">
                         <i class="fa-solid fa-envelope mt-0.5 text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
-                        <span>{{ $email }}</span>
+                        <span class="break-all">{{ $email }}</span>
                     </div>
                     <div class="flex items-start gap-3">
                         <i class="fa-brands fa-whatsapp mt-0.5 text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
@@ -78,32 +78,32 @@
 
                 <div class="mt-6 flex flex-wrap items-center gap-3">
                     @if (filled($socials['instagram'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['instagram'] }}" aria-label="Instagram Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['instagram'] }}" aria-label="Kunjungi Instagram Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-instagram text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['linkedin'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['linkedin'] }}" aria-label="LinkedIn Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['linkedin'] }}" aria-label="Kunjungi LinkedIn Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-linkedin-in text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['dribbble'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['dribbble'] }}" aria-label="Dribbble Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['dribbble'] }}" aria-label="Kunjungi Dribbble Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-dribbble text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['twitter'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['twitter'] }}" aria-label="Twitter Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['twitter'] }}" aria-label="Kunjungi Twitter Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-x-twitter text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['github'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['github'] }}" aria-label="GitHub Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['github'] }}" aria-label="Kunjungi GitHub Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-github text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['youtube'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/15 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15" href="{{ $socials['youtube'] }}" aria-label="YouTube Sankara Tech" target="_blank" rel="noreferrer">
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['youtube'] }}" aria-label="Kunjungi YouTube Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-youtube text-base" aria-hidden="true"></i>
                         </a>
                     @endif
@@ -111,9 +111,9 @@
             </div>
         </div>
 
-        <div class="mt-10 flex flex-col gap-2 border-t border-white/15 pt-6 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between">
+        <div class="mt-10 flex flex-col gap-2 border-t border-white/15 pt-6 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
             <div>{{ $footerCopyright }}</div>
-            <div class="text-white/65">{{ $footerSubtext }}</div>
+            <div class="text-slate-300">{{ $footerSubtext }}</div>
         </div>
     </div>
 </footer>

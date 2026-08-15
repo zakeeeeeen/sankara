@@ -38,25 +38,25 @@
         >
             <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between gap-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-6">
-                    <a href="{{ $homeHref }}" class="flex items-center gap-3 lg:justify-self-start" aria-label="{{ $siteName }} Home">
+                    <a href="{{ $homeHref }}" class="flex items-center gap-3 lg:justify-self-start" aria-label="{{ $siteName }} Beranda">
                         <img src="{{ $siteLogo }}" alt="{{ $siteName }} Logo" width="36" height="36" fetchpriority="high" class="h-9 w-9 object-contain">
                         <span class="leading-tight">
-                            <span data-brand-name class="block text-sm font-semibold tracking-tight {{ $isLanding ? 'text-white' : 'text-slate-900' }}">{{ $siteName }}</span>
-                            <span data-brand-tagline class="block text-xs font-medium {{ $isLanding ? 'text-white/65' : 'text-slate-500' }}">{{ $siteTagline }}</span>
+                            <span data-brand-name class="block text-sm font-bold tracking-tight {{ $isLanding ? 'text-white' : 'text-slate-900' }}">{{ $siteName }}</span>
+                            <span data-brand-tagline class="block text-xs font-semibold {{ $isLanding ? 'text-slate-200' : 'text-slate-600' }}">{{ $siteTagline }}</span>
                         </span>
                     </a>
 
-                    <nav class="hidden items-center gap-7 text-sm font-medium lg:flex lg:justify-self-center" aria-label="Navigasi Utama">
+                    <nav class="hidden items-center gap-7 text-sm font-semibold lg:flex lg:justify-self-center" aria-label="Navigasi Utama">
                         @foreach ($navItems as $item)
                             @php
                                 $isActive = $active === $item['key'];
                             @endphp
                             <a
                                 wire:navigate
-                                class="navlink relative py-1 text-sm font-medium transition-colors duration-200
+                                class="navlink relative py-1 text-sm font-semibold transition-colors duration-200
                                 {{ $isActive
-                                    ? ($isLanding ? 'navlink--active text-sky-400 font-semibold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-400' : 'navlink--active text-sky-600 font-semibold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-600')
-                                    : ($isLanding ? 'text-white/80 hover:text-white' : 'text-slate-900 hover:text-sky-600')
+                                    ? ($isLanding ? 'navlink--active text-sky-300 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-300' : 'navlink--active text-sky-700 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-700')
+                                    : ($isLanding ? 'text-slate-100 hover:text-white' : 'text-slate-800 hover:text-sky-700')
                                 }}"
                                 href="{{ $item['url'] }}"
                             >
@@ -65,15 +65,27 @@
                         @endforeach
                     </nav>
 
-                    <button
-                        type="button"
-                        @click="open = !open"
-                        data-mobile-toggle="true"
-                        class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white shadow-none backdrop-blur hover:bg-white/20' : 'border-slate-200/70 bg-white text-slate-700 shadow-sm backdrop-blur hover:bg-slate-50 hover:text-sky-600' }} transition lg:justify-self-end lg:hidden"
-                        aria-label="Buka menu navigasi"
-                    >
-                        <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
-                    </button>
+                    <div class="flex items-center justify-end gap-3 lg:justify-self-end">
+                        <a
+                            wire:navigate
+                            href="{{ route('contact.show') }}"
+                            class="hidden lg:inline-flex items-center gap-2 rounded-2xl brand-gradient px-5 py-2.5 text-xs font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                            aria-label="Hubungi Sankara Tech"
+                        >
+                            <span>Hubungi Kami</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+                        </a>
+
+                        <button
+                            type="button"
+                            @click="open = !open"
+                            data-mobile-toggle="true"
+                            class="flex h-10 w-10 shrink-0 aspect-square items-center justify-center rounded-full border {{ $isLanding ? 'border-white/20 bg-white/10 text-white shadow-none backdrop-blur hover:bg-white/20' : 'border-slate-200/70 bg-white text-slate-700 shadow-sm backdrop-blur hover:bg-slate-50 hover:text-sky-600' }} transition lg:justify-self-end lg:hidden"
+                            aria-label="Buka menu navigasi"
+                        >
+                            <i :class="open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'" class="text-base" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 

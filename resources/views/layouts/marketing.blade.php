@@ -3,7 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>@yield('title', \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech'))</title>
+        <!-- Critical Inline Anti-FOUC Styles -->
+        <style>
+            html {
+                background-color: #ffffff;
+                color: #0f172a;
+            }
+            [x-cloak], .cloak { display: none !important; }
+        </style>
         
         <!-- Dynamic SEO Meta Tags, OpenGraph, Twitter Cards & GA4 -->
         @php
@@ -28,9 +35,9 @@
         <link rel="icon" type="image/png" href="{{ $fav }}">
         <link rel="apple-touch-icon" href="{{ $fav }}">
 
-        <!-- Preconnect & Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-        <link rel="dns-prefetch" href="https://fonts.bunny.net">
+        <!-- Asset Preloading & Resource Hints for LCP -->
+        <link rel="preload" as="image" type="image/webp" href="{{ asset('logo.webp') }}" fetchpriority="high">
+
         @fonts
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])

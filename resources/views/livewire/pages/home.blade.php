@@ -1,52 +1,46 @@
 <div>
-    @php
-        $contact = is_array($contact ?? null) ? $contact : [];
-        $publicEmail = $contact['email'] ?? ($contact['inbox_email'] ?? null);
-        $publicEmail = filled($publicEmail) ? $publicEmail : 'hello@sankaratech.com';
-        $publicWhatsapp = filled($contact['whatsapp'] ?? null) ? $contact['whatsapp'] : '+62 812-0000-0000';
-        $publicHours = filled($contact['hours'] ?? null) ? $contact['hours'] : 'Senin–Jumat, 09.00–18.00 WIB';
-    @endphp
-
     @include('partials.marketing-header', [
-        'active' => 'home',
-        'homeHref' => '#home',
-        'headerId' => 'home',
-        'scrollNavbar' => true,
         'variant' => 'landing',
+        'active' => 'home',
+        'scrollNavbar' => true,
     ])
 
-    <main class="pt-0">
-        <section id="home" class="agency-hero relative overflow-hidden pt-28">
-            <div class="agency-hero-grid pointer-events-none absolute inset-0 opacity-45" aria-hidden="true"></div>
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="mx-auto max-w-3xl text-center">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold text-white/85 backdrop-blur">
-                        <span class="h-1.5 w-1.5 rounded-full bg-[rgb(var(--agency-cyan))]"></span>
-                        Web & Product Agency
+    <main>
+        <section id="hero" class="relative overflow-hidden bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] pt-28 pb-20 sm:pt-36 sm:pb-28">
+            <div class="pointer-events-none absolute inset-0">
+                <div class="brand-blob-1 absolute -top-40 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full blur-3xl opacity-30"></div>
+                <div class="brand-blob-2 absolute -bottom-56 -left-40 h-[42rem] w-[42rem] rounded-full blur-3xl opacity-20"></div>
+            </div>
+
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
+                        <span class="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>{{ $hero?->badge_text ?? 'Digital Agency • Web, Mobile & Software' }}</span>
                     </div>
 
-                    <h1 class="mt-6 text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-                        {{ $hero?->heading ?? 'Inovasi Digital untuk Pertumbuhan Bisnis Anda' }}
+                    <h1 class="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1]">
+                        {!! nl2br(e($hero?->heading ?? "Membangun Produk Digital\nYang Berdampak & Siap Scale")) !!}
                     </h1>
 
-                    <p class="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
-                        {{ $hero?->subheading ?? 'Kami membantu bisnis berkembang melalui solusi digital modern seperti website, aplikasi mobile, software custom, desain kreatif, game development, dan 3D modeling.' }}
+                    <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-xl sm:leading-relaxed">
+                        {{ $hero?->subheading ?? 'Kami membantu brand dan bisnis membangun website, aplikasi mobile, dan perangkat lunak kustom dengan standar desain dunia dan teknologi modern.' }}
                     </p>
 
-                    <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row sm:items-center">
-                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
-                            <span>{{ $hero?->primary_cta_label ?? 'Mulai Proyek' }}</span>
-                            <i class="fa-solid fa-arrow-right text-xs" aria-hidden="true"></i>
+                    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
+                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-xl transition-all duration-300 hover:scale-[1.02]" aria-label="Konsultasi Gratis">
+                            <span>{{ $hero?->cta_primary_label ?? 'Konsultasi Gratis' }}</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
                         </a>
 
-                        <a href="{{ $hero?->secondary_cta_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-3 text-sm font-semibold">
-                            <span>{{ $hero?->secondary_cta_label ?? 'Lihat Portofolio' }}</span>
-                            <i class="fa-solid fa-bars-staggered text-xs text-white/70" aria-hidden="true"></i>
+                        <a href="#portofolio" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]" aria-label="Lihat Karya Kami">
+                            <span>{{ $hero?->cta_secondary_label ?? 'Lihat Portofolio' }}</span>
                         </a>
                     </div>
                 </div>
 
-                <div class="relative mx-auto mt-14 max-w-[70rem] pb-16 lg:pb-24">
+                <!-- Interactive Code Display Panel -->
+                <div class="mt-14 sm:mt-20">
                     <div class="agency-code-panel relative mx-auto max-w-4xl rounded-2xl border border-white/15 bg-slate-950/80 shadow-2xl backdrop-blur-xl">
                         <div class="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
                             <div class="flex items-center gap-2">
@@ -59,7 +53,7 @@
 
                         <div class="grid gap-0 lg:grid-cols-[64px_1fr]">
                             <div class="hidden border-r border-white/10 bg-black/20 px-3 py-5 text-right font-mono text-xs leading-8 text-white/30 lg:block select-none" aria-hidden="true">
-                                @for ($i = 1; $i <= 14; $i++)
+                                @for ($i = 1; $i <= 11; $i++)
                                     <div>{{ sprintf('%2d', $i) }}</div>
                                 @endfor
                             </div>
@@ -96,7 +90,7 @@
                     </div>
 
                     <div class="max-w-4xl">
-                        <p class="pt-2 text-base leading-8 text-slate-600 sm:text-xl sm:leading-relaxed">
+                        <p class="pt-2 text-base leading-8 text-slate-700 sm:text-xl sm:leading-relaxed font-normal">
                             {{ $about?->body ?? 'Kami merancang pengalaman digital end-to-end—mulai dari strategi, desain UI/UX, hingga pengembangan website, software, mobile apps, game, dan 3D asset. Fokus kami sederhana: hasil yang elegan, cepat, dan siap scale.' }}
                         </p>
                     </div>
@@ -164,7 +158,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
-                    <p class="mt-3 max-w-2xl text-base font-medium text-slate-600 sm:text-lg">
+                    <p class="mt-3 max-w-2xl text-base font-semibold text-slate-700 sm:text-lg">
                         Solusi Digital End-to-End untuk Membantu Bisnis Anda Grow & Scale
                     </p>
                 </div>
@@ -228,7 +222,7 @@
                 <div class="flex flex-col items-center text-center">
                     <div class="agency-divider mx-auto"></div>
                     <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Portofolio</h2>
-                    <p class="mt-3 max-w-2xl text-base font-medium text-white/80 sm:text-lg">
+                    <p class="mt-3 max-w-2xl text-base font-semibold text-slate-200 sm:text-lg">
                         Menampilkan Project Terbaik dari Setiap Kolaborasi
                     </p>
                 </div>
@@ -263,7 +257,7 @@
                     class="mt-12 sm:mt-16"
                 >
                     @if ($items->count() === 0)
-                        <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-white/75">
+                        <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-slate-200 font-medium">
                             Belum ada data portofolio.
                         </div>
                     @else
@@ -318,7 +312,7 @@
                 </div>
 
                 <div class="mt-12 flex justify-center">
-                    <a href="{{ route('portfolios.index') }}" wire:navigate class="agency-btn-primary group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold shadow-lg transition-all duration-300 hover:-translate-y-0.5">
+                    <a href="{{ route('portfolios.index') }}" wire:navigate class="agency-btn-primary group inline-flex items-center gap-2 px-8 py-3.5 text-sm font-semibold shadow-lg transition-all duration-300 hover:-translate-y-0.5" aria-label="Buka Semua Halaman Portofolio">
                         <span>Lihat Selengkapnya</span>
                         <i class="fa-solid fa-arrow-right text-xs transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
                     </a>
@@ -338,9 +332,9 @@
                     <div class="mx-auto flex justify-center">
                         <div class="agency-divider"></div>
                     </div>
-                    <p class="mt-4 text-sm font-semibold text-slate-600">Pricing</p>
-                    <h2 class="mt-3 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Paket fleksibel untuk setiap kebutuhan</h2>
-                    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+                    <p class="mt-4 text-sm font-bold text-slate-800">Pricing</p>
+                    <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Paket fleksibel untuk setiap kebutuhan</h2>
+                    <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700 font-normal">
                         Pilih paket sesuai scope. Semua paket sudah termasuk konsultasi, timeline yang jelas, dan dokumentasi.
                     </p>
                 </div>
@@ -375,7 +369,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ route('contact.show') }}" wire:navigate class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]">
+                            <a href="{{ route('contact.show') }}" wire:navigate class="mt-8 inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--agency-navy-1))] px-6 py-3 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-[rgb(var(--agency-navy-2))]" aria-label="Konsultasi Paket {{ $plan->name }}">
                                 Konsultasi Paket
                             </a>
                         </div>
@@ -395,14 +389,14 @@
                         <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                             {{ $cta?->heading ?? 'Siap Membangun Produk Digital Anda?' }}
                         </h2>
-                        <p class="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+                        <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-100 sm:text-lg font-medium">
                             {{ $cta?->body ?? 'Ceritakan kebutuhan Anda. Kami bantu dari ide hingga eksekusi—dengan desain futuristik, performa cepat, dan pengalaman pengguna yang elegan.' }}
                         </p>
                         <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                            <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-lg transition-transform hover:-translate-y-0.5">
+                            <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold shadow-lg transition-transform hover:-translate-y-0.5" aria-label="Konsultasi Sekarang">
                                 {{ $cta?->primary_label ?? 'Konsultasi Sekarang' }}
                             </a>
-                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold shadow-md transition-transform hover:-translate-y-0.5">
+                            <a href="{{ $cta?->secondary_url ?: '#portofolio' }}" class="agency-btn-secondary inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold shadow-md transition-transform hover:-translate-y-0.5" aria-label="Lihat Hasil Karya Kami">
                                 {{ $cta?->secondary_label ?? 'Lihat Hasil Kami' }}
                             </a>
                         </div>

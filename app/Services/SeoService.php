@@ -39,8 +39,8 @@ class SeoService
         $canonical = $custom['canonical'] ?? url()->current();
         $type = $custom['type'] ?? 'website';
         $robots = $custom['robots'] ?? (app()->environment('production') ? 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' : 'noindex, nofollow');
-        $gaId = trim((string) SiteSetting::getValue('ga_measurement_id', ''));
-        $gscCode = trim((string) SiteSetting::getValue('google_search_console_code', ''));
+        $gaId = trim((string) (SiteSetting::getValue('ga4_id') ?: SiteSetting::getValue('ga_measurement_id', '')));
+        $gscCode = trim((string) (SiteSetting::getValue('gsc_verification') ?: SiteSetting::getValue('google_search_console_code', '')));
 
         $html = [];
 

@@ -8,6 +8,7 @@ use App\Models\PortfolioSection;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class PortfolioService
@@ -67,7 +68,7 @@ class PortfolioService
             }
 
             /** @var Portfolio $portfolio */
-            $portfolio = Portfolio::query()->create($pData);
+            $portfolio = Portfolio::query()->create($this->filterValidColumns($pData));
 
             if (isset($data['categories'])) {
                 $portfolio->categories()->sync((array) $data['categories']);
@@ -126,7 +127,7 @@ class PortfolioService
                 $pData['preview_image_path'] = $files['preview_image']->store('portfolios', 'public');
             }
 
-            $portfolio->update($pData);
+            $portfolio->update($this->filterValidColumns($pData));
 
             $portfolio->categories()->sync((array) ($data['categories'] ?? []));
 
@@ -198,5 +199,25 @@ class PortfolioService
     public function deleteCategory(PortfolioCategory $category): bool
     {
         return (bool) $category->delete();
+    }
+
+    /**
+     * Filter array attributes so only existing table columns are sent to query builder.
+     *
+     * @param  array<string, mixed>  $attributes
+     * @return array<string, mixed>
+     */
+    private function filterValidColumns(array $attributes): array
+    {
+        try {
+            $columns = Schema::getColumnListing('portfolios');
+            if (! empty($columns)) {
+                return array_intersect_key($attributes, array_flip($columns));
+            }
+        } catch (\Throwable) {
+            // Fallback
+        }
+
+        return $attributes;
     }
 }

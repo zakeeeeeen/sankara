@@ -7,6 +7,7 @@ use App\Models\ServiceFeature;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 
 class ServiceService
@@ -46,7 +47,7 @@ class ServiceService
             }
 
             /** @var Service $service */
-            $service = Service::query()->create($serviceData);
+            $service = Service::query()->create($this->filterValidColumns($serviceData));
 
             if (isset($data['portfolio_category_ids'])) {
                 $service->portfolioCategories()->sync((array) $data['portfolio_category_ids']);
@@ -83,7 +84,7 @@ class ServiceService
                 $serviceData['image_path'] = $image->store('services', 'public');
             }
 
-            $service->update($serviceData);
+            $service->update($this->filterValidColumns($serviceData));
 
             $service->portfolioCategories()->sync((array) ($data['portfolio_category_ids'] ?? []));
 
@@ -106,5 +107,25 @@ class ServiceService
     public function deleteService(Service $service): bool
     {
         return (bool) $service->delete();
+    }
+
+    /**
+     * Filter array attributes so only existing table columns are sent to query builder.
+     *
+     * @param  array<string, mixed>  $attributes
+     * @return array<string, mixed>
+     */
+    private function filterValidColumns(array $attributes): array
+    {
+        try {
+            $columns = Schema::getColumnListing('services');
+            if (! empty($columns)) {
+                return array_intersect_key($attributes, array_flip($columns));
+            }
+        } catch (\Throwable) {
+            // Fallback
+        }
+
+        return $attributes;
     }
 }

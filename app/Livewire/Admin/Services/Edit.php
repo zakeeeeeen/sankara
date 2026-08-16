@@ -82,6 +82,17 @@ class Edit extends Component
             'serviceData.sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['nullable', 'image', 'max:4096'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
+        ], [
+            'serviceData.title.required' => 'Nama / Judul layanan wajib diisi.',
+            'serviceData.title.max' => 'Nama / Judul layanan tidak boleh lebih dari 255 karakter.',
+            'serviceData.slug.unique' => 'Slug sudah digunakan oleh layanan lain.',
+            'serviceData.slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
+            'serviceData.excerpt.max' => 'Ringkasan tidak boleh lebih dari 500 karakter.',
+            'serviceData.sort_order.integer' => 'Urutan tampil harus berupa angka.',
+            'serviceData.sort_order.min' => 'Urutan tampil minimal bernilai 0.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal adalah 4MB.',
+            'features.*.text.max' => 'Teks fitur tidak boleh lebih dari 255 karakter.',
         ]);
 
         $serviceService->updateService($this->serviceModel, [

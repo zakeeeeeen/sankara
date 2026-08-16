@@ -80,7 +80,7 @@
 
             <div class="grid gap-6 sm:grid-cols-2">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700">Nama Brand / Website</label>
+                    <label class="block text-xs font-bold text-slate-700">Nama Brand / Website <span class="text-rose-500">*</span></label>
                     <input
                         type="text"
                         wire:model="site_name"

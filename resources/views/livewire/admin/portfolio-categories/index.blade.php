@@ -113,7 +113,7 @@
 
                 <form class="mt-5 space-y-4" wire:submit="store">
                     <div>
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Nama Kategori</label>
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Nama Kategori <span class="text-rose-500">*</span></label>
                         <input type="text" wire:model="name" placeholder="Contoh: Web Application" class="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
                         @error('name') <div class="mt-1 text-xs font-semibold text-rose-600">{{ $message }}</div> @enderror
                     </div>
@@ -162,7 +162,7 @@
 
                 <form class="mt-5 space-y-4" wire:submit="update">
                     <div>
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Nama Kategori</label>
+                        <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Nama Kategori <span class="text-rose-500">*</span></label>
                         <input type="text" wire:model="editName" class="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50/60 px-4 py-3 text-sm font-medium text-slate-900 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-2 focus:ring-sky-500/20" />
                         @error('editName') <div class="mt-1 text-xs font-semibold text-rose-600">{{ $message }}</div> @enderror
                     </div>

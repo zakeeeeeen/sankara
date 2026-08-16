@@ -12,7 +12,10 @@ use Livewire\Component;
 #[Layout('layouts.dashboard')]
 class Index extends Component
 {
-    #[Rule('required|string|max:255')]
+    #[Rule('required|string|max:255', message: [
+        'required' => 'Nama kategori wajib diisi.',
+        'max' => 'Nama kategori tidak boleh lebih dari 255 karakter.',
+    ])]
     public string $name = '';
 
     #[Rule('nullable|string|max:255')]
@@ -23,7 +26,10 @@ class Index extends Component
 
     public ?int $editingCategoryId = null;
 
-    #[Rule('required|string|max:255')]
+    #[Rule('required|string|max:255', message: [
+        'required' => 'Nama kategori wajib diisi.',
+        'max' => 'Nama kategori tidak boleh lebih dari 255 karakter.',
+    ])]
     public string $editName = '';
 
     #[Rule('nullable|string|max:255')]
@@ -54,6 +60,13 @@ class Index extends Component
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255', 'unique:portfolio_categories,slug'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'name.required' => 'Nama kategori wajib diisi.',
+            'name.max' => 'Nama kategori tidak boleh lebih dari 255 karakter.',
+            'slug.unique' => 'Slug sudah digunakan oleh kategori lain.',
+            'slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
+            'sort_order.integer' => 'Urutan harus berupa angka.',
+            'sort_order.min' => 'Urutan minimal bernilai 0.',
         ]);
 
         $portfolioService->createCategory([
@@ -96,6 +109,13 @@ class Index extends Component
             'editName' => ['required', 'string', 'max:255'],
             'editSlug' => ['nullable', 'string', 'max:255', 'unique:portfolio_categories,slug,'.$category->id],
             'editSortOrder' => ['nullable', 'integer', 'min:0'],
+        ], [
+            'editName.required' => 'Nama kategori wajib diisi.',
+            'editName.max' => 'Nama kategori tidak boleh lebih dari 255 karakter.',
+            'editSlug.unique' => 'Slug sudah digunakan oleh kategori lain.',
+            'editSlug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
+            'editSortOrder.integer' => 'Urutan harus berupa angka.',
+            'editSortOrder.min' => 'Urutan minimal bernilai 0.',
         ]);
 
         $portfolioService->updateCategory($category, [

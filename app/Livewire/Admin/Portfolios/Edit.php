@@ -105,6 +105,16 @@ class Edit extends Component
             'portfolioData.description' => ['nullable', 'string'],
             'cover_image' => ['nullable', 'image', 'max:4096'],
             'preview_image' => ['nullable', 'image', 'max:4096'],
+        ], [
+            'portfolioData.title.required' => 'Nama / Judul project wajib diisi.',
+            'portfolioData.title.max' => 'Nama / Judul project tidak boleh lebih dari 255 karakter.',
+            'portfolioData.slug.unique' => 'Slug sudah digunakan oleh project lain.',
+            'portfolioData.slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
+            'portfolioData.excerpt.max' => 'Ringkasan tidak boleh lebih dari 500 karakter.',
+            'cover_image.image' => 'File harus berupa gambar.',
+            'cover_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
+            'preview_image.image' => 'File harus berupa gambar.',
+            'preview_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
         ]);
 
         $techs = array_values(array_filter(array_map('trim', explode(',', $this->technologiesText))));

@@ -27,7 +27,7 @@
 
             <div class="grid gap-6 sm:grid-cols-2">
                 <div>
-                    <label class="block text-xs font-bold text-slate-700">Nama Paket</label>
+                    <label class="block text-xs font-bold text-slate-700">Nama Paket <span class="text-rose-500">*</span></label>
                     <input
                         type="text"
                         wire:model="planData.name"

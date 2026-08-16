@@ -28,12 +28,12 @@
 
             <div class="grid gap-6 sm:grid-cols-2">
                 <div class="sm:col-span-2">
-                    <label class="block text-xs font-bold text-slate-700">Nama / Judul Project</label>
+                    <label class="block text-xs font-bold text-slate-700">Nama / Judul Project <span class="text-rose-500">*</span></label>
                     <input
                         type="text"
                         wire:model="portfolio.title"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                        placeholder="E-Commerce Mobile App"
+                        placeholder="Sankara E-Commerce Platform"
                         required
                     />
                     @error('portfolio.title') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror

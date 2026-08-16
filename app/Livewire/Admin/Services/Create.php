@@ -54,6 +54,17 @@ class Create extends Component
             'service.sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['nullable', 'image', 'max:4096'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
+        ], [
+            'service.title.required' => 'Nama / Judul layanan wajib diisi.',
+            'service.title.max' => 'Nama / Judul layanan tidak boleh lebih dari 255 karakter.',
+            'service.slug.unique' => 'Slug sudah digunakan oleh layanan lain.',
+            'service.slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
+            'service.excerpt.max' => 'Ringkasan tidak boleh lebih dari 500 karakter.',
+            'service.sort_order.integer' => 'Urutan tampil harus berupa angka.',
+            'service.sort_order.min' => 'Urutan tampil minimal bernilai 0.',
+            'image.image' => 'File harus berupa gambar.',
+            'image.max' => 'Ukuran gambar maksimal adalah 4MB.',
+            'features.*.text.max' => 'Teks fitur tidak boleh lebih dari 255 karakter.',
         ]);
 
         $serviceService->createService([

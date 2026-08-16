@@ -31,7 +31,7 @@
         <div class="rounded-[2.5rem] border border-slate-200/80 bg-white/90 p-6 sm:p-8 shadow-xs backdrop-blur">
             <div class="grid gap-6 sm:grid-cols-2">
                 <div class="sm:col-span-2">
-                    <label class="block text-xs font-bold text-slate-700">Nama Halaman (Browser Title)</label>
+                    <label class="block text-xs font-bold text-slate-700">Nama Halaman (Browser Title) <span class="text-rose-500">*</span></label>
                     <input
                         type="text"
                         wire:model="title"

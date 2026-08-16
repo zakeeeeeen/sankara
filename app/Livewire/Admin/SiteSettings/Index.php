@@ -151,6 +151,22 @@ class Index extends Component
             'seo_keywords' => ['nullable', 'string', 'max:500'],
             'ga4_id' => ['nullable', 'string', 'max:64', 'regex:/^(G-[A-Za-z0-9]+)?$/'],
             'gsc_verification' => ['nullable', 'string', 'max:255'],
+        ], [
+            'site_name.required' => 'Nama brand / website wajib diisi.',
+            'site_name.max' => 'Nama brand tidak boleh lebih dari 255 karakter.',
+            'site_tagline.max' => 'Tagline tidak boleh lebih dari 255 karakter.',
+            'logo.image' => 'Logo harus berupa gambar.',
+            'logo.max' => 'Ukuran logo maksimal adalah 4MB.',
+            'favicon.image' => 'Favicon harus berupa gambar.',
+            'favicon.max' => 'Ukuran favicon maksimal adalah 2MB.',
+            'og_image_file.image' => 'OG Image harus berupa gambar.',
+            'og_image_file.max' => 'Ukuran OG Image maksimal adalah 4MB.',
+            'seo_title.max' => 'SEO Title tidak boleh lebih dari 255 karakter.',
+            'seo_description.max' => 'SEO Description tidak boleh lebih dari 500 karakter.',
+            'seo_keywords.max' => 'SEO Keywords tidak boleh lebih dari 500 karakter.',
+            'ga4_id.max' => 'ID GA4 tidak boleh lebih dari 64 karakter.',
+            'ga4_id.regex' => 'ID GA4 harus diawali dengan G- (contoh: G-XXXXXXXXXX).',
+            'gsc_verification.max' => 'Kode verifikasi GSC tidak boleh lebih dari 255 karakter.',
         ]);
 
         $files = [];

@@ -28,7 +28,7 @@
 
             <div class="grid gap-6 sm:grid-cols-2">
                 <div class="sm:col-span-2">
-                    <label class="block text-xs font-bold text-slate-700">Nama / Judul Project</label>
+                    <label class="block text-xs font-bold text-slate-700">Nama / Judul Project <span class="text-rose-500">*</span></label>
                     <input
                         type="text"
                         wire:model="portfolioData.title"

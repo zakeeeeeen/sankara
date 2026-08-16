@@ -63,6 +63,14 @@ class Edit extends Component
             'planData.description' => ['nullable', 'string'],
             'planData.sort_order' => ['nullable', 'integer', 'min:0'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
+        ], [
+            'planData.name.required' => 'Nama paket wajib diisi.',
+            'planData.name.max' => 'Nama paket tidak boleh lebih dari 255 karakter.',
+            'planData.tag.max' => 'Tag tidak boleh lebih dari 255 karakter.',
+            'planData.price_text.max' => 'Teks harga tidak boleh lebih dari 255 karakter.',
+            'planData.sort_order.integer' => 'Urutan tampil harus berupa angka.',
+            'planData.sort_order.min' => 'Urutan tampil minimal bernilai 0.',
+            'features.*.text.max' => 'Teks fitur tidak boleh lebih dari 255 karakter.',
         ]);
 
         $pricingService->updatePricingPlan($this->planModel, [

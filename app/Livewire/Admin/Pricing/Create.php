@@ -43,6 +43,14 @@ class Create extends Component
             'plan.description' => ['nullable', 'string'],
             'plan.sort_order' => ['nullable', 'integer', 'min:0'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
+        ], [
+            'plan.name.required' => 'Nama paket wajib diisi.',
+            'plan.name.max' => 'Nama paket tidak boleh lebih dari 255 karakter.',
+            'plan.tag.max' => 'Tag tidak boleh lebih dari 255 karakter.',
+            'plan.price_text.max' => 'Teks harga tidak boleh lebih dari 255 karakter.',
+            'plan.sort_order.integer' => 'Urutan tampil harus berupa angka.',
+            'plan.sort_order.min' => 'Urutan tampil minimal bernilai 0.',
+            'features.*.text.max' => 'Teks fitur tidak boleh lebih dari 255 karakter.',
         ]);
 
         $pricingService->createPricingPlan([

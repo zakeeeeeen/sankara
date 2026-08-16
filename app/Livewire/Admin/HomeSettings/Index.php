@@ -159,6 +159,21 @@ class Index extends Component
             'stats.*.value' => ['required', 'string', 'max:64'],
             'stats.*.label' => ['required', 'string', 'max:128'],
             'advantages.*.title' => ['required', 'string', 'max:255'],
+        ], [
+            'hero.heading.required' => 'Heading utama wajib diisi.',
+            'hero.heading.max' => 'Heading utama tidak boleh lebih dari 255 karakter.',
+            'hero_image.image' => 'Hero Image harus berupa gambar.',
+            'hero_image.max' => 'Ukuran Hero Image maksimal adalah 4MB.',
+            'about_image.image' => 'About Image harus berupa gambar.',
+            'about_image.max' => 'Ukuran About Image maksimal adalah 4MB.',
+            'cta.heading.required' => 'Judul CTA wajib diisi.',
+            'cta.heading.max' => 'Judul CTA tidak boleh lebih dari 255 karakter.',
+            'stats.*.value.required' => 'Nilai statistik wajib diisi.',
+            'stats.*.value.max' => 'Nilai statistik tidak boleh lebih dari 64 karakter.',
+            'stats.*.label.required' => 'Label statistik wajib diisi.',
+            'stats.*.label.max' => 'Label statistik tidak boleh lebih dari 128 karakter.',
+            'advantages.*.title.required' => 'Judul keunggulan wajib diisi.',
+            'advantages.*.title.max' => 'Judul keunggulan tidak boleh lebih dari 255 karakter.',
         ]);
 
         $files = [];

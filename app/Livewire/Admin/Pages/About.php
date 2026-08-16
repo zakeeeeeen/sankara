@@ -14,13 +14,20 @@ class About extends Component
 {
     use WithFileUploads;
 
-    #[Rule('required|string|max:255')]
+    #[Rule('required|string|max:255', message: [
+        'required' => 'Nama halaman wajib diisi.',
+        'max' => 'Nama halaman tidak boleh lebih dari 255 karakter.',
+    ])]
     public string $title = '';
 
-    #[Rule('nullable|string|max:255')]
+    #[Rule('nullable|string|max:255', message: [
+        'max' => 'Hero title tidak boleh lebih dari 255 karakter.',
+    ])]
     public string $hero_title = '';
 
-    #[Rule('nullable|string|max:500')]
+    #[Rule('nullable|string|max:500', message: [
+        'max' => 'Hero subtitle tidak boleh lebih dari 500 karakter.',
+    ])]
     public string $hero_subtitle = '';
 
     #[Rule('nullable|string')]

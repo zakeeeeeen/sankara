@@ -12,10 +12,15 @@ use Livewire\Component;
 #[Layout('layouts.admin')]
 class Login extends Component
 {
-    #[Rule('required|email')]
+    #[Rule('required|email', message: [
+        'required' => 'Email wajib diisi.',
+        'email' => 'Format email tidak valid.',
+    ])]
     public string $email = '';
 
-    #[Rule('required|string')]
+    #[Rule('required|string', message: [
+        'required' => 'Password wajib diisi.',
+    ])]
     public string $password = '';
 
     public bool $remember = false;

@@ -17,7 +17,7 @@ class Edit extends Component
 
     public Portfolio $portfolioModel;
 
-    public array $portfolio = [
+    public array $portfolioData = [
         'title' => '',
         'slug' => '',
         'client_name' => '',
@@ -49,7 +49,7 @@ class Edit extends Component
     {
         $this->portfolioModel = $portfolio->load(['categories', 'sections']);
 
-        $this->portfolio = [
+        $this->portfolioData = [
             'title' => $portfolio->title,
             'slug' => $portfolio->slug,
             'client_name' => $portfolio->client_name ?? '',
@@ -99,16 +99,16 @@ class Edit extends Component
     public function save(PortfolioService $portfolioService): void
     {
         $this->validate([
-            'portfolio.title' => ['required', 'string', 'max:255'],
-            'portfolio.slug' => ['nullable', 'string', 'max:255', 'unique:portfolios,slug,'.$this->portfolioModel->id],
-            'portfolio.excerpt' => ['nullable', 'string', 'max:500'],
-            'portfolio.description' => ['nullable', 'string'],
+            'portfolioData.title' => ['required', 'string', 'max:255'],
+            'portfolioData.slug' => ['nullable', 'string', 'max:255', 'unique:portfolios,slug,'.$this->portfolioModel->id],
+            'portfolioData.excerpt' => ['nullable', 'string', 'max:500'],
+            'portfolioData.description' => ['nullable', 'string'],
             'cover_image' => ['nullable', 'image', 'max:4096'],
             'preview_image' => ['nullable', 'image', 'max:4096'],
         ]);
 
         $techs = array_values(array_filter(array_map('trim', explode(',', $this->technologiesText))));
-        $pData = $this->portfolio;
+        $pData = $this->portfolioData;
         $pData['technologies'] = $techs;
         if (empty($pData['published_at'])) {
             $pData['published_at'] = null;

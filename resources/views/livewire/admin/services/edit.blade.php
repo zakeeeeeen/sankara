@@ -5,7 +5,7 @@
                 <i class="fa-solid fa-arrow-left text-[10px]"></i>
                 <span>Kembali ke Daftar Layanan</span>
             </a>
-            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Layanan: {{ $service['title'] }}</h1>
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Layanan: {{ $serviceData['title'] }}</h1>
             <p class="mt-1 text-sm text-slate-500">Perbarui konten layanan, fitur, dan relasi kategori portofolio</p>
         </div>
 
@@ -30,28 +30,28 @@
                     <label class="block text-xs font-bold text-slate-700">Nama / Judul Layanan</label>
                     <input
                         type="text"
-                        wire:model="service.title"
+                        wire:model="serviceData.title"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                         required
                     />
-                    @error('service.title') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
+                    @error('serviceData.title') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700">Slug (URL)</label>
                     <input
                         type="text"
-                        wire:model="service.slug"
+                        wire:model="serviceData.slug"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-mono text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
-                    @error('service.slug') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
+                    @error('serviceData.slug') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700">Urutan Tampil (Sort Order)</label>
                     <input
                         type="number"
-                        wire:model="service.sort_order"
+                        wire:model="serviceData.sort_order"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -59,7 +59,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Ringkasan / Excerpt</label>
                     <textarea
-                        wire:model="service.excerpt"
+                        wire:model="serviceData.excerpt"
                         rows="2"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     ></textarea>
@@ -68,7 +68,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Deskripsi Lengkap</label>
                     <textarea
-                        wire:model="service.description"
+                        wire:model="serviceData.description"
                         rows="5"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white leading-relaxed"
                     ></textarea>
@@ -101,7 +101,7 @@
 
                 <div class="sm:col-span-2">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" wire:model="service.is_active" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
+                        <input type="checkbox" wire:model="serviceData.is_active" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
                         <span class="text-xs font-bold text-slate-800">Aktifkan Layanan (Tampilkan ke Publik)</span>
                     </label>
                 </div>
@@ -153,7 +153,7 @@
             <p class="text-xs text-slate-500">Portofolio pada kategori yang dipilih akan otomatis tampil di halaman layanan ini</p>
 
             <div class="grid gap-3 sm:grid-cols-3 pt-2">
-                @foreach ($categories as $cat)
+                @foreach ($allCategories as $cat)
                     <label class="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50/50 p-3 cursor-pointer hover:bg-slate-100/60 transition">
                         <input
                             type="checkbox"

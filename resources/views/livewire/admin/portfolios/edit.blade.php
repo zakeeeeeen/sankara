@@ -5,7 +5,7 @@
                 <i class="fa-solid fa-arrow-left text-[10px]"></i>
                 <span>Kembali ke Daftar Portofolio</span>
             </a>
-            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Portofolio: {{ $portfolio['title'] }}</h1>
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Portofolio: {{ $portfolioData['title'] }}</h1>
             <p class="mt-1 text-sm text-slate-500">Perbarui rincian proyek, mockup preview, kategori, dan sections</p>
         </div>
 
@@ -31,28 +31,28 @@
                     <label class="block text-xs font-bold text-slate-700">Nama / Judul Project</label>
                     <input
                         type="text"
-                        wire:model="portfolio.title"
+                        wire:model="portfolioData.title"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                         required
                     />
-                    @error('portfolio.title') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
+                    @error('portfolioData.title') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700">Slug (URL)</label>
                     <input
                         type="text"
-                        wire:model="portfolio.slug"
+                        wire:model="portfolioData.slug"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-mono text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
-                    @error('portfolio.slug') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
+                    @error('portfolioData.slug') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700">Nama Klien / Partner</label>
                     <input
                         type="text"
-                        wire:model="portfolio.client_name"
+                        wire:model="portfolioData.client_name"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -61,7 +61,7 @@
                     <label class="block text-xs font-bold text-slate-700">Link Live Project (URL)</label>
                     <input
                         type="text"
-                        wire:model="portfolio.project_url"
+                        wire:model="portfolioData.project_url"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -70,7 +70,7 @@
                     <label class="block text-xs font-bold text-slate-700">Tanggal Rilis / Publish</label>
                     <input
                         type="date"
-                        wire:model="portfolio.published_at"
+                        wire:model="portfolioData.published_at"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -87,7 +87,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Ringkasan / Excerpt Singkat</label>
                     <textarea
-                        wire:model="portfolio.excerpt"
+                        wire:model="portfolioData.excerpt"
                         rows="2"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     ></textarea>
@@ -96,7 +96,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Deskripsi Lengkap / Overview</label>
                     <textarea
-                        wire:model="portfolio.description"
+                        wire:model="portfolioData.description"
                         rows="5"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white leading-relaxed"
                     ></textarea>
@@ -157,7 +157,7 @@
 
                 <div class="sm:col-span-2">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" wire:model="portfolio.is_active" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
+                        <input type="checkbox" wire:model="portfolioData.is_active" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
                         <span class="text-xs font-bold text-slate-800">Aktifkan Portofolio (Tampilkan ke Publik)</span>
                     </label>
                 </div>

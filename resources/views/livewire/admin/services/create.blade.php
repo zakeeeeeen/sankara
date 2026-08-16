@@ -151,7 +151,7 @@
             <p class="text-xs text-slate-500">Portofolio pada kategori yang dipilih akan otomatis tampil di halaman layanan ini</p>
 
             <div class="grid gap-3 sm:grid-cols-3 pt-2">
-                @foreach ($categories as $cat)
+                @foreach ($allCategories as $cat)
                     <label class="flex items-center gap-2.5 rounded-xl border border-slate-100 bg-slate-50/50 p-3 cursor-pointer hover:bg-slate-100/60 transition">
                         <input
                             type="checkbox"

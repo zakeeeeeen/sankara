@@ -5,7 +5,7 @@
                 <i class="fa-solid fa-arrow-left text-[10px]"></i>
                 <span>Kembali ke Daftar Paket Harga</span>
             </a>
-            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Paket: {{ $plan['name'] }}</h1>
+            <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">Edit Paket: {{ $planData['name'] }}</h1>
             <p class="mt-1 text-sm text-slate-500">Perbarui harga, deskripsi, tag, dan daftar benefit paket</p>
         </div>
 
@@ -30,18 +30,18 @@
                     <label class="block text-xs font-bold text-slate-700">Nama Paket</label>
                     <input
                         type="text"
-                        wire:model="plan.name"
+                        wire:model="planData.name"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                         required
                     />
-                    @error('plan.name') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
+                    @error('planData.name') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-700">Tag / Keterangan Tag</label>
                     <input
                         type="text"
-                        wire:model="plan.tag"
+                        wire:model="planData.tag"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -50,7 +50,7 @@
                     <label class="block text-xs font-bold text-slate-700">Teks Harga</label>
                     <input
                         type="text"
-                        wire:model="plan.price_text"
+                        wire:model="planData.price_text"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-bold text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -59,7 +59,7 @@
                     <label class="block text-xs font-bold text-slate-700">Urutan Tampil (Sort Order)</label>
                     <input
                         type="number"
-                        wire:model="plan.sort_order"
+                        wire:model="planData.sort_order"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-3 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -67,7 +67,7 @@
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Deskripsi Singkat Paket</label>
                     <textarea
-                        wire:model="plan.description"
+                        wire:model="planData.description"
                         rows="3"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     ></textarea>
@@ -75,7 +75,7 @@
 
                 <div class="sm:col-span-2">
                     <label class="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" wire:model="plan.is_popular" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
+                        <input type="checkbox" wire:model="planData.is_popular" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
                         <span class="text-xs font-bold text-slate-800">Tandai sebagai Paket Terpopuler (Featured Card)</span>
                     </label>
                 </div>

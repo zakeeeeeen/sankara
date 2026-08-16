@@ -89,6 +89,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->longText('description')->nullable();
             $table->string('cta_label')->nullable();
+            $table->string('cta_url')->nullable();
             $table->string('image_path')->nullable();
             $table->string('image_url')->nullable();
             $table->boolean('is_active')->default(true);
@@ -117,6 +118,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable();
+            $table->longText('description')->nullable();
             $table->string('client_name')->nullable();
             $table->string('project_url')->nullable();
             $table->date('published_at')->nullable();

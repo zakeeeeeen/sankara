@@ -68,8 +68,8 @@ class Create extends Component
 
     public function render(): View
     {
-        $categories = PortfolioCategory::query()->orderBy('sort_order')->get();
+        $allCategories = PortfolioCategory::query()->orderBy('sort_order')->get();
 
-        return view('livewire.admin.services.create', compact('categories'));
+        return view('livewire.admin.services.create', compact('allCategories'));
     }
 }

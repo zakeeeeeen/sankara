@@ -7,8 +7,7 @@ use App\Models\Portfolio;
 use App\Models\Service;
 use App\Models\SiteSetting;
 use Illuminate\Console\Command;
-use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
+use Illuminate\Support\Facades\File;
 
 class GenerateSitemap extends Command
 {
@@ -24,7 +23,7 @@ class GenerateSitemap extends Command
      *
      * @var string
      */
-    protected $description = 'Generate the XML sitemap using Spatie Sitemap';
+    protected $description = 'Generate the XML sitemap for search engine indexing';
 
     /**
      * Execute the console command.
@@ -33,82 +32,92 @@ class GenerateSitemap extends Command
     {
         $this->info('Generating XML sitemap for Sankara Tech...');
 
-        $sitemap = Sitemap::create();
+        $urls = [];
 
         // 1. Homepage
-        $sitemap->add(
-            Url::create(route('home'))
-                ->setPriority(1.0)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_DAILY)
-        );
+        $urls[] = [
+            'loc' => route('home'),
+            'priority' => '1.0',
+            'changefreq' => 'daily',
+            'lastmod' => now()->toIso8601String(),
+        ];
 
         // 2. About page
         if (Page::query()->where('slug', 'tentang-kami')->exists()) {
-            $sitemap->add(
-                Url::create(route('about'))
-                    ->setPriority(0.8)
-                    ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-            );
+            $urls[] = [
+                'loc' => route('about'),
+                'priority' => '0.8',
+                'changefreq' => 'weekly',
+                'lastmod' => now()->toIso8601String(),
+            ];
         }
 
         // 3. Services Index
-        $sitemap->add(
-            Url::create(route('services.index'))
-                ->setPriority(0.9)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-        );
+        $urls[] = [
+            'loc' => route('services.index'),
+            'priority' => '0.9',
+            'changefreq' => 'weekly',
+            'lastmod' => now()->toIso8601String(),
+        ];
 
-        // 4. Individual Active Services
-        $services = Service::query()->active()->get(['slug', 'updated_at']);
-        foreach ($services as $service) {
-            $url = Url::create(route('services.show', $service->slug))
-                ->setPriority(0.8)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY);
-
-            if ($service->updated_at) {
-                $url->setLastModificationDate($service->updated_at);
-            }
-
-            $sitemap->add($url);
+        // Services Details
+        foreach (Service::query()->active()->get() as $service) {
+            $urls[] = [
+                'loc' => route('services.show', $service->slug),
+                'priority' => '0.8',
+                'changefreq' => 'weekly',
+                'lastmod' => $service->updated_at?->toIso8601String() ?? now()->toIso8601String(),
+            ];
         }
 
-        // 5. Portfolios Index
-        $sitemap->add(
-            Url::create(route('portfolios.index'))
-                ->setPriority(0.9)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY)
-        );
+        // 4. Portfolios Index
+        $urls[] = [
+            'loc' => route('portfolios.index'),
+            'priority' => '0.9',
+            'changefreq' => 'weekly',
+            'lastmod' => now()->toIso8601String(),
+        ];
 
-        // 6. Individual Active Portfolios
-        $portfolios = Portfolio::query()->active()->get(['slug', 'updated_at']);
-        foreach ($portfolios as $portfolio) {
-            $url = Url::create(route('portfolios.show', $portfolio->slug))
-                ->setPriority(0.8)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY);
-
-            if ($portfolio->updated_at) {
-                $url->setLastModificationDate($portfolio->updated_at);
-            }
-
-            $sitemap->add($url);
+        // Portfolios Details
+        foreach (Portfolio::query()->active()->get() as $portfolio) {
+            $urls[] = [
+                'loc' => route('portfolios.show', $portfolio->slug),
+                'priority' => '0.8',
+                'changefreq' => 'monthly',
+                'lastmod' => $portfolio->updated_at?->toIso8601String() ?? now()->toIso8601String(),
+            ];
         }
 
-        // 7. Contact page
-        $sitemap->add(
-            Url::create(route('contact.show'))
-                ->setPriority(0.7)
-                ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
-        );
+        // 5. Contact
+        $urls[] = [
+            'loc' => route('contact.show'),
+            'priority' => '0.7',
+            'changefreq' => 'monthly',
+            'lastmod' => now()->toIso8601String(),
+        ];
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
+        foreach ($urls as $item) {
+            $xml .= "  <url>\n";
+            $xml .= '    <loc>'.htmlspecialchars($item['loc'], ENT_XML1, 'UTF-8')."</loc>\n";
+            $xml .= '    <lastmod>'.$item['lastmod']."</lastmod>\n";
+            $xml .= '    <changefreq>'.$item['changefreq']."</changefreq>\n";
+            $xml .= '    <priority>'.$item['priority']."</priority>\n";
+            $xml .= "  </url>\n";
+        }
+        $xml .= '</urlset>';
 
         $outputPath = $this->option('path') ?: public_path('sitemap.xml');
 
-        $sitemap->writeToFile($outputPath);
+        File::ensureDirectoryExists(dirname($outputPath));
+        File::put($outputPath, $xml);
 
-        SiteSetting::setValue('sitemap_last_generated_at', now()->toDateTimeString());
+        $now = now()->toIso8601String();
+        SiteSetting::setValue('sitemap_last_generated_at', $now);
 
-        $totalUrls = 1 + ($services->count()) + 1 + ($portfolios->count()) + 2;
-        $this->info("Sitemap successfully written to: {$outputPath} ({$totalUrls} URLs)");
+        $this->info("XML sitemap successfully generated at: {$outputPath} with ".count($urls).' URLs.');
 
-        return self::SUCCESS;
+        return 0;
     }
 }

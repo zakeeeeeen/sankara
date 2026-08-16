@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
     'excerpt',
     'description',
     'cta_label',
+    'cta_url',
     'image_path',
     'image_url',
     'is_active',

@@ -17,7 +17,7 @@ class Edit extends Component
 
     public Service $serviceModel;
 
-    public array $service = [
+    public array $serviceData = [
         'title' => '',
         'slug' => '',
         'excerpt' => '',
@@ -40,7 +40,7 @@ class Edit extends Component
     {
         $this->serviceModel = $service->load(['features', 'portfolioCategories']);
 
-        $this->service = [
+        $this->serviceData = [
             'title' => $service->title,
             'slug' => $service->slug,
             'excerpt' => $service->excerpt ?? '',
@@ -75,17 +75,17 @@ class Edit extends Component
     public function save(ServiceService $serviceService): void
     {
         $this->validate([
-            'service.title' => ['required', 'string', 'max:255'],
-            'service.slug' => ['nullable', 'string', 'max:255', 'unique:services,slug,'.$this->serviceModel->id],
-            'service.excerpt' => ['nullable', 'string', 'max:500'],
-            'service.description' => ['nullable', 'string'],
-            'service.sort_order' => ['nullable', 'integer', 'min:0'],
+            'serviceData.title' => ['required', 'string', 'max:255'],
+            'serviceData.slug' => ['nullable', 'string', 'max:255', 'unique:services,slug,'.$this->serviceModel->id],
+            'serviceData.excerpt' => ['nullable', 'string', 'max:500'],
+            'serviceData.description' => ['nullable', 'string'],
+            'serviceData.sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['nullable', 'image', 'max:4096'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
         ]);
 
         $serviceService->updateService($this->serviceModel, [
-            'service' => $this->service,
+            'service' => $this->serviceData,
             'features' => $this->features,
             'portfolio_category_ids' => $this->portfolio_category_ids,
         ], $this->image);
@@ -96,8 +96,8 @@ class Edit extends Component
 
     public function render(): View
     {
-        $categories = PortfolioCategory::query()->orderBy('sort_order')->get();
+        $allCategories = PortfolioCategory::query()->orderBy('sort_order')->get();
 
-        return view('livewire.admin.services.edit', compact('categories'));
+        return view('livewire.admin.services.edit', compact('allCategories'));
     }
 }

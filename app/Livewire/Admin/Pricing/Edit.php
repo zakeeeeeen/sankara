@@ -13,7 +13,7 @@ class Edit extends Component
 {
     public PricingPlan $planModel;
 
-    public array $plan = [
+    public array $planData = [
         'name' => '',
         'tag' => '',
         'price_text' => '',
@@ -28,7 +28,7 @@ class Edit extends Component
     {
         $this->planModel = $plan->load('features');
 
-        $this->plan = [
+        $this->planData = [
             'name' => $plan->name,
             'tag' => $plan->tag ?? '',
             'price_text' => $plan->price_text ?? '',
@@ -57,16 +57,16 @@ class Edit extends Component
     public function save(PricingService $pricingService): void
     {
         $this->validate([
-            'plan.name' => ['required', 'string', 'max:255'],
-            'plan.tag' => ['nullable', 'string', 'max:255'],
-            'plan.price_text' => ['nullable', 'string', 'max:255'],
-            'plan.description' => ['nullable', 'string'],
-            'plan.sort_order' => ['nullable', 'integer', 'min:0'],
+            'planData.name' => ['required', 'string', 'max:255'],
+            'planData.tag' => ['nullable', 'string', 'max:255'],
+            'planData.price_text' => ['nullable', 'string', 'max:255'],
+            'planData.description' => ['nullable', 'string'],
+            'planData.sort_order' => ['nullable', 'integer', 'min:0'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
         ]);
 
         $pricingService->updatePricingPlan($this->planModel, [
-            'plan' => $this->plan,
+            'plan' => $this->planData,
             'features' => $this->features,
         ]);
 

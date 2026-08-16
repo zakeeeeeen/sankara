@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
     'title',
     'slug',
     'excerpt',
+    'description',
     'client_name',
     'project_url',
     'technologies',

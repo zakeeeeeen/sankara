@@ -82,19 +82,41 @@
                             <i class="fa-brands fa-instagram text-base" aria-hidden="true"></i>
                         </a>
                     @endif
+                    @if (filled($socials['tiktok'] ?? null))
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['tiktok'] }}" aria-label="Kunjungi TikTok Sankara Tech" target="_blank" rel="noreferrer">
+                            <i class="fa-brands fa-tiktok text-base" aria-hidden="true"></i>
+                        </a>
+                    @endif
+                    @if (filled($socials['twitter'] ?? null))
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['twitter'] }}" aria-label="Kunjungi X Twitter Sankara Tech" target="_blank" rel="noreferrer">
+                            <i class="fa-brands fa-x-twitter text-base" aria-hidden="true"></i>
+                        </a>
+                    @endif
                     @if (filled($socials['linkedin'] ?? null))
                         <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['linkedin'] }}" aria-label="Kunjungi LinkedIn Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-linkedin-in text-base" aria-hidden="true"></i>
                         </a>
                     @endif
+                    @if (filled($socials['discord'] ?? null))
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['discord'] }}" aria-label="Kunjungi Discord Sankara Tech" target="_blank" rel="noreferrer">
+                            <i class="fa-brands fa-discord text-base" aria-hidden="true"></i>
+                        </a>
+                    @endif
+                    @if (filled($socials['whatsapp'] ?? null))
+                        @php
+                            $waUrl = $socials['whatsapp'];
+                            if (!str_starts_with($waUrl, 'http://') && !str_starts_with($waUrl, 'https://')) {
+                                $cleanWa = preg_replace('/[^0-9]/', '', $waUrl);
+                                $waUrl = 'https://wa.me/' . $cleanWa;
+                            }
+                        @endphp
+                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $waUrl }}" aria-label="Kunjungi WhatsApp Sankara Tech" target="_blank" rel="noreferrer">
+                            <i class="fa-brands fa-whatsapp text-base" aria-hidden="true"></i>
+                        </a>
+                    @endif
                     @if (filled($socials['dribbble'] ?? null))
                         <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['dribbble'] }}" aria-label="Kunjungi Dribbble Sankara Tech" target="_blank" rel="noreferrer">
                             <i class="fa-brands fa-dribbble text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['twitter'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['twitter'] }}" aria-label="Kunjungi Twitter Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-x-twitter text-base" aria-hidden="true"></i>
                         </a>
                     @endif
                     @if (filled($socials['github'] ?? null))

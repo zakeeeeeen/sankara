@@ -74,6 +74,12 @@ class HomeService
                 'instagram' => '',
                 'linkedin' => '',
                 'dribbble' => '',
+                'tiktok' => '',
+                'twitter' => '',
+                'discord' => '',
+                'whatsapp' => '',
+                'github' => '',
+                'youtube' => '',
             ]),
         ];
     }

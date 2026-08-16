@@ -64,7 +64,10 @@ class Index extends Component
         'instagram' => '',
         'linkedin' => '',
         'dribbble' => '',
+        'tiktok' => '',
         'twitter' => '',
+        'discord' => '',
+        'whatsapp' => '',
         'github' => '',
         'youtube' => '',
     ];

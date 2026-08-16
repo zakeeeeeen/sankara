@@ -290,6 +290,12 @@ class CmsSeeder extends Seeder
             'instagram' => '#',
             'linkedin' => '#',
             'dribbble' => '#',
+            'tiktok' => '',
+            'twitter' => '',
+            'discord' => '',
+            'whatsapp' => '',
+            'github' => '',
+            'youtube' => '',
         ];
         SiteSetting::setValue('socials', array_merge($socialDefaults, is_array($existingSocials) ? $existingSocials : []));
 

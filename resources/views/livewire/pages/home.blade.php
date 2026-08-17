@@ -21,9 +21,22 @@
                         <span>{{ $hero?->badge_text ?? 'Digital Agency • Web, Mobile & Software' }}</span>
                     </div>
 
-                    <!-- H1: Ukuran Judul Utama Jauh Lebih Besar di Mobile (40px / 2.5rem) -->
-                    <h1 class="mt-1 text-[2.35rem] sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.12] sm:leading-[1.1] animate-float max-w-4xl">
-                        {!! nl2br(e($hero?->heading ?? "Membangun Produk Digital\nYang Berdampak & Siap Scale")) !!}
+                    <!-- H1: Maksimal 2 Baris Presisi + Emas Mengkilap di "Inovasi Digital" -->
+                    @php
+                        $headingText = $hero?->heading ?? 'Inovasi Digital untuk Pertumbuhan Bisnis Anda';
+                        if (str_contains($headingText, 'Inovasi Digital')) {
+                            $line1 = 'Inovasi Digital';
+                            $line2 = trim(str_replace('Inovasi Digital', '', $headingText));
+                        } else {
+                            $words = explode(' ', $headingText);
+                            $mid = ceil(count($words) / 2);
+                            $line1 = implode(' ', array_slice($words, 0, $mid));
+                            $line2 = implode(' ', array_slice($words, $mid));
+                        }
+                    @endphp
+                    <h1 class="mt-1 text-[2.15rem] xs:text-[2.4rem] sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.1] animate-float max-w-5xl mx-auto">
+                        <span class="block text-gold-shiny drop-shadow-md">{{ $line1 }}</span>
+                        <span class="block text-white mt-0.5 sm:mt-1">{{ $line2 }}</span>
                     </h1>
 
                     <!-- P: Deskripsi Lebih Besar & Jelas di Mobile (16px / text-base) -->

@@ -61,10 +61,16 @@ class PortfolioService
             }
 
             if (isset($files['cover_image']) && $files['cover_image'] instanceof UploadedFile) {
-                $pData['cover_image_path'] = $files['cover_image']->store('portfolios', 'public');
+                $path = ImageService::storeAsWebp($files['cover_image'], 'portfolios');
+                $pData['cover_image_path'] = $path;
+                $pData['preview_image_path'] = $path;
             }
             if (isset($files['preview_image']) && $files['preview_image'] instanceof UploadedFile) {
-                $pData['preview_image_path'] = $files['preview_image']->store('portfolios', 'public');
+                $path = ImageService::storeAsWebp($files['preview_image'], 'portfolios');
+                $pData['preview_image_path'] = $path;
+                if (! isset($pData['cover_image_path'])) {
+                    $pData['cover_image_path'] = $path;
+                }
             }
 
             /** @var Portfolio $portfolio */
@@ -93,7 +99,7 @@ class PortfolioService
                 $section->sort_order = $i + 1;
 
                 if ($hasImageFile) {
-                    $section->image_path = $sectionImages[$i]->store('portfolios/sections', 'public');
+                    $section->image_path = ImageService::storeAsWebp($sectionImages[$i], 'portfolios/sections');
                 }
 
                 $section->save();
@@ -121,10 +127,16 @@ class PortfolioService
             }
 
             if (isset($files['cover_image']) && $files['cover_image'] instanceof UploadedFile) {
-                $pData['cover_image_path'] = $files['cover_image']->store('portfolios', 'public');
+                $path = ImageService::storeAsWebp($files['cover_image'], 'portfolios');
+                $pData['cover_image_path'] = $path;
+                $pData['preview_image_path'] = $path;
             }
             if (isset($files['preview_image']) && $files['preview_image'] instanceof UploadedFile) {
-                $pData['preview_image_path'] = $files['preview_image']->store('portfolios', 'public');
+                $path = ImageService::storeAsWebp($files['preview_image'], 'portfolios');
+                $pData['preview_image_path'] = $path;
+                if (! isset($pData['cover_image_path'])) {
+                    $pData['cover_image_path'] = $path;
+                }
             }
 
             $portfolio->update($this->filterValidColumns($pData));
@@ -152,7 +164,7 @@ class PortfolioService
                 $section->sort_order = $i + 1;
 
                 if ($hasImageFile) {
-                    $section->image_path = $sectionImages[$i]->store('portfolios/sections', 'public');
+                    $section->image_path = ImageService::storeAsWebp($sectionImages[$i], 'portfolios/sections');
                 }
 
                 $section->save();

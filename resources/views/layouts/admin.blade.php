@@ -181,6 +181,8 @@
             </main>
         @endif
 
+        <x-toast />
+
         @livewireScripts
     </body>
 </html>

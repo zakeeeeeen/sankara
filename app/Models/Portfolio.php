@@ -74,7 +74,8 @@ class Portfolio extends Model
             return Storage::url($this->cover_image_path);
         }
 
-        return $this->normalizePublicAssetUrl($this->cover_image_url);
+        return $this->normalizePublicAssetUrl($this->cover_image_url)
+            ?: ($this->preview_image_path ? Storage::url($this->preview_image_path) : $this->normalizePublicAssetUrl($this->preview_image_url));
     }
 
     public function getPreviewImageSrcAttribute(): ?string
@@ -83,7 +84,7 @@ class Portfolio extends Model
             return Storage::url($this->preview_image_path);
         }
 
-        return $this->normalizePublicAssetUrl($this->preview_image_url);
+        return $this->normalizePublicAssetUrl($this->preview_image_url) ?: $this->cover_image_src;
     }
 
     public function scopeActive($query)

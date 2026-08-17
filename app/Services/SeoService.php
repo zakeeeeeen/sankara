@@ -176,8 +176,7 @@ class SeoService
                 '@context' => 'https://schema.org',
                 '@type' => 'CreativeWork',
                 'name' => $port['title'] ?? '',
-                'headline' => $port['title'] ?? '',
-                'description' => $port['excerpt'] ?? '',
+                'description' => $port['description'] ?? ($port['excerpt'] ?? ''),
                 'image' => $port['image'] ?? $siteLogo,
                 'creator' => [
                     '@id' => url('/#organization'),

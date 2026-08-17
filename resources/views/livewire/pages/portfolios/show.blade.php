@@ -3,7 +3,7 @@
     $seoStructured = app(\App\Services\SeoService::class)->renderStructuredData([
         'portfolio' => [
             'title' => $portfolio->title,
-            'excerpt' => $portfolio->excerpt,
+            'excerpt' => \Illuminate\Support\Str::limit(strip_tags($portfolio->description ?? ''), 160),
             'image' => $mainShot,
             'url' => route('portfolios.show', $portfolio->slug),
         ],
@@ -16,7 +16,7 @@
 @endphp
 
 @section('title', $portfolio->title . ' - ' . \App\Models\SiteSetting::getValue('site_name', 'Sankara Tech'))
-@section('meta_description', $portfolio->excerpt)
+@section('meta_description', \Illuminate\Support\Str::limit(strip_tags($portfolio->description ?? ''), 160))
 @section('structured_data', $seoStructured)
 
 <div>
@@ -38,10 +38,10 @@
                         </div>
 
                         <div class="mt-8 space-y-8">
-                            @if ($portfolio->excerpt)
+                            @if ($portfolio->description)
                                 <div>
                                     <h2 class="text-2xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))]">Tentang Proyek</h2>
-                                    <p class="mt-3 whitespace-pre-line text-base leading-relaxed text-slate-600">{{ $portfolio->excerpt }}</p>
+                                    <p class="mt-3 whitespace-pre-line text-base leading-relaxed text-slate-600">{{ $portfolio->description }}</p>
                                 </div>
                             @endif
 

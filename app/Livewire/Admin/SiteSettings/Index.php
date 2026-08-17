@@ -62,14 +62,8 @@ class Index extends Component
 
     public array $socials = [
         'instagram' => '',
-        'linkedin' => '',
-        'dribbble' => '',
-        'tiktok' => '',
-        'twitter' => '',
-        'discord' => '',
+        'facebook' => '',
         'whatsapp' => '',
-        'github' => '',
-        'youtube' => '',
     ];
 
     public ?string $sitemapLastGeneratedAt = null;
@@ -143,9 +137,9 @@ class Index extends Component
         $this->validate([
             'site_name' => ['required', 'string', 'max:255'],
             'site_tagline' => ['nullable', 'string', 'max:255'],
-            'logo' => ['nullable', 'image', 'max:4096'],
+            'logo' => ['nullable', 'image', 'max:10240'],
             'favicon' => ['nullable', 'image', 'max:2048'],
-            'og_image_file' => ['nullable', 'image', 'max:4096'],
+            'og_image_file' => ['nullable', 'image', 'max:10240'],
             'seo_title' => ['nullable', 'string', 'max:255'],
             'seo_description' => ['nullable', 'string', 'max:500'],
             'seo_keywords' => ['nullable', 'string', 'max:500'],
@@ -203,6 +197,7 @@ class Index extends Component
         $this->reset(['logo', 'favicon', 'og_image_file']);
 
         session()->flash('status', 'Pengaturan situs dan SEO berhasil disimpan.');
+        $this->dispatch('notify', message: 'Pengaturan situs dan SEO berhasil disimpan.');
     }
 
     public function render(): View

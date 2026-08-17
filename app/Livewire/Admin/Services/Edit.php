@@ -80,7 +80,7 @@ class Edit extends Component
             'serviceData.excerpt' => ['nullable', 'string', 'max:500'],
             'serviceData.description' => ['nullable', 'string'],
             'serviceData.sort_order' => ['nullable', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'max:10240'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
         ], [
             'serviceData.title.required' => 'Nama / Judul layanan wajib diisi.',

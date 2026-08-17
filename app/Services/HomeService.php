@@ -72,14 +72,8 @@ class HomeService
             ]),
             'socials' => SiteSetting::getValue('socials', [
                 'instagram' => '',
-                'linkedin' => '',
-                'dribbble' => '',
-                'tiktok' => '',
-                'twitter' => '',
-                'discord' => '',
+                'facebook' => '',
                 'whatsapp' => '',
-                'github' => '',
-                'youtube' => '',
             ]),
         ];
     }
@@ -104,7 +98,7 @@ class HomeService
             $hero->fill($data['hero']);
 
             if (isset($files['hero_image']) && $files['hero_image'] instanceof UploadedFile) {
-                $hero->image_path = $files['hero_image']->store('home', 'public');
+                $hero->image_path = ImageService::storeAsWebp($files['hero_image'], 'home');
             }
             $hero->save();
 
@@ -121,7 +115,7 @@ class HomeService
             $about = HomeAbout::query()->first() ?: new HomeAbout;
             $about->fill($data['about']);
             if (isset($files['about_image']) && $files['about_image'] instanceof UploadedFile) {
-                $about->image_path = $files['about_image']->store('home', 'public');
+                $about->image_path = ImageService::storeAsWebp($files['about_image'], 'home');
             }
             $about->save();
 

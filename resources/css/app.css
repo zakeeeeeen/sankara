@@ -400,23 +400,27 @@
         transform: translateY(0);
     }
 
-    @keyframes float {
+    @keyframes floatSoft {
         0%,
         100% {
             transform: translateY(0);
         }
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
         }
     }
 
     .animate-float {
-        animation: float 8s ease-in-out infinite;
+        animation: floatSoft 5s ease-in-out infinite;
+    }
+
+    .animate-float-slow {
+        animation: floatSoft 7s ease-in-out infinite;
     }
 
     .animate-float-delayed {
-        animation: float 10s ease-in-out infinite;
-        animation-delay: -2s;
+        animation: floatSoft 6s ease-in-out infinite;
+        animation-delay: -2.5s;
     }
 
     .no-scrollbar {

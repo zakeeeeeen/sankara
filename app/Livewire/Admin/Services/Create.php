@@ -52,7 +52,7 @@ class Create extends Component
             'service.excerpt' => ['nullable', 'string', 'max:500'],
             'service.description' => ['nullable', 'string'],
             'service.sort_order' => ['nullable', 'integer', 'min:0'],
-            'image' => ['nullable', 'image', 'max:4096'],
+            'image' => ['nullable', 'image', 'max:10240'],
             'features.*.text' => ['nullable', 'string', 'max:255'],
         ], [
             'service.title.required' => 'Nama / Judul layanan wajib diisi.',

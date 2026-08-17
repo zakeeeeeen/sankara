@@ -7,9 +7,7 @@
                 <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
                     <div>
                         <div class="reveal">
-                            <div class="agency-divider"></div>
-
-                            <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+                            <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
                                 {{ $page->hero_title ?: $page->title }}
                             </h1>
 

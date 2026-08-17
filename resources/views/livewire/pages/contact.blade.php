@@ -15,8 +15,7 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-start">
                     <div class="reveal">
-                        <div class="agency-divider"></div>
-                        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Hubungi Tim Kami</h1>
+                        <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Hubungi Tim Kami</h1>
                         <p class="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
                             Kami siap membantu mewujudkan ide digital Anda. Hubungi tim kami untuk diskusi, konsultasi, atau penawaran proyek terbaik.
                         </p>

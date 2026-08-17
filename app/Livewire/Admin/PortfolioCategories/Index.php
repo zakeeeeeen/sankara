@@ -78,6 +78,7 @@ class Index extends Component
         $this->createModalOpen = false;
         $this->reset(['name', 'slug', 'sort_order']);
         session()->flash('status', 'Kategori berhasil ditambahkan.');
+        $this->dispatch('notify', message: 'Kategori berhasil ditambahkan.');
     }
 
     public function openEditModal(int $id): void
@@ -127,6 +128,7 @@ class Index extends Component
         $this->editModalOpen = false;
         $this->editingCategoryId = null;
         session()->flash('status', 'Kategori berhasil diperbarui.');
+        $this->dispatch('notify', message: 'Kategori berhasil diperbarui.');
     }
 
     public function delete(int $id, PortfolioService $portfolioService): void
@@ -134,6 +136,7 @@ class Index extends Component
         $category = PortfolioCategory::query()->findOrFail($id);
         $portfolioService->deleteCategory($category);
         session()->flash('status', 'Kategori berhasil dihapus.');
+        $this->dispatch('notify', message: 'Kategori berhasil dihapus.');
     }
 
     public function render(): View

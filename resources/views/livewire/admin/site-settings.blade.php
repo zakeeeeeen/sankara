@@ -424,42 +424,17 @@
                     <input
                         type="text"
                         wire:model="socials.instagram"
+                        placeholder="https://instagram.com/sankaratech"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-slate-700">TikTok</label>
+                    <label class="block text-xs font-bold text-slate-700">Facebook</label>
                     <input
                         type="text"
-                        wire:model="socials.tiktok"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">X / Twitter</label>
-                    <input
-                        type="text"
-                        wire:model="socials.twitter"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">LinkedIn</label>
-                    <input
-                        type="text"
-                        wire:model="socials.linkedin"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">Discord</label>
-                    <input
-                        type="text"
-                        wire:model="socials.discord"
+                        wire:model="socials.facebook"
+                        placeholder="https://facebook.com/sankaratech"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>
@@ -469,33 +444,7 @@
                     <input
                         type="text"
                         wire:model="socials.whatsapp"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">Dribbble</label>
-                    <input
-                        type="text"
-                        wire:model="socials.dribbble"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">GitHub</label>
-                    <input
-                        type="text"
-                        wire:model="socials.github"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    />
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-700">YouTube</label>
-                    <input
-                        type="text"
-                        wire:model="socials.youtube"
+                        placeholder="https://wa.me/6281200000000 atau +6281200000000"
                         class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 px-4 py-2.5 text-xs font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
                     />
                 </div>

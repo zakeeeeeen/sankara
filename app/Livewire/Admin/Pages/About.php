@@ -65,6 +65,7 @@ class About extends Component
         $this->reset('image');
 
         session()->flash('status', 'Halaman Tentang Kami berhasil diperbarui.');
+        $this->dispatch('notify', message: 'Halaman Tentang Kami berhasil diperbarui.');
     }
 
     public function render(): View

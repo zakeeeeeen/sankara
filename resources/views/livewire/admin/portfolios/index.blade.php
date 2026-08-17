@@ -74,7 +74,6 @@
                                     </div>
                                     <div>
                                         <div class="font-bold text-slate-900">{{ $portfolio->title }}</div>
-                                        <div class="text-xs font-normal text-slate-400 truncate max-w-xs">{{ $portfolio->excerpt }}</div>
                                     </div>
                                 </div>
                             </td>

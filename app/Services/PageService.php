@@ -33,7 +33,7 @@ class PageService
     public function updatePage(Page $page, array $data, ?UploadedFile $image = null): Page
     {
         if ($image instanceof UploadedFile) {
-            $data['image_path'] = $image->store('pages', 'public');
+            $data['image_path'] = ImageService::storeAsWebp($image, 'pages');
         }
 
         $page->update($data);

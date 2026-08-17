@@ -26,6 +26,7 @@ class Index extends Component
         $portfolio = Portfolio::query()->findOrFail($id);
         $portfolioService->deletePortfolio($portfolio);
         session()->flash('status', 'Portofolio berhasil dihapus.');
+        $this->dispatch('notify', message: 'Portofolio berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void
@@ -33,6 +34,7 @@ class Index extends Component
         $portfolio = Portfolio::query()->findOrFail($id);
         $portfolio->update(['is_active' => ! $portfolio->is_active]);
         session()->flash('status', 'Status portofolio berhasil diperbarui.');
+        $this->dispatch('notify', message: 'Status portofolio berhasil diperbarui.');
     }
 
     public function render(): View

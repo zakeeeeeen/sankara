@@ -288,14 +288,8 @@ class CmsSeeder extends Seeder
         $existingSocials = SiteSetting::getValue('socials', []);
         $socialDefaults = [
             'instagram' => '#',
-            'linkedin' => '#',
-            'dribbble' => '#',
-            'tiktok' => '',
-            'twitter' => '',
-            'discord' => '',
-            'whatsapp' => '',
-            'github' => '',
-            'youtube' => '',
+            'facebook' => '#',
+            'whatsapp' => '#',
         ];
         SiteSetting::setValue('socials', array_merge($socialDefaults, is_array($existingSocials) ? $existingSocials : []));
 
@@ -324,7 +318,7 @@ class CmsSeeder extends Seeder
         }
 
         if (! filled(SiteSetting::getValue('footer_subtext'))) {
-            SiteSetting::setValue('footer_subtext', 'Built with Laravel • Blade • Livewire • Tailwind');
+            SiteSetting::setValue('footer_subtext', '');
         }
 
         if (empty(SiteSetting::getValue('header_nav'))) {

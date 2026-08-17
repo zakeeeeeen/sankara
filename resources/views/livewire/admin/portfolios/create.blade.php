@@ -90,15 +90,6 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label class="block text-xs font-bold text-slate-700">Ringkasan / Excerpt Singkat</label>
-                    <textarea
-                        wire:model="portfolio.excerpt"
-                        rows="2"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white"
-                    ></textarea>
-                </div>
-
-                <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-slate-700">Deskripsi Lengkap / Overview</label>
                     <textarea
                         wire:model="portfolio.description"
@@ -109,50 +100,33 @@
             </div>
         </div>
 
-        <!-- GAMBAR & PREVIEW -->
+        <!-- GAMBAR PORTOFOLIO -->
         <div class="rounded-[2.5rem] border border-slate-200/80 bg-white/90 p-6 sm:p-8 shadow-xs backdrop-blur space-y-6">
-            <h2 class="text-xl font-bold text-slate-900">2. Gambar & Mockup Portofolio</h2>
+            <h2 class="text-xl font-bold text-slate-900">2. Gambar Portofolio</h2>
 
-            <div class="grid gap-6 sm:grid-cols-2">
+            <div class="grid gap-6">
                 <div class="rounded-2xl border border-slate-100 bg-slate-50/50 p-5">
-                    <label class="block text-xs font-bold text-slate-700">Cover Image Utama (Header)</label>
-                    <div class="mt-3 flex items-center gap-4">
+                    <label class="block text-xs font-bold text-slate-700">Upload Gambar Portofolio Utama</label>
+                    <div class="mt-3 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                         @if ($cover_image)
-                            <div class="h-20 w-32 rounded-xl overflow-hidden border border-sky-300">
-                                <img src="{{ $cover_image->temporaryUrl() }}" alt="Preview" class="h-full w-full object-cover">
+                            <div class="h-24 w-40 rounded-xl overflow-hidden border-2 border-sky-400 shadow-sm shrink-0">
+                                <img src="{{ $cover_image->temporaryUrl() }}" alt="Preview Baru" class="h-full w-full object-cover">
                             </div>
                         @endif
-                        <div class="flex-1">
+                        <div class="flex-1 w-full">
                             <input
                                 type="file"
                                 wire:model="cover_image"
                                 accept="image/*"
                                 class="w-full text-xs text-slate-600 file:mr-3 file:rounded-xl file:border-0 file:bg-slate-900 file:px-4 file:py-2.5 file:text-xs file:font-semibold file:text-white hover:file:bg-slate-800"
                             />
+                            <p class="mt-2 text-[11px] text-slate-500">Format gambar: JPG, PNG, WEBP. Maksimal 10MB. Gambar ini akan tampil pada card preview dan halaman detail portofolio.</p>
+                            @error('cover_image') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                         </div>
                     </div>
                 </div>
 
-                <div class="rounded-2xl border border-slate-100 bg-slate-50/50 p-5">
-                    <label class="block text-xs font-bold text-slate-700">Preview Screenshot Card</label>
-                    <div class="mt-3 flex items-center gap-4">
-                        @if ($preview_image)
-                            <div class="h-20 w-32 rounded-xl overflow-hidden border border-sky-300">
-                                <img src="{{ $preview_image->temporaryUrl() }}" alt="Preview" class="h-full w-full object-cover">
-                            </div>
-                        @endif
-                        <div class="flex-1">
-                            <input
-                                type="file"
-                                wire:model="preview_image"
-                                accept="image/*"
-                                class="w-full text-xs text-slate-600 file:mr-3 file:rounded-xl file:border-0 file:bg-slate-900 file:px-4 file:py-2.5 file:text-xs file:font-semibold file:text-white hover:file:bg-slate-800"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sm:col-span-2">
+                <div>
                     <label class="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" wire:model="portfolio.is_active" class="rounded border-slate-300 text-sky-600 focus:ring-sky-500">
                         <span class="text-xs font-bold text-slate-800">Aktifkan Portofolio (Tampilkan ke Publik)</span>

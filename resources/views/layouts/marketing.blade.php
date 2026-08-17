@@ -57,6 +57,8 @@
 
         @include('partials.marketing-footer')
 
+        <x-toast />
+
         @livewireScripts
     </body>
 </html>

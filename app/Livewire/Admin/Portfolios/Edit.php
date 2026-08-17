@@ -22,7 +22,6 @@ class Edit extends Component
         'slug' => '',
         'client_name' => '',
         'project_url' => '',
-        'excerpt' => '',
         'description' => '',
         'sort_order' => 0,
         'is_active' => true,
@@ -34,10 +33,6 @@ class Edit extends Component
     public mixed $cover_image = null;
 
     public ?string $existingCoverImage = null;
-
-    public mixed $preview_image = null;
-
-    public ?string $existingPreviewImage = null;
 
     public array $categories = [];
 
@@ -54,7 +49,6 @@ class Edit extends Component
             'slug' => $portfolio->slug,
             'client_name' => $portfolio->client_name ?? '',
             'project_url' => $portfolio->project_url ?? '',
-            'excerpt' => $portfolio->excerpt ?? '',
             'description' => $portfolio->description ?? '',
             'sort_order' => $portfolio->sort_order,
             'is_active' => (bool) $portfolio->is_active,
@@ -64,8 +58,7 @@ class Edit extends Component
         $techs = is_array($portfolio->technologies) ? $portfolio->technologies : [];
         $this->technologiesText = implode(', ', $techs);
 
-        $this->existingCoverImage = $portfolio->cover_image_src;
-        $this->existingPreviewImage = $portfolio->preview_image_src;
+        $this->existingCoverImage = $portfolio->cover_image_src ?: $portfolio->preview_image_src;
 
         $this->categories = $portfolio->categories->pluck('id')->all();
 
@@ -101,20 +94,15 @@ class Edit extends Component
         $this->validate([
             'portfolioData.title' => ['required', 'string', 'max:255'],
             'portfolioData.slug' => ['nullable', 'string', 'max:255', 'unique:portfolios,slug,'.$this->portfolioModel->id],
-            'portfolioData.excerpt' => ['nullable', 'string', 'max:500'],
             'portfolioData.description' => ['nullable', 'string'],
-            'cover_image' => ['nullable', 'image', 'max:4096'],
-            'preview_image' => ['nullable', 'image', 'max:4096'],
+            'cover_image' => ['nullable', 'image', 'max:10240'],
         ], [
             'portfolioData.title.required' => 'Nama / Judul project wajib diisi.',
             'portfolioData.title.max' => 'Nama / Judul project tidak boleh lebih dari 255 karakter.',
             'portfolioData.slug.unique' => 'Slug sudah digunakan oleh project lain.',
             'portfolioData.slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
-            'portfolioData.excerpt.max' => 'Ringkasan tidak boleh lebih dari 500 karakter.',
             'cover_image.image' => 'File harus berupa gambar.',
-            'cover_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
-            'preview_image.image' => 'File harus berupa gambar.',
-            'preview_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
+            'cover_image.max' => 'Ukuran gambar maksimal adalah 10MB.',
         ]);
 
         $techs = array_values(array_filter(array_map('trim', explode(',', $this->technologiesText))));
@@ -127,9 +115,6 @@ class Edit extends Component
         $files = [];
         if ($this->cover_image) {
             $files['cover_image'] = $this->cover_image;
-        }
-        if ($this->preview_image) {
-            $files['preview_image'] = $this->preview_image;
         }
         if (! empty($this->section_images)) {
             $files['section_images'] = $this->section_images;

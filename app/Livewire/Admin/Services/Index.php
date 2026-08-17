@@ -18,6 +18,7 @@ class Index extends Component
         $service = Service::query()->findOrFail($id);
         $serviceService->deleteService($service);
         session()->flash('status', 'Layanan berhasil dihapus.');
+        $this->dispatch('notify', message: 'Layanan berhasil dihapus.');
     }
 
     public function toggleActive(int $id): void
@@ -25,6 +26,7 @@ class Index extends Component
         $service = Service::query()->findOrFail($id);
         $service->update(['is_active' => ! $service->is_active]);
         session()->flash('status', 'Status layanan berhasil diperbarui.');
+        $this->dispatch('notify', message: 'Status layanan berhasil diperbarui.');
     }
 
     public function render(): View

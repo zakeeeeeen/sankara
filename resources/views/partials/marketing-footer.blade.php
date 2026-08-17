@@ -8,7 +8,7 @@
 
     $footerDescription = \App\Models\SiteSetting::getValue('footer_description', 'Kami membangun produk digital modern: website, software, aplikasi mobile, UI/UX, game development, dan 3D modeling—dengan kualitas premium yang meyakinkan.');
     $footerCopyright = \App\Models\SiteSetting::getValue('footer_copyright', '© ' . date('Y') . ' ' . $siteName . '. All rights reserved.');
-    $footerSubtext = \App\Models\SiteSetting::getValue('footer_subtext', 'Built with Laravel • Blade • Livewire • Tailwind');
+    $footerSubtext = \App\Models\SiteSetting::getValue('footer_subtext', '');
 
     $contact = \App\Models\SiteSetting::getValue('contact', []);
     $socials = \App\Models\SiteSetting::getValue('socials', []);
@@ -77,65 +77,38 @@
                 </div>
 
                 <div class="mt-6 flex flex-wrap items-center gap-3">
-                    @if (filled($socials['instagram'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['instagram'] }}" aria-label="Kunjungi Instagram Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-instagram text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['tiktok'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['tiktok'] }}" aria-label="Kunjungi TikTok Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-tiktok text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['twitter'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['twitter'] }}" aria-label="Kunjungi X Twitter Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-x-twitter text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['linkedin'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['linkedin'] }}" aria-label="Kunjungi LinkedIn Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-linkedin-in text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['discord'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['discord'] }}" aria-label="Kunjungi Discord Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-discord text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['whatsapp'] ?? null))
-                        @php
-                            $waUrl = $socials['whatsapp'];
-                            if (!str_starts_with($waUrl, 'http://') && !str_starts_with($waUrl, 'https://')) {
-                                $cleanWa = preg_replace('/[^0-9]/', '', $waUrl);
-                                $waUrl = 'https://wa.me/' . $cleanWa;
-                            }
-                        @endphp
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $waUrl }}" aria-label="Kunjungi WhatsApp Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-whatsapp text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['dribbble'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['dribbble'] }}" aria-label="Kunjungi Dribbble Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-dribbble text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['github'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['github'] }}" aria-label="Kunjungi GitHub Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-github text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
-                    @if (filled($socials['youtube'] ?? null))
-                        <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $socials['youtube'] }}" aria-label="Kunjungi YouTube Sankara Tech" target="_blank" rel="noreferrer">
-                            <i class="fa-brands fa-youtube text-base" aria-hidden="true"></i>
-                        </a>
-                    @endif
+                    @php
+                        $igUrl = filled($socials['instagram'] ?? null) ? $socials['instagram'] : '#';
+                        $fbUrl = filled($socials['facebook'] ?? null) ? $socials['facebook'] : '#';
+                        $waRaw = $socials['whatsapp'] ?? $whatsappRaw ?? '';
+                        if ($waRaw && !str_starts_with($waRaw, 'http://') && !str_starts_with($waRaw, 'https://')) {
+                            $cleanWa = preg_replace('/[^0-9]/', '', $waRaw);
+                            $waUrl = 'https://wa.me/' . $cleanWa;
+                        } else {
+                            $waUrl = filled($waRaw) ? $waRaw : '#';
+                        }
+                    @endphp
+
+                    <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $igUrl }}" aria-label="Kunjungi Instagram Sankara Tech" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-instagram text-base" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $fbUrl }}" aria-label="Kunjungi Facebook Sankara Tech" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-facebook-f text-base" aria-hidden="true"></i>
+                    </a>
+
+                    <a class="grid h-10 w-10 place-items-center rounded-2xl border border-white/20 bg-white/10 text-white shadow-none backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20" href="{{ $waUrl }}" aria-label="Kunjungi WhatsApp Sankara Tech" target="_blank" rel="noreferrer">
+                        <i class="fa-brands fa-whatsapp text-base" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="mt-10 flex flex-col gap-2 border-t border-white/15 pt-6 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between">
             <div>{{ $footerCopyright }}</div>
-            <div class="text-slate-300">{{ $footerSubtext }}</div>
+            @if (filled($footerSubtext))
+                <div class="text-slate-300">{{ $footerSubtext }}</div>
+            @endif
         </div>
     </div>
 </footer>

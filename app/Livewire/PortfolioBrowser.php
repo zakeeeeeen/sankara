@@ -71,7 +71,7 @@ class PortfolioBrowser extends Component
         if ($trimmedSearch !== '') {
             $query->where(function ($q) use ($trimmedSearch): void {
                 $q->where('title', 'like', '%'.$trimmedSearch.'%')
-                    ->orWhere('excerpt', 'like', '%'.$trimmedSearch.'%');
+                    ->orWhere('description', 'like', '%'.$trimmedSearch.'%');
             });
         }
 

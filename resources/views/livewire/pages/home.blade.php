@@ -6,75 +6,41 @@
     ])
 
     <main>
-        <section id="hero" class="agency-hero relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
+        <section id="hero" class="agency-hero relative overflow-hidden min-h-screen min-h-[100dvh] flex flex-col justify-center items-center pt-24 pb-16 sm:pt-32 sm:pb-20">
             <div class="pointer-events-none absolute inset-0">
                 <div class="agency-hero-grid absolute inset-0 opacity-75"></div>
                 <div class="brand-blob-1 absolute -top-40 left-1/2 h-[38rem] w-[38rem] -translate-x-1/2 rounded-full blur-3xl opacity-30"></div>
                 <div class="brand-blob-2 absolute -bottom-56 -left-40 h-[42rem] w-[42rem] rounded-full blur-3xl opacity-20"></div>
             </div>
 
-            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white backdrop-blur-md">
-                        <span class="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full my-auto">
+                <div class="text-center flex flex-col items-center">
+                    <!-- Badge: Melayang Pelan & Lebih Jelas -->
+                    <div class="mb-5 inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-xs sm:text-sm font-semibold text-white backdrop-blur-md shadow-lg animate-float-slow">
+                        <span class="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span>{{ $hero?->badge_text ?? 'Digital Agency • Web, Mobile & Software' }}</span>
                     </div>
 
-                    <h1 class="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-6xl lg:text-7xl leading-[1.1]">
+                    <!-- H1: Ukuran Judul Utama Jauh Lebih Besar di Mobile (40px / 2.5rem) -->
+                    <h1 class="mt-1 text-[2.35rem] sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.12] sm:leading-[1.1] animate-float max-w-4xl">
                         {!! nl2br(e($hero?->heading ?? "Membangun Produk Digital\nYang Berdampak & Siap Scale")) !!}
                     </h1>
 
-                    <p class="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-xl sm:leading-relaxed">
+                    <!-- P: Deskripsi Lebih Besar & Jelas di Mobile (16px / text-base) -->
+                    <p class="mx-auto mt-5 sm:mt-6 max-w-lg sm:max-w-3xl text-base sm:text-xl leading-relaxed text-slate-200 font-normal px-1 sm:px-0 animate-float-delayed">
                         {{ $hero?->subheading ?? 'Kami membantu brand dan bisnis membangun website, aplikasi mobile, dan perangkat lunak kustom dengan standar desain dunia dan teknologi modern.' }}
                     </p>
 
-                    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center">
-                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-xl transition-all duration-300 hover:scale-[1.02]" aria-label="Konsultasi Gratis">
+                    <!-- Buttons CTA: Lebih Besar & Mantap (Full-Width di Mobile) -->
+                    <div class="mt-8 sm:mt-10 flex flex-col gap-3.5 sm:flex-row sm:justify-center w-full max-w-sm sm:max-w-none mx-auto">
+                        <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base sm:text-lg font-extrabold shadow-2xl transition-all duration-300 hover:scale-[1.03]" aria-label="Konsultasi Gratis">
                             <span>{{ $hero?->cta_primary_label ?? 'Konsultasi Gratis' }}</span>
-                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
                         </a>
 
-                        <a href="#portofolio" class="agency-btn-secondary inline-flex items-center justify-center gap-2 px-8 py-4 text-base font-bold shadow-lg transition-all duration-300 hover:scale-[1.02]" aria-label="Lihat Portofolio">
+                        <a href="#portofolio" class="agency-btn-secondary w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 text-base sm:text-lg font-extrabold shadow-xl transition-all duration-300 hover:scale-[1.03]" aria-label="Lihat Portofolio">
                             <span>{{ $hero?->cta_secondary_label ?? 'Lihat Portofolio' }}</span>
                         </a>
-                    </div>
-                </div>
-
-                <!-- Interactive Code Display Panel -->
-                <div class="mt-14 sm:mt-20">
-                    <div class="agency-code-panel relative mx-auto max-w-4xl rounded-2xl border border-white/15 bg-slate-950/80 shadow-2xl backdrop-blur-xl">
-                        <div class="flex items-center justify-between border-b border-white/10 px-5 py-3.5">
-                            <div class="flex items-center gap-2">
-                                <span class="h-3 w-3 rounded-full bg-rose-500/80"></span>
-                                <span class="h-3 w-3 rounded-full bg-amber-500/80"></span>
-                                <span class="h-3 w-3 rounded-full bg-emerald-500/80"></span>
-                                <div class="ml-3 hidden rounded-md border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] font-medium text-white/70 sm:block">app/Services/SankaraTech.php</div>
-                            </div>
-                        </div>
-
-                        <div class="grid gap-0 lg:grid-cols-[64px_1fr]">
-                            <div class="hidden border-r border-white/10 bg-black/20 px-3 py-5 text-right font-mono text-xs leading-8 text-white/30 lg:block select-none" aria-hidden="true">
-                                @for ($i = 1; $i <= 11; $i++)
-                                    <div>{{ sprintf('%2d', $i) }}</div>
-                                @endfor
-                            </div>
-                            <div class="agency-code-lines overflow-x-auto px-5 py-5 font-mono text-[13px] leading-8 sm:px-7 sm:text-[14px]">
-                                <div><span class="text-amber-400 font-medium">&lt;?php</span></div>
-                                <div class="mt-1"><span class="text-purple-400 font-semibold">namespace</span> <span class="text-sky-300">App\Services</span><span class="text-white/60">;</span></div>
-                                <div class="mt-3"><span class="text-purple-400 font-semibold">class</span> <span class="text-sky-300 font-bold">SankaraTech</span></div>
-                                <div><span class="text-white/60">{</span></div>
-                                <div class="pl-4"><span class="text-purple-400 font-semibold">public function</span> <span class="text-blue-300 font-medium">buildDigitalProduct</span><span class="text-white/60">(</span><span class="text-sky-300">array</span> <span class="text-cyan-200">$vision</span><span class="text-white/60">):</span> <span class="text-sky-300">Product</span></div>
-                                <div class="pl-4"><span class="text-white/60">{</span></div>
-                                <div class="pl-8"><span class="text-purple-400 font-semibold">return</span> <span class="text-sky-300">Product</span><span class="text-white/60">::</span><span class="text-blue-300">craft</span><span class="text-white/60">([</span></div>
-                                <div class="pl-12"><span class="text-cyan-300">'name'</span> <span class="text-white/60">=&gt;</span> <span class="text-emerald-300">'Sankara Tech'</span><span class="text-white/60">,</span></div>
-                                <div class="pl-12"><span class="text-cyan-300">'services'</span> <span class="text-white/60">=&gt;</span> <span class="text-white/60">[</span><span class="text-emerald-300">'Web'</span><span class="text-white/60">,</span> <span class="text-emerald-300">'Mobile'</span><span class="text-white/60">,</span> <span class="text-emerald-300">'Software'</span><span class="text-white/60">],</span></div>
-                                <div class="pl-12"><span class="text-cyan-300">'approach'</span> <span class="text-white/60">=&gt;</span> <span class="text-emerald-300">'Modern UI/UX &amp; Scalable Tech'</span><span class="text-white/60">,</span></div>
-                                <div class="pl-12"><span class="text-cyan-300">'delivery'</span> <span class="text-white/60">=&gt;</span> <span class="text-emerald-300">'Idea to Launch'</span></div>
-                                <div class="pl-8"><span class="text-white/60">])-&gt;</span><span class="text-blue-300">launch</span><span class="text-white/60">();</span></div>
-                                <div class="pl-4"><span class="text-white/60">}</span></div>
-                                <div><span class="text-white/60">}</span></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -108,14 +74,14 @@
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col items-center text-center">
                     <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                        Dari Ide hingga <span class="text-sky-400">Siap Scale</span>
+                        Dari Ide hingga <br class="sm:hidden" /><span class="text-sky-400">Siap Scale</span>
                     </h2>
                     <p class="mt-4 max-w-2xl text-base font-normal text-white/80 sm:text-lg">
                         Solusi digital agency terlengkap dengan berbagai keunggulan untuk kesuksesan bisnismu
                     </p>
                 </div>
 
-                <div class="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
+                <div class="mt-14 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-10 lg:gap-12">
                     @foreach (($advantages ?? collect()) as $adv)
                         @php
                             $titleLower = mb_strtolower($adv->title);
@@ -137,15 +103,15 @@
                         @endphp
 
                         <div class="group flex flex-col items-center text-center">
-                            <div class="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 via-sky-500 to-sky-600 text-white shadow-lg shadow-sky-500/30 transition-transform duration-300 group-hover:scale-110">
-                                <i class="{{ $iconClass }} text-2xl" aria-hidden="true"></i>
+                            <div class="grid h-12 w-12 sm:h-16 sm:w-16 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 via-sky-500 to-sky-600 text-white shadow-lg shadow-sky-500/30 transition-transform duration-300 group-hover:scale-110">
+                                <i class="{{ $iconClass }} text-xl sm:text-2xl" aria-hidden="true"></i>
                             </div>
 
-                            <h3 class="mt-6 text-lg font-bold text-white leading-snug transition-colors group-hover:text-sky-300">
+                            <h3 class="mt-4 sm:mt-6 text-sm sm:text-lg font-bold text-white leading-snug transition-colors group-hover:text-sky-300">
                                 {{ $adv->title }}
                             </h3>
 
-                            <p class="mt-3 text-sm leading-relaxed text-white/75 max-w-xs">
+                            <p class="mt-2 sm:mt-3 text-xs sm:text-sm leading-relaxed text-white/75 max-w-xs">
                                 {{ $adv->description }}
                             </p>
                         </div>
@@ -298,7 +264,7 @@
                         </div>
                     @else
                         <!-- Portofolio Mobile: Auto-Changing Fade Carousel (< sm) -->
-                        <div class="block sm:hidden relative w-full aspect-[4/3] overflow-hidden rounded-3xl bg-slate-900 shadow-2xl border border-white/10 select-none">
+                        <div class="block sm:hidden relative w-full aspect-video overflow-hidden rounded-3xl bg-slate-900 shadow-2xl border border-white/10 select-none">
                             @foreach ($items as $idx => $item)
                                 <div
                                     x-show="active === {{ $idx }}"
@@ -312,7 +278,7 @@
                                 >
                                     <a href="{{ $item['url'] }}" wire:navigate class="group block h-full w-full" aria-label="Lihat Project {{ $item['title'] }}">
                                         <div data-hover-shot class="no-scrollbar h-full w-full overflow-y-auto overscroll-contain rounded-3xl bg-slate-900">
-                                            <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                            <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
                                         </div>
                                         <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-5 text-white">
                                             <div class="text-[11px] font-medium text-sky-400">Featured Project</div>
@@ -341,8 +307,8 @@
                                 @foreach ($items as $item)
                                     <div class="w-[85%] shrink-0 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
                                         <a href="{{ $item['url'] }}" wire:navigate class="group block h-full" aria-label="Lihat Project {{ $item['title'] }}">
-                                            <div data-hover-shot class="no-scrollbar aspect-[4/3] w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20 sm:aspect-[16/11]">
-                                                <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="400" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                            <div data-hover-shot class="no-scrollbar aspect-video w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20">
+                                                <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
                                             </div>
                                         </a>
                                     </div>

@@ -43,7 +43,7 @@ class ServiceService
             $serviceData['is_active'] = (bool) ($serviceData['is_active'] ?? false);
 
             if ($image instanceof UploadedFile) {
-                $serviceData['image_path'] = $image->store('services', 'public');
+                $serviceData['image_path'] = ImageService::storeAsWebp($image, 'services');
             }
 
             /** @var Service $service */
@@ -81,7 +81,7 @@ class ServiceService
             $serviceData['is_active'] = (bool) ($serviceData['is_active'] ?? false);
 
             if ($image instanceof UploadedFile) {
-                $serviceData['image_path'] = $image->store('services', 'public');
+                $serviceData['image_path'] = ImageService::storeAsWebp($image, 'services');
             }
 
             $service->update($this->filterValidColumns($serviceData));

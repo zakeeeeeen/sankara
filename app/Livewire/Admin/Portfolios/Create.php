@@ -19,7 +19,6 @@ class Create extends Component
         'slug' => '',
         'client_name' => '',
         'project_url' => '',
-        'excerpt' => '',
         'description' => '',
         'sort_order' => 0,
         'is_active' => true,
@@ -29,8 +28,6 @@ class Create extends Component
     public string $technologiesText = 'Laravel, Livewire, Tailwind CSS';
 
     public mixed $cover_image = null;
-
-    public mixed $preview_image = null;
 
     public array $categories = [];
 
@@ -66,20 +63,15 @@ class Create extends Component
         $this->validate([
             'portfolio.title' => ['required', 'string', 'max:255'],
             'portfolio.slug' => ['nullable', 'string', 'max:255', 'unique:portfolios,slug'],
-            'portfolio.excerpt' => ['nullable', 'string', 'max:500'],
             'portfolio.description' => ['nullable', 'string'],
-            'cover_image' => ['nullable', 'image', 'max:4096'],
-            'preview_image' => ['nullable', 'image', 'max:4096'],
+            'cover_image' => ['nullable', 'image', 'max:10240'],
         ], [
             'portfolio.title.required' => 'Nama / Judul project wajib diisi.',
             'portfolio.title.max' => 'Nama / Judul project tidak boleh lebih dari 255 karakter.',
             'portfolio.slug.unique' => 'Slug sudah digunakan oleh project lain.',
             'portfolio.slug.max' => 'Slug tidak boleh lebih dari 255 karakter.',
-            'portfolio.excerpt.max' => 'Ringkasan tidak boleh lebih dari 500 karakter.',
             'cover_image.image' => 'File harus berupa gambar.',
-            'cover_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
-            'preview_image.image' => 'File harus berupa gambar.',
-            'preview_image.max' => 'Ukuran gambar maksimal adalah 4MB.',
+            'cover_image.max' => 'Ukuran gambar maksimal adalah 10MB.',
         ]);
 
         $techs = array_values(array_filter(array_map('trim', explode(',', $this->technologiesText))));
@@ -92,9 +84,6 @@ class Create extends Component
         $files = [];
         if ($this->cover_image) {
             $files['cover_image'] = $this->cover_image;
-        }
-        if ($this->preview_image) {
-            $files['preview_image'] = $this->preview_image;
         }
         if (! empty($this->section_images)) {
             $files['section_images'] = $this->section_images;

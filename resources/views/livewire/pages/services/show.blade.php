@@ -91,19 +91,16 @@
                             >
                                 <div class="relative overflow-hidden bg-slate-900">
                                     @if ($portfolio->preview_image_src)
-                                        <div data-hover-shot class="no-scrollbar aspect-[4/3] overflow-y-auto overscroll-contain">
+                                        <div data-hover-shot class="no-scrollbar aspect-video overflow-y-auto overscroll-contain">
                                             <img class="w-full object-cover object-top" src="{{ $portfolio->preview_image_src }}" alt="Preview {{ $portfolio->title }}" />
                                         </div>
                                     @else
-                                        <div class="aspect-[4/3] w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
+                                        <div class="aspect-video w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
                                     @endif
                                 </div>
 
                                 <div class="p-6">
                                     <div class="text-base font-bold text-[rgb(var(--agency-navy-1))] group-hover:text-[rgb(var(--agency-cyan))] transition-colors">{{ $portfolio->title }}</div>
-                                    @if ($portfolio->excerpt)
-                                        <div class="mt-2 text-sm leading-relaxed text-slate-500 line-clamp-2">{{ $portfolio->excerpt }}</div>
-                                    @endif
 
                                     <div class="mt-4 flex flex-wrap gap-2">
                                         @foreach ($portfolio->categories->take(3) as $cat)

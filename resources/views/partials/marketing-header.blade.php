@@ -49,15 +49,38 @@
                     <nav class="hidden items-center gap-7 text-sm font-semibold lg:flex lg:justify-self-center" aria-label="Navigasi Utama">
                         @foreach ($navItems as $item)
                             @php
-                                $isActive = $active === $item['key'];
+                                $itemKey = $item['key'] ?? '';
+                                $itemUrlPath = trim(parse_url($item['url'] ?? '', PHP_URL_PATH) ?? '', '/');
+                                $currentPath = trim(request()->getPathInfo(), '/');
+
+                                $isActive = false;
+                                if (! $isLanding) {
+                                    if ($currentPath === '' && ($itemKey === 'home' || $itemUrlPath === '')) {
+                                        $isActive = true;
+                                    } elseif ($currentPath !== '') {
+                                        if ($itemUrlPath !== '' && ($currentPath === $itemUrlPath || str_starts_with($currentPath, $itemUrlPath.'/'))) {
+                                            $isActive = true;
+                                        } elseif ($active && (
+                                            $active === $itemKey
+                                            || ($active === 'services' && in_array($itemKey, ['services', 'layanan']))
+                                            || ($active === 'portfolios' && in_array($itemKey, ['portfolios', 'portofolio', 'portfolio']))
+                                            || ($active === 'about' && in_array($itemKey, ['about', 'tentang-kami', 'tentang']))
+                                            || ($active === 'contact' && in_array($itemKey, ['contact', 'kontak']))
+                                        )) {
+                                            $isActive = true;
+                                        }
+                                    }
+                                }
                             @endphp
                             <a
                                 wire:navigate
                                 class="navlink relative py-1 text-sm font-semibold transition-colors duration-200
-                                {{ $isActive
-                                    ? ($isLanding ? 'navlink--active text-sky-300 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-300' : 'navlink--active text-sky-700 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-700')
-                                    : ($isLanding ? 'text-slate-100 hover:text-white' : 'text-slate-800 hover:text-sky-700')
-                                }}"
+                                @if ($isLanding)
+                                    {{ $active === $itemKey ? 'navlink--active text-sky-300 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-300' : 'text-slate-100 hover:text-white' }}
+                                @else
+                                    {{ $isActive ? 'text-sky-600 font-bold border-b-2 border-sky-600 pb-0.5' : 'text-slate-800 hover:text-sky-600' }}
+                                @endif
+                                "
                                 href="{{ $item['url'] }}"
                             >
                                 {{ $item['label'] }}
@@ -96,12 +119,33 @@
                     <nav class="grid gap-1 text-sm font-medium" aria-label="Navigasi Mobile">
                         @foreach ($navItems as $item)
                             @php
-                                $isActive = $active === $item['key'];
+                                $itemKey = $item['key'] ?? '';
+                                $itemUrlPath = trim(parse_url($item['url'] ?? '', PHP_URL_PATH) ?? '', '/');
+                                $currentPath = trim(request()->getPathInfo(), '/');
+
+                                $isActive = false;
+                                if (! $isLanding) {
+                                    if ($currentPath === '' && ($itemKey === 'home' || $itemUrlPath === '')) {
+                                        $isActive = true;
+                                    } elseif ($currentPath !== '') {
+                                        if ($itemUrlPath !== '' && ($currentPath === $itemUrlPath || str_starts_with($currentPath, $itemUrlPath.'/'))) {
+                                            $isActive = true;
+                                        } elseif ($active && (
+                                            $active === $itemKey
+                                            || ($active === 'services' && in_array($itemKey, ['services', 'layanan']))
+                                            || ($active === 'portfolios' && in_array($itemKey, ['portfolios', 'portofolio', 'portfolio']))
+                                            || ($active === 'about' && in_array($itemKey, ['about', 'tentang-kami', 'tentang']))
+                                            || ($active === 'contact' && in_array($itemKey, ['contact', 'kontak']))
+                                        )) {
+                                            $isActive = true;
+                                        }
+                                    }
+                                }
                             @endphp
                             <a
                                 @click="open = false"
                                 wire:navigate
-                                class="block rounded-xl px-4 py-3 font-medium transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-semibold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
+                                class="block rounded-xl px-4 py-3 font-semibold transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-bold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
                                 href="{{ $item['url'] }}"
                             >
                                 {{ $item['label'] }}

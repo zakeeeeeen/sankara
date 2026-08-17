@@ -151,9 +151,9 @@ class Index extends Component
         $this->validate([
             'hero.heading' => ['required', 'string', 'max:255'],
             'hero.subheading' => ['nullable', 'string'],
-            'hero_image' => ['nullable', 'image', 'max:4096'],
+            'hero_image' => ['nullable', 'image', 'max:10240'],
             'about.body' => ['nullable', 'string'],
-            'about_image' => ['nullable', 'image', 'max:4096'],
+            'about_image' => ['nullable', 'image', 'max:10240'],
             'cta.heading' => ['required', 'string', 'max:255'],
             'cta.body' => ['nullable', 'string'],
             'stats.*.value' => ['required', 'string', 'max:64'],
@@ -195,6 +195,7 @@ class Index extends Component
         ], $files);
 
         session()->flash('status', 'Pengaturan Beranda (Home) berhasil disimpan.');
+        $this->dispatch('notify', message: 'Pengaturan Beranda (Home) berhasil disimpan.');
     }
 
     public function render(): View

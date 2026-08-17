@@ -34,9 +34,9 @@
                             $line2 = implode(' ', array_slice($words, $mid));
                         }
                     @endphp
-                    <h1 class="mt-1 text-[2.15rem] xs:text-[2.4rem] sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.15] sm:leading-[1.1] animate-float max-w-5xl mx-auto">
-                        <span class="block text-gold-shiny drop-shadow-md">{{ $line1 }}</span>
-                        <span class="block text-white mt-0.5 sm:mt-1">{{ $line2 }}</span>
+                    <h1 class="mt-1 font-black tracking-tight animate-float max-w-5xl mx-auto">
+                        <span class="block text-[2.6rem] xs:text-[3rem] sm:text-6xl lg:text-7xl leading-tight text-gold-shiny drop-shadow-md">{{ $line1 }}</span>
+                        <span class="block text-[1.85rem] xs:text-[2.25rem] sm:text-5xl lg:text-6xl leading-tight text-white mt-1 sm:mt-2">{{ $line2 }}</span>
                     </h1>
 
                     <!-- P: Deskripsi Lebih Besar & Jelas di Mobile (16px / text-base) -->

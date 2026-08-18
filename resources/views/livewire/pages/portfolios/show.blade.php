@@ -41,7 +41,9 @@
                             @if ($portfolio->description)
                                 <div>
                                     <h2 class="text-2xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))]">Tentang Proyek</h2>
-                                    <p class="mt-3 whitespace-pre-line text-base leading-relaxed text-slate-600">{{ $portfolio->description }}</p>
+                                    <div class="mt-3 prose prose-slate prose-headings:font-bold prose-a:text-sky-600 prose-blockquote:border-sky-500 max-w-none">
+                                        {!! $portfolio->description !!}
+                                    </div>
                                 </div>
                             @endif
 

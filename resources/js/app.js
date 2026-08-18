@@ -1,3 +1,5 @@
+import './rich-editor.js';
+
 const toggleNavbar = () => {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;

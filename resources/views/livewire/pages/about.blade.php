@@ -19,8 +19,8 @@
                         </div>
 
                         @if ($page->body)
-                            <div class="mt-8 text-base leading-relaxed text-slate-600 reveal whitespace-pre-line">
-                                {{ $page->body }}
+                            <div class="mt-8 prose prose-slate prose-headings:font-bold prose-a:text-sky-600 prose-blockquote:border-sky-500 max-w-none reveal">
+                                {!! $page->body !!}
                             </div>
                         @endif
 

@@ -85,12 +85,13 @@
                 </div>
 
                 <div class="sm:col-span-2">
-                    <label class="block text-xs font-bold text-slate-700">Deskripsi Lengkap / Overview</label>
-                    <textarea
+                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Deskripsi Lengkap / Overview</label>
+                    <x-rich-editor
                         wire:model="portfolioData.description"
-                        rows="5"
-                        class="mt-1.5 w-full rounded-2xl border border-slate-200 bg-slate-50/50 p-4 text-sm font-medium text-slate-900 outline-none focus:border-sky-500 focus:bg-white leading-relaxed"
-                    ></textarea>
+                        placeholder="Tulis ringkasan dan rincian lengkap mengenai proyek ini..."
+                        min-height="200px"
+                    />
+                    @error('portfolioData.description') <div class="mt-1 text-xs text-rose-600">{{ $message }}</div> @enderror
                 </div>
             </div>
         </div>

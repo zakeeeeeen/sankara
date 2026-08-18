@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+@plugin '@tailwindcss/typography';
 
 [x-cloak] {
     display: none !important;
@@ -505,3 +506,76 @@
         animation: none;
     }
 }
+
+/* TipTap & Rich Text Editor Styles */
+.tiptap-content .ProseMirror {
+    outline: none !important;
+    min-height: 140px;
+}
+
+.tiptap-content .ProseMirror p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: #94a3b8;
+    pointer-events: none;
+    height: 0;
+}
+
+.tiptap-content .ProseMirror table,
+.prose table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1.25rem 0;
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid #e2e8f0;
+}
+
+.tiptap-content .ProseMirror th,
+.tiptap-content .ProseMirror td,
+.prose th,
+.prose td {
+    border: 1px solid #cbd5e1;
+    padding: 0.6rem 0.85rem;
+    vertical-align: top;
+    text-align: left;
+    min-width: 100px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.tiptap-content .ProseMirror th,
+.prose th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.tiptap-content .ProseMirror .selectedCell:after {
+    z-index: 2;
+    position: absolute;
+    content: "";
+    left: 0; right: 0; top: 0; bottom: 0;
+    background: rgba(56, 189, 248, 0.15);
+    pointer-events: none;
+}
+
+.tiptap-content .ProseMirror pre,
+.prose pre {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    padding: 1rem 1.25rem !important;
+    border-radius: 1rem !important;
+    overflow-x: auto;
+}
+
+.tiptap-content .ProseMirror blockquote,
+.prose blockquote {
+    border-left: 4px solid #0284c7 !important;
+    padding-left: 1rem !important;
+    font-style: italic !important;
+    color: #475569 !important;
+    margin: 1rem 0 !important;
+}
+

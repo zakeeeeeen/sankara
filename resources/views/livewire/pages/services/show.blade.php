@@ -32,7 +32,9 @@
                             <p class="mt-4 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">{{ $service->excerpt }}</p>
                         @endif
                         @if ($service->description)
-                            <p class="mt-3 max-w-xl text-base leading-relaxed text-slate-600">{{ $service->description }}</p>
+                            <div class="mt-4 prose prose-slate prose-headings:font-bold prose-a:text-sky-600 prose-blockquote:border-sky-500 max-w-none">
+                                {!! $service->description !!}
+                            </div>
                         @endif
 
                         @if ($service->features->count())

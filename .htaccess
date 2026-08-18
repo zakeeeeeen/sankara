@@ -1,16 +1,14 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Prevent direct access to sensitive files and directories
-    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package\.(json|lock)|pnpm-lock\.yaml|artisan|storage|bootstrap\/cache) - [F,L,NC]
+    # Prevent direct access to sensitive files and folders outside public
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package\.(json|lock)|pnpm-lock\.yaml|artisan|bootstrap\/cache) - [F,L,NC]
 
-    # Rewrite all traffic to /public
+    # Redirect requests to the public directory dynamically
     RewriteCond %{REQUEST_URI} !^/public/
-    RewriteRule ^(.*)$ public/$1 [L]
+    RewriteRule ^(.*)$ public/$1 [L,QSA]
 </IfModule>
 
-# Security: Disable Directory Browsing
-Options -Indexes
+# Options & Security
+Options -Indexes +FollowSymLinks
 
-# UTF-8 Encoding
-AddDefaultCharset UTF-8

@@ -18,7 +18,7 @@ class PortfolioSection extends Model
     public function getImageSrcAttribute(): ?string
     {
         if ($this->image_path) {
-            return Storage::url($this->image_path);
+            return Storage::disk('public')->url($this->image_path);
         }
 
         return $this->image_url;

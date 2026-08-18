@@ -22,6 +22,7 @@ use App\Models\Service;
 use App\Models\SiteSetting;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -153,6 +154,8 @@ class LivewireAdminTest extends TestCase
     {
         $admin = User::query()->where('email', 'admin@sankaratech.test')->firstOrFail();
 
+        $file = UploadedFile::fake()->image('portfolio.png', 600, 400);
+
         Livewire::actingAs($admin)
             ->test(AdminPortfoliosCreate::class)
             ->set('portfolio.title', 'FinTech SuperApp')
@@ -160,11 +163,14 @@ class LivewireAdminTest extends TestCase
             ->set('portfolio.client_name', 'FinCorp')
             ->set('portfolio.description', 'Comprehensive fintech solution')
             ->set('technologiesText', 'Flutter, Laravel, Redis')
+            ->set('cover_image', $file)
             ->call('save')
             ->assertHasNoErrors()
             ->assertRedirect(route('admin.portfolios.index'));
 
         $portfolio = Portfolio::query()->where('slug', 'fintech-superapp')->firstOrFail();
+        $this->assertNotNull($portfolio->cover_image_path);
+        $this->assertStringContainsString('/storage/portfolios/', $portfolio->cover_image_src);
 
         Livewire::actingAs($admin)
             ->test(AdminPortfoliosEdit::class, ['portfolio' => $portfolio])

@@ -27,8 +27,7 @@
             <div class="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                 <div class="grid gap-12 lg:grid-cols-2 lg:items-start">
                     <div class="reveal">
-                        <div class="agency-divider"></div>
-                        <h1 class="mt-4 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{{ $portfolio->title }}</h1>
+                        <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">{{ $portfolio->title }}</h1>
                         <div class="mt-4 flex flex-wrap gap-2">
                             @foreach ($portfolio->categories as $cat)
                                 <span class="rounded-full border border-sky-100 bg-[rgb(var(--agency-cyan)/0.08)] px-3.5 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">
@@ -36,6 +35,26 @@
                                 </span>
                             @endforeach
                         </div>
+
+                        @if (filled($portfolio->client_name) || filled($portfolio->published_at))
+                            <div class="mt-6 flex flex-wrap items-center gap-y-2 gap-x-6 rounded-2xl border border-slate-100 bg-slate-50/80 px-4 py-3 text-xs text-slate-600">
+                                @if (filled($portfolio->client_name))
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-regular fa-building text-sky-600"></i>
+                                        <span class="font-medium text-slate-500">Klien:</span>
+                                        <span class="font-semibold text-slate-900">{{ $portfolio->client_name }}</span>
+                                    </div>
+                                @endif
+
+                                @if ($portfolio->published_at)
+                                    <div class="flex items-center gap-2">
+                                        <i class="fa-regular fa-calendar-check text-sky-600"></i>
+                                        <span class="font-medium text-slate-500">Rilis:</span>
+                                        <span class="font-semibold text-slate-900">{{ $portfolio->published_at->translatedFormat('F Y') }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
 
                         <div class="mt-8 space-y-8">
                             @if ($portfolio->description)
@@ -87,7 +106,7 @@
                             @endif
 
                             <div>
-                                <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
+                                <a href="{{ route('contact.show') }}" wire:navigate class="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-700">
                                     <span>Konsultasi Proyek Serupa</span>
                                     <i class="fa-solid fa-arrow-right text-xs"></i>
                                 </a>
@@ -111,6 +130,15 @@
                                 </div>
                             @endif
                         </div>
+
+                        @if (filled($portfolio->project_url))
+                            <div class="mt-4">
+                                <a href="{{ $portfolio->project_url }}" target="_blank" rel="noopener noreferrer" class="inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-sky-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-700" aria-label="Lihat Live Demo {{ $portfolio->title }}">
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                                    <span>Lihat Live Demo</span>
+                                </a>
+                            </div>
+                        @endif
 
                         @if (is_array($portfolio->technologies) && count($portfolio->technologies))
                             <div class="mt-8">

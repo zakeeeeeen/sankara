@@ -155,15 +155,15 @@
     }
 
     .landing-agency #navbar.navbar--scrolled .navlink:hover {
-        color: #0284c7 !important;
+        color: #d97706 !important;
     }
 
     .landing-agency #navbar.navbar--scrolled .navlink--active {
-        color: #0284c7 !important;
+        color: #d97706 !important;
     }
 
     .landing-agency #navbar.navbar--scrolled .navlink--active::after {
-        background-color: #0284c7 !important;
+        background-color: #d97706 !important;
     }
 
     .landing-agency #navbar.navbar--scrolled [data-brand-name] {
@@ -183,7 +183,7 @@
 
     #navbar.navbar--scrolled [data-mobile-toggle]:hover {
         background-color: rgb(241 245 249) !important;
-        color: rgb(2 132 199) !important;
+        color: rgb(217 119 6) !important;
     }
 }
 
@@ -332,7 +332,7 @@
     .agency-service-card:hover {
         transform: translateY(-6px);
         border-color: rgba(56, 189, 248, 0.45);
-        box-shadow: 0 20px 45px -15px rgba(2, 132, 199, 0.12), 0 8px 18px -4px rgba(15, 23, 42, 0.04);
+        box-shadow: 0 20px 45px -15px rgba(56, 189, 248, 0.15), 0 8px 18px -4px rgba(15, 23, 42, 0.04);
     }
 
     @media (min-width: 1024px) {
@@ -345,23 +345,25 @@
         .agency-service-card--featured:hover {
             transform: translateY(calc(-1.5rem - 6px));
             border-color: rgba(56, 189, 248, 0.6);
-            box-shadow: 0 20px 45px -15px rgba(2, 132, 199, 0.14), 0 8px 18px -4px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 20px 45px -15px rgba(56, 189, 248, 0.18), 0 8px 18px -4px rgba(15, 23, 42, 0.04);
         }
     }
 
     .agency-btn-primary {
         border-radius: 9999px;
-        background: rgb(var(--agency-cyan));
-        color: rgb(var(--agency-navy-1));
-        box-shadow: 0 20px 60px -34px rgb(var(--agency-cyan) / 0.7);
+        background: linear-gradient(110deg, #fef08a 0%, #fbbf24 35%, #f59e0b 70%, #d97706 100%);
+        color: #ffffff;
+        font-weight: 800;
+        box-shadow: 0 14px 40px -14px rgba(245, 158, 11, 0.6);
         transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
             background-color 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .agency-btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 24px 70px -34px rgb(var(--agency-cyan) / 0.82);
-        background: rgb(var(--agency-cyan) / 0.9);
+        box-shadow: 0 18px 50px -14px rgba(245, 158, 11, 0.75);
+        background: linear-gradient(110deg, #ffffff 0%, #fef08a 25%, #fbbf24 60%, #f59e0b 100%);
+        color: #ffffff;
     }
 
     .agency-btn-secondary {

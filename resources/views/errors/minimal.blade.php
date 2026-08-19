@@ -92,7 +92,7 @@
 
                 <!-- Actions Button -->
                 <div class="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-                    <a href="{{ route('home') }}" class="agency-btn-primary inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold shadow-lg shadow-sky-500/25">
+                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-7 py-3 text-sm font-bold text-white shadow-lg shadow-sky-600/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-700">
                         <i class="fa-solid fa-house text-xs" aria-hidden="true"></i>
                         <span>Kembali ke Beranda</span>
                     </a>

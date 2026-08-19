@@ -259,6 +259,7 @@ class CmsSeeder extends Seeder
                 [
                     'title' => Str::headline($name),
                     'excerpt' => 'Preview project '.Str::headline($name).'.',
+                    'project_url' => 'https://demo.sankaratech.com/'.$slug,
                     'preview_image_url' => $publicUrl,
                     'cover_image_url' => $publicUrl,
                     'is_active' => true,

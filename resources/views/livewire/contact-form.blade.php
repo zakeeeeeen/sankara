@@ -4,7 +4,7 @@
             <div>{{ $status }}</div>
             @if ($waLink)
                 <div class="mt-3">
-                    <a href="{{ $waLink }}" target="_blank" rel="noreferrer" class="agency-btn-primary inline-flex items-center justify-center px-5 py-2 text-xs font-semibold" aria-label="Lanjut chat via WhatsApp">
+                    <a href="{{ $waLink }}" target="_blank" rel="noreferrer" class="inline-flex items-center justify-center rounded-full bg-emerald-600 px-5 py-2 text-xs font-bold text-white shadow-sm transition hover:bg-emerald-700" aria-label="Lanjut chat via WhatsApp">
                         Lanjut via WhatsApp
                     </a>
                 </div>
@@ -77,7 +77,7 @@
             </div>
 
             <div class="pt-2">
-                <button type="submit" wire:loading.attr="disabled" class="agency-btn-primary inline-flex w-full items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold disabled:opacity-70" aria-label="Kirim Formulir Kontak">
+                <button type="submit" wire:loading.attr="disabled" class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sky-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-700 disabled:opacity-70" aria-label="Kirim Formulir Kontak">
                     <span wire:loading.remove>Kirim Pesan Sekarang</span>
                     <span wire:loading>Mengirim...</span>
                     <i wire:loading.remove class="fa-solid fa-paper-plane text-xs" aria-hidden="true"></i>

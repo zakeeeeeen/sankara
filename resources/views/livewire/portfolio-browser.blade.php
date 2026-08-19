@@ -43,6 +43,7 @@
         @forelse ($portfolios as $portfolio)
             <a
                 href="{{ route('portfolios.show', $portfolio->slug) }}"
+                wire:navigate
                 class="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
                 aria-label="Lihat detail project {{ $portfolio->title }}"
             >

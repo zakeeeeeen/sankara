@@ -76,7 +76,7 @@
                                 wire:navigate
                                 class="navlink relative py-1 text-sm font-semibold transition-colors duration-200
                                 @if ($isLanding)
-                                    {{ $active === $itemKey ? 'navlink--active text-sky-300 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-sky-300' : 'text-slate-100 hover:text-white' }}
+                                    {{ $active === $itemKey ? 'navlink--active text-amber-300 font-bold after:absolute after:-bottom-1 after:inset-x-0 after:h-0.5 after:rounded-full after:bg-amber-300' : 'text-slate-100 hover:text-white' }}
                                 @else
                                     {{ $isActive ? 'text-sky-600 font-bold border-b-2 border-sky-600 pb-0.5' : 'text-slate-800 hover:text-sky-600' }}
                                 @endif
@@ -145,7 +145,7 @@
                             <a
                                 @click="open = false"
                                 wire:navigate
-                                class="block rounded-xl px-4 py-3 font-semibold transition-all duration-200 {{ $isActive ? 'bg-sky-500/20 text-sky-400 font-bold border-l-4 border-sky-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
+                                class="block rounded-xl px-4 py-3 font-semibold transition-all duration-200 {{ $isActive ? 'bg-amber-500/20 text-amber-300 font-bold border-l-4 border-amber-400 pl-3.5' : 'text-white/85 hover:bg-white/10 hover:text-white' }}"
                                 href="{{ $item['url'] }}"
                             >
                                 {{ $item['label'] }}

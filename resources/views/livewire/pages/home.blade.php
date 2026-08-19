@@ -80,14 +80,14 @@
 
         <section id="why-us" class="scroll-mt-28 relative overflow-hidden bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] py-16 sm:py-24 lg:py-28">
             <div class="pointer-events-none absolute inset-0">
-                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-sky-500/10 blur-3xl"></div>
-                <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-sky-400/10 blur-3xl"></div>
+                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-amber-500/10 blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl"></div>
             </div>
 
             <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col items-center text-center">
                     <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
-                        Dari Ide hingga <br class="sm:hidden" /><span class="text-sky-400">Siap Scale</span>
+                        Dari Ide hingga <br class="sm:hidden" /><span class="text-gold-shiny inline-block drop-shadow-md">Siap Scale</span>
                     </h2>
                     <p class="mt-4 max-w-2xl text-base font-normal text-white/80 sm:text-lg">
                         Solusi digital agency terlengkap dengan berbagai keunggulan untuk kesuksesan bisnismu
@@ -116,11 +116,11 @@
                         @endphp
 
                         <div class="group flex flex-col items-center text-center">
-                            <div class="grid h-12 w-12 sm:h-16 sm:w-16 place-items-center rounded-2xl bg-gradient-to-br from-sky-400 via-sky-500 to-sky-600 text-white shadow-lg shadow-sky-500/30 transition-transform duration-300 group-hover:scale-110">
-                                <i class="{{ $iconClass }} text-xl sm:text-2xl" aria-hidden="true"></i>
+                            <div class="grid h-12 w-12 sm:h-16 sm:w-16 place-items-center rounded-2xl bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 text-white shadow-lg shadow-amber-500/25 transition-transform duration-300 group-hover:scale-110">
+                                <i class="{{ $iconClass }} text-xl sm:text-2xl text-white" aria-hidden="true"></i>
                             </div>
 
-                            <h3 class="mt-4 sm:mt-6 text-sm sm:text-lg font-bold text-white leading-snug transition-colors group-hover:text-sky-300">
+                            <h3 class="mt-4 sm:mt-6 text-sm sm:text-lg font-bold text-white leading-snug transition-colors group-hover:text-amber-300">
                                 {{ $adv->title }}
                             </h3>
 
@@ -136,8 +136,7 @@
         <section id="layanan" class="scroll-mt-28 relative bg-slate-50 pt-8 sm:pt-12 lg:pt-16 pb-16 sm:pb-24 lg:pb-32">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col items-center text-center">
-                    <div class="agency-divider mx-auto"></div>
-                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-[rgb(var(--agency-navy-1))] sm:text-4xl lg:text-5xl">Layanan Kami</h2>
                     <p class="mt-3 max-w-2xl text-base font-semibold text-slate-700 sm:text-lg">
                         Solusi Digital End-to-End untuk Membantu Bisnis Anda Grow & Scale
                     </p>
@@ -163,11 +162,11 @@
                             $iconClass = $faIcons[$service->slug] ?? 'fa-solid fa-cubes';
                         @endphp
                         <div class="w-full min-w-full shrink-0 snap-center snap-always px-2 py-2">
-                            <a href="{{ route('services.show', $service->slug) }}" wire:navigate class="agency-service-card flex h-full flex-col p-7" aria-label="Detail Layanan {{ $service->title }}">
-                                <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm">
+                            <a href="{{ route('services.show', $service->slug) }}" wire:navigate class="agency-service-card group flex h-full flex-col p-7" aria-label="Detail Layanan {{ $service->title }}">
+                                <div class="grid h-14 w-14 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm transition-transform duration-300 group-hover:scale-105">
                                     <i class="{{ $iconClass }} text-xl" aria-hidden="true"></i>
                                 </div>
-                                <h3 class="mt-6 text-xl font-bold leading-snug tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
+                                <h3 class="mt-6 text-xl font-bold leading-snug tracking-tight text-[rgb(var(--agency-navy-1))] group-hover:text-sky-600 transition-colors">{{ strtoupper($service->title) }}</h3>
                                 <p class="mt-3 text-xs leading-relaxed text-slate-500">{{ $service->excerpt }}</p>
                                 <div class="mt-auto flex items-center justify-end pt-8 text-sky-600">
                                     <i class="fa-solid fa-arrow-right text-base transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
@@ -207,11 +206,11 @@
                                         $iconClass = $faIcons[$service->slug] ?? 'fa-solid fa-cubes';
                                     @endphp
                                     <div class="w-full shrink-0 snap-center sm:w-[46%] lg:w-[31.5%] py-2">
-                                        <a href="{{ route('services.show', $service->slug) }}" wire:navigate data-carousel-feature-card class="agency-service-card flex h-full flex-col p-6 sm:p-9 lg:p-10" aria-label="Detail Layanan {{ $service->title }}">
-                                            <div class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm">
+                                        <a href="{{ route('services.show', $service->slug) }}" wire:navigate data-carousel-feature-card class="agency-service-card group flex h-full flex-col p-6 sm:p-9 lg:p-10" aria-label="Detail Layanan {{ $service->title }}">
+                                            <div class="grid h-14 w-14 sm:h-16 sm:w-16 place-items-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600 shadow-sm transition-transform duration-300 group-hover:scale-105">
                                                 <i class="{{ $iconClass }} text-xl sm:text-2xl" aria-hidden="true"></i>
                                             </div>
-                                            <h3 class="mt-6 sm:mt-8 text-xl sm:text-2xl font-bold leading-snug tracking-tight text-[rgb(var(--agency-navy-1))]">{{ strtoupper($service->title) }}</h3>
+                                            <h3 class="mt-6 sm:mt-8 text-xl sm:text-2xl font-bold leading-snug tracking-tight text-[rgb(var(--agency-navy-1))] group-hover:text-sky-600 transition-colors">{{ strtoupper($service->title) }}</h3>
                                             <p class="mt-3 sm:mt-4 text-xs sm:text-base leading-relaxed sm:leading-relaxed text-slate-500">{{ $service->excerpt }}</p>
                                             <div class="mt-auto flex items-center justify-end pt-8 sm:pt-10 text-sky-600">
                                                 <i class="fa-solid fa-arrow-right text-base sm:text-lg transition-transform group-hover:translate-x-1" aria-hidden="true"></i>
@@ -235,29 +234,20 @@
 
             <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
                 <div class="flex flex-col items-center text-center">
-                    <div class="agency-divider mx-auto"></div>
-                    <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Portofolio</h2>
+                    <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">Portofolio</h2>
                     <p class="mt-3 max-w-2xl text-base font-semibold text-slate-200 sm:text-lg">
                         Menampilkan Project Terbaik dari Setiap Kolaborasi
                     </p>
                 </div>
 
                 @php
-                    $items = ($portfolios ?? collect())
-                        ->map(fn ($p) => [
-                            'id' => $p->slug,
-                            'title' => $p->title,
-                            'src' => $p->preview_image_src ?: $p->cover_image_src,
-                            'url' => route('portfolios.show', $p->slug),
-                        ])
-                        ->filter(fn ($p) => filled($p['src']))
-                        ->values();
+                    $portfolioList = ($portfolios ?? collect())->values();
                 @endphp
 
                 <div
                     x-data="{
                         active: 0,
-                        total: {{ $items->count() }},
+                        total: {{ $portfolioList->count() }},
                         timer: null,
                         startAutoPlay() {
                             if (this.total <= 1) return;
@@ -271,14 +261,17 @@
                     x-init="startAutoPlay()"
                     class="mt-8 sm:mt-16"
                 >
-                    @if ($items->count() === 0)
+                    @if ($portfolioList->count() === 0)
                         <div class="rounded-3xl border border-white/15 bg-white/10 p-8 text-center text-sm text-slate-200 font-medium">
                             Belum ada data portofolio.
                         </div>
                     @else
                         <!-- Portofolio Mobile: Auto-Changing Fade Carousel (< sm) -->
                         <div class="block sm:hidden relative w-full aspect-video overflow-hidden rounded-3xl bg-slate-900 shadow-2xl border border-white/10 select-none">
-                            @foreach ($items as $idx => $item)
+                            @foreach ($portfolioList as $idx => $item)
+                                @php
+                                    $imgSrc = $item->preview_image_src ?: $item->cover_image_src;
+                                @endphp
                                 <div
                                     x-show="active === {{ $idx }}"
                                     x-transition:enter="transition opacity duration-700 ease-in-out"
@@ -289,13 +282,13 @@
                                     x-transition:leave-end="opacity-0"
                                     class="absolute inset-0 h-full w-full"
                                 >
-                                    <a href="{{ $item['url'] }}" wire:navigate class="group block h-full w-full" aria-label="Lihat Project {{ $item['title'] }}">
+                                    <a href="{{ route('portfolios.show', $item->slug) }}" wire:navigate class="group block h-full w-full" aria-label="Lihat Project {{ $item->title }}">
                                         <div data-hover-shot class="no-scrollbar h-full w-full overflow-y-auto overscroll-contain rounded-3xl bg-slate-900">
-                                            <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
-                                        </div>
-                                        <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-5 text-white">
-                                            <div class="text-[11px] font-medium text-sky-400">Featured Project</div>
-                                            <div class="mt-0.5 text-base font-bold tracking-tight text-white">{{ $item['title'] }}</div>
+                                            @if ($imgSrc)
+                                                <img class="block h-full w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item->title }}" src="{{ $imgSrc }}" />
+                                            @else
+                                                <div class="h-full w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
+                                            @endif
                                         </div>
                                     </a>
                                 </div>
@@ -317,11 +310,18 @@
 
                             <!-- Carousel Track -->
                             <div data-carousel-track class="no-scrollbar flex w-full gap-6 overflow-x-auto scroll-smooth py-4 select-none">
-                                @foreach ($items as $item)
+                                @foreach ($portfolioList as $item)
+                                    @php
+                                        $imgSrc = $item->preview_image_src ?: $item->cover_image_src;
+                                    @endphp
                                     <div class="w-[85%] shrink-0 sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]">
-                                        <a href="{{ $item['url'] }}" wire:navigate class="group block h-full" aria-label="Lihat Project {{ $item['title'] }}">
-                                            <div data-hover-shot class="no-scrollbar aspect-video w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-cyan-500/20">
-                                                <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item['title'] }}" src="{{ $item['src'] }}" />
+                                        <a href="{{ route('portfolios.show', $item->slug) }}" wire:navigate class="group block h-full" aria-label="Lihat Project {{ $item->title }}">
+                                            <div data-hover-shot class="no-scrollbar aspect-video w-full overflow-y-auto overscroll-contain rounded-2xl bg-slate-900 shadow-xl transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl group-hover:shadow-sky-500/20">
+                                                @if ($imgSrc)
+                                                    <img class="block w-full object-cover object-top transition-opacity duration-300" loading="lazy" width="600" height="337" alt="Preview Project {{ $item->title }}" src="{{ $imgSrc }}" />
+                                                @else
+                                                    <div class="aspect-video w-full bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))]"></div>
+                                                @endif
                                             </div>
                                         </a>
                                     </div>
@@ -349,10 +349,7 @@
         <section id="harga" class="scroll-mt-28 bg-white">
             <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
                 <div class="text-center">
-                    <div class="mx-auto flex justify-center">
-                        <div class="agency-divider"></div>
-                    </div>
-                    <p class="mt-4 text-sm font-bold text-slate-800">Pricing</p>
+                    <p class="text-sm font-bold text-slate-800">Pricing</p>
                     <h2 class="mt-3 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Paket fleksibel untuk setiap kebutuhan</h2>
                     <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-700 font-normal">
                         Pilih paket sesuai scope. Semua paket sudah termasuk konsultasi, timeline yang jelas, dan dokumentasi.
@@ -368,10 +365,10 @@
                     @foreach ($pricingList as $plan)
                         @php $popular = (bool) $plan->is_popular; @endphp
                         <div class="w-full min-w-full shrink-0 snap-center snap-always px-2 py-2">
-                            <div class="agency-card relative flex flex-col justify-between p-7 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
+                            <div class="agency-card relative flex flex-col justify-between p-7 {{ $popular ? 'ring-2 ring-amber-400' : '' }}">
                                 <div>
                                     @if ($popular)
-                                        <div class="inline-block mb-3 rounded-full bg-[rgb(var(--agency-cyan))] px-3 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">Paling populer</div>
+                                        <div class="inline-block mb-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-3 py-1 text-xs font-black text-slate-950 shadow-sm">Paling populer</div>
                                     @endif
                                     <div class="flex items-start justify-between gap-4">
                                         <div>
@@ -388,7 +385,7 @@
                                     <div class="mt-6 space-y-2.5 text-xs text-slate-700">
                                         @foreach ($plan->features as $feat)
                                             <div class="flex items-center gap-2.5">
-                                                <i class="fa-solid fa-check text-xs text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
+                                                <i class="fa-solid fa-check text-xs text-amber-500" aria-hidden="true"></i>
                                                 <span>{{ $feat->text }}</span>
                                             </div>
                                         @endforeach
@@ -408,10 +405,10 @@
                     @foreach ($pricingList as $plan)
                         @php $popular = (bool) $plan->is_popular; @endphp
                         <div class="py-2 flex flex-col">
-                            <div class="agency-card relative flex h-full flex-col justify-between p-8 {{ $popular ? 'ring-2 ring-[rgb(var(--agency-cyan)/0.55)]' : '' }}">
+                            <div class="agency-card relative flex h-full flex-col justify-between p-8 {{ $popular ? 'ring-2 ring-amber-400' : '' }}">
                             <div>
                                 @if ($popular)
-                                    <div class="inline-block mb-3 lg:absolute lg:right-6 lg:top-6 rounded-full bg-[rgb(var(--agency-cyan))] px-3 py-1 text-xs font-semibold text-[rgb(var(--agency-navy-1))]">Paling populer</div>
+                                    <div class="inline-block mb-3 lg:absolute lg:right-6 lg:top-6 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 px-3 py-1 text-xs font-black text-slate-950 shadow-sm">Paling populer</div>
                                 @endif
                                 <div class="flex items-start justify-between gap-4">
                                     <div>
@@ -428,7 +425,7 @@
                                 <div class="mt-6 space-y-2.5 text-xs text-slate-700 sm:text-sm">
                                     @foreach ($plan->features as $feat)
                                         <div class="flex items-center gap-2.5">
-                                            <i class="fa-solid fa-check text-xs text-[rgb(var(--agency-cyan))]" aria-hidden="true"></i>
+                                            <i class="fa-solid fa-check text-xs text-amber-500" aria-hidden="true"></i>
                                             <span>{{ $feat->text }}</span>
                                         </div>
                                     @endforeach
@@ -448,12 +445,11 @@
         <section id="kontak" class="scroll-mt-28 relative bg-white py-16 sm:py-24 lg:py-32">
             <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
                 <div class="relative overflow-hidden rounded-[2.5rem] bg-[linear-gradient(135deg,rgb(var(--agency-navy-1)),rgb(var(--agency-navy-2)))] p-8 text-center shadow-2xl sm:p-12 lg:p-16">
-                    <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[rgb(var(--agency-cyan)/0.2)] blur-3xl" aria-hidden="true"></div>
+                    <div class="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-amber-500/20 blur-3xl" aria-hidden="true"></div>
                     <div class="pointer-events-none absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden="true"></div>
 
                     <div class="relative flex flex-col items-center text-center">
-                        <div class="agency-divider mx-auto"></div>
-                        <h2 class="mt-4 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                        <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
                             {{ $cta?->heading ?? 'Siap Membangun Produk Digital Anda?' }}
                         </h2>
                         <p class="mt-4 max-w-2xl text-base leading-relaxed text-slate-100 sm:text-lg font-medium">

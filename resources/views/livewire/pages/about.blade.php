@@ -25,7 +25,7 @@
                         @endif
 
                         <div class="mt-8">
-                            <a href="{{ route('contact.show') }}" wire:navigate class="agency-btn-primary inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold">
+                            <a href="{{ route('contact.show') }}" wire:navigate class="inline-flex items-center justify-center gap-2 rounded-full bg-sky-600 px-8 py-3.5 text-sm font-bold text-white shadow-lg shadow-sky-600/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-700">
                                 <span>Konsultasi dengan Kami</span>
                                 <i class="fa-solid fa-arrow-right text-xs"></i>
                             </a>
